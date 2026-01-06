@@ -1146,6 +1146,7 @@ static void shuffle(vector<T> &vec)
 void HetuwMod::initOnBirth()
 { // will be called from LivingLifePage.cpp
 	ourLiveObject = livingLifePage->getOurLiveObject();
+	if (ourLiveObject == NULL) return;
 	if (ourLiveObject->id == lastLoggedId)
 		return;
 
