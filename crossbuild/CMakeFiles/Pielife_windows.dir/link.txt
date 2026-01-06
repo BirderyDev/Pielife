@@ -1,0 +1,3 @@
+/usr/bin/cmake -E rm -f CMakeFiles/Pielife_windows.dir/objects.a
+/usr/bin/i686-w64-mingw32-ar qc CMakeFiles/Pielife_windows.dir/objects.a @CMakeFiles/Pielife_windows.dir/objects1.rsp
+/usr/bin/i686-w64-mingw32-g++ -mwindows -static-libstdc++ -static-libgcc -Wl,--whole-archive CMakeFiles/Pielife_windows.dir/objects.a -Wl,--no-whole-archive -o Pielife_windows.exe -Wl,--out-implib,libPielife_windows.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles/Pielife_windows.dir/linkLibs.rsp

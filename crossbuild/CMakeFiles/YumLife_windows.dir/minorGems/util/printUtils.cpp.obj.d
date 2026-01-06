@@ -1,0 +1,20 @@
+CMakeFiles/YumLife_windows.dir/minorGems/util/printUtils.cpp.obj: \
+ /home/crow/onelife/Pielife/minorGems/util/printUtils.cpp \
+ /home/crow/onelife/Pielife/minorGems/util/printUtils.h \
+ /home/crow/onelife/Pielife/./minorGems/common.h \
+ /home/crow/onelife/Pielife/./minorGems/util/development/memory/debugMemory.h \
+ /home/crow/onelife/Pielife/./minorGems/system/MutexLock.h \
+ /usr/share/mingw-w64/include/stdio.h \
+ /usr/share/mingw-w64/include/corecrt_stdio_config.h \
+ /usr/share/mingw-w64/include/corecrt.h \
+ /usr/share/mingw-w64/include/_mingw.h \
+ /usr/share/mingw-w64/include/_mingw_mac.h \
+ /usr/share/mingw-w64/include/_mingw_secapi.h \
+ /usr/share/mingw-w64/include/vadefs.h \
+ /usr/share/mingw-w64/include/sdks/_mingw_ddk.h \
+ /usr/share/mingw-w64/include/_mingw_off_t.h \
+ /usr/share/mingw-w64/include/swprintf.inl \
+ /usr/share/mingw-w64/include/sec_api/stdio_s.h \
+ /usr/lib/gcc/i686-w64-mingw32/13-win32/include/stdarg.h \
+ /usr/share/mingw-w64/include/stdarg.h \
+ /usr/share/mingw-w64/include/_mingw_stdarg.h

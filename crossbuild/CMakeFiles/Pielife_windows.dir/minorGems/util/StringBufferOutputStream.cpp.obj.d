@@ -1,0 +1,23 @@
+CMakeFiles/Pielife_windows.dir/minorGems/util/StringBufferOutputStream.cpp.obj: \
+ /home/crow/onelife/Pielife/minorGems/util/StringBufferOutputStream.cpp \
+ /home/crow/onelife/Pielife/./minorGems/util/StringBufferOutputStream.h \
+ /home/crow/onelife/Pielife/./minorGems/common.h \
+ /home/crow/onelife/Pielife/./minorGems/util/development/memory/debugMemory.h \
+ /home/crow/onelife/Pielife/./minorGems/util/SimpleVector.h \
+ /usr/share/mingw-w64/include/string.h \
+ /usr/share/mingw-w64/include/crtdefs.h \
+ /usr/share/mingw-w64/include/corecrt.h \
+ /usr/share/mingw-w64/include/_mingw.h \
+ /usr/share/mingw-w64/include/_mingw_mac.h \
+ /usr/share/mingw-w64/include/_mingw_secapi.h \
+ /usr/share/mingw-w64/include/vadefs.h \
+ /usr/share/mingw-w64/include/sdks/_mingw_ddk.h \
+ /usr/share/mingw-w64/include/sec_api/string_s.h \
+ /usr/share/mingw-w64/include/stdio.h \
+ /usr/share/mingw-w64/include/corecrt_stdio_config.h \
+ /usr/share/mingw-w64/include/_mingw_off_t.h \
+ /usr/share/mingw-w64/include/swprintf.inl \
+ /usr/share/mingw-w64/include/sec_api/stdio_s.h \
+ /home/crow/onelife/Pielife/./minorGems/io/OutputStream.h \
+ /home/crow/onelife/Pielife/./minorGems/io/Stream.h \
+ /home/crow/onelife/Pielife/./minorGems/io/TypeIO.h

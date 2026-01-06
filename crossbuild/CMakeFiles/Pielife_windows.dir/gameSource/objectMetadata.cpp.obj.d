@@ -1,0 +1,26 @@
+CMakeFiles/Pielife_windows.dir/gameSource/objectMetadata.cpp.obj: \
+ /home/crow/onelife/Pielife/gameSource/objectMetadata.cpp \
+ /home/crow/onelife/Pielife/gameSource/objectMetadata.h \
+ /home/crow/onelife/Pielife/gameSource/transitionBank.h \
+ /home/crow/onelife/Pielife/./minorGems/util/SimpleVector.h \
+ /home/crow/onelife/Pielife/./minorGems/common.h \
+ /home/crow/onelife/Pielife/./minorGems/util/development/memory/debugMemory.h \
+ /usr/share/mingw-w64/include/string.h \
+ /usr/share/mingw-w64/include/crtdefs.h \
+ /usr/share/mingw-w64/include/corecrt.h \
+ /usr/share/mingw-w64/include/_mingw.h \
+ /usr/share/mingw-w64/include/_mingw_mac.h \
+ /usr/share/mingw-w64/include/_mingw_secapi.h \
+ /usr/share/mingw-w64/include/vadefs.h \
+ /usr/share/mingw-w64/include/sdks/_mingw_ddk.h \
+ /usr/share/mingw-w64/include/sec_api/string_s.h \
+ /usr/share/mingw-w64/include/stdio.h \
+ /usr/share/mingw-w64/include/corecrt_stdio_config.h \
+ /usr/share/mingw-w64/include/_mingw_off_t.h \
+ /usr/share/mingw-w64/include/swprintf.inl \
+ /usr/share/mingw-w64/include/sec_api/stdio_s.h \
+ /home/crow/onelife/Pielife/gameSource/objectBank.h \
+ /home/crow/onelife/Pielife/./minorGems/game/doublePair.h \
+ /home/crow/onelife/Pielife/gameSource/FloatRGB.h \
+ /home/crow/onelife/Pielife/gameSource/SoundUsage.h \
+ /home/crow/onelife/Pielife/gameSource/categoryBank.h

@@ -1,0 +1,3 @@
+/home/crow/onelife/Pielife/crossbuild/CMakeFiles/Pielife_windows.dir
+/home/crow/onelife/Pielife/crossbuild/CMakeFiles/edit_cache.dir
+/home/crow/onelife/Pielife/crossbuild/CMakeFiles/rebuild_cache.dir

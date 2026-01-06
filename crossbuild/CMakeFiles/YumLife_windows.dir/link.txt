@@ -1,0 +1,3 @@
+/usr/bin/cmake -E rm -f CMakeFiles/YumLife_windows.dir/objects.a
+/usr/bin/i686-w64-mingw32-ar qc CMakeFiles/YumLife_windows.dir/objects.a @CMakeFiles/YumLife_windows.dir/objects1.rsp
+/usr/bin/i686-w64-mingw32-g++ -mwindows -static-libstdc++ -static-libgcc -Wl,--whole-archive CMakeFiles/YumLife_windows.dir/objects.a -Wl,--no-whole-archive -o YumLife_windows.exe -Wl,--out-implib,libYumLife_windows.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles/YumLife_windows.dir/linkLibs.rsp
