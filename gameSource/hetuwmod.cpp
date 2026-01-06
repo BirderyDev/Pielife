@@ -6246,7 +6246,6 @@ bool HetuwMod::justKilled(int holdingID)
 	static const std::unordered_set<int> murderWeapons = {749, 750, 3048};
 	return murderWeapons.count(holdingID) > 0;
 }
-
 void HetuwMod::drawCurseToken()
 {
 	if (ourLiveObject == NULL)
@@ -6283,6 +6282,9 @@ void HetuwMod::drawCurseToken()
 
 void HetuwMod::drawOurStatus()
 {
+	if (ourLiveObject == NULL)
+		return;
+
 	char sBuf[64];
 	std::string status = "NO NAME";
 	setDrawColor(1, 1, 1, 1);
@@ -6326,14 +6328,13 @@ void HetuwMod::drawOurStatus()
 			char finalBuf[256];
 			snprintf(finalBuf, sizeof(finalBuf), "%s", descrBuf);
 
-			status = strdup(finalBuf);
+			status = finalBuf;
 
 			setDrawColor(1, 0, 1, 1);
 			delete[] stringUpper;
 		}
 	}
-
-	else if (ourLiveObject->name != NULL)
+	else if (ourLiveObject->name != NULL && ourLiveObject->name[0] != '\0')
 	{
 		status = ourLiveObject->name;
 		setDrawColor(1, 1, 1, 1);
@@ -6359,7 +6360,7 @@ void HetuwMod::drawHunger()
 
 	int foodstore = ourLiveObject->foodStore;
 	int foodcap = ourLiveObject->foodCapacity;
-	int bonus = livingLifePage->hetuwGetYumBonus();
+	int bonus = livingLifePage ? livingLifePage->hetuwGetYumBonus() : 0;
 	int totalPips = foodstore + bonus;
 
 	static double countdown = 0.0;
@@ -6458,16 +6459,21 @@ void HetuwMod::drawSpeed()
 
 	if (ourLiveObject->heldByAdultID != -1)
 	{
-
-		for (int i = 0; i < gameObjects->size(); i++)
+		LiveObject *parent = NULL;
+		if (gameObjects)
 		{
-			LiveObject *o = gameObjects->getElement(i);
-			if (o && o->id == ourLiveObject->heldByAdultID)
+			for (int i = 0; i < gameObjects->size(); i++)
 			{
-				speed = o->currentSpeed;
-				break;
+				LiveObject *o = gameObjects->getElement(i);
+				if (o && o->id == ourLiveObject->heldByAdultID)
+				{
+					parent = o;
+					break;
+				}
 			}
 		}
+		if (parent)
+			speed = parent->currentSpeed;
 	}
 	else
 	{
@@ -6491,6 +6497,9 @@ void HetuwMod::drawSpeed()
 
 void HetuwMod::drawTemp()
 {
+	if (ourLiveObject == NULL)
+		return;
+
 	doublePair drawPos;
 	char sBuf[32];
 
@@ -6506,7 +6515,6 @@ void HetuwMod::drawTemp()
 
 	if (temp <= 0.5f)
 	{
-
 		float t = temp / 0.5f;
 		r = 0.0f + t * 1.0f;
 		g = 1.0f;
@@ -6514,7 +6522,6 @@ void HetuwMod::drawTemp()
 	}
 	else
 	{
-
 		float t = (temp - 0.5f) / 0.5f;
 		r = 1.0f;
 		g = 1.0f - t * 1.0f;
@@ -6533,7 +6540,7 @@ void HetuwMod::drawTemp()
 
 void HetuwMod::drawCombatIndicator()
 {
-	if (!ourLiveObject)
+	if (!ourLiveObject || !gameObjects)
 		return;
 
 	doublePair drawPos = {
@@ -6674,6 +6681,9 @@ void HetuwMod::drawCombatIndicator()
 
 void HetuwMod::drawAge()
 {
+	if (ourLiveObject == NULL)
+		return;
+
 	doublePair drawPos;
 	char sBuf[32];
 
@@ -6696,7 +6706,6 @@ void HetuwMod::drawAge()
 
 	livingLifePage->hetuwDrawScaledHandwritingFont(sBuf, drawPos, guiScale * 0.8, alignLeft);
 }
-
 void HetuwMod::drawCords()
 {
 	int x = round(ourLiveObject->currentPos.x + cordOffset.x);
