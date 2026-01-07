@@ -28286,6 +28286,7 @@ void LivingLifePage::drawCravingStatus() {
 }
 
 void LivingLifePage::drawCravingBonus() {
+    
     int bonus = mYumMultiplier;
 
     float s = HetuwMod::guiScale;
