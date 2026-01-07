@@ -6300,19 +6300,19 @@ void HetuwMod::drawOurStatus()
 		status = "HELD";
 		setDrawColor(1, 1, 0, 1);
 	}
-	else if (ourLiveObject->holdingID < 0 &&
+	else if (ourLiveObject->holdingID == 0 &&
 			 ourLiveObject->age >= 14 && ourLiveObject->age < 40 &&
 			 ourGender == 'F')
 	{
 		status = "NURSING";
 		setDrawColor(0, 1, 1, 1);
 	}
-	else if (ourGender == 'M' && ourLiveObject->holdingID < 0)
+	else if (ourGender == 'M' && ourLiveObject->holdingID == 0)
 	{
 		status = "HOLDING";
 		setDrawColor(0, 1, 1, 1);
 	}
-	else if (ourLiveObject->holdingID != 0)
+	else if (ourLiveObject->holdingID > 0)
 	{
 		ObjectRecord *obj = getObject(ourLiveObject->holdingID);
 		if (obj != NULL)
@@ -6620,7 +6620,14 @@ void HetuwMod::drawCombatIndicator()
 
 	wasVulnerable = holdingMurderWeapon;
 
-	if (weAreKillable)
+	if (holdingMurderWeapon)
+	{
+		status = "VULNERABLE";
+		r = 1.0f;
+		g = 1.0f;
+		b = 0.0f;
+	}
+	else if (weAreKillable)
 	{
 		status = "DANGER";
 		r = 1.0f;
@@ -6648,14 +6655,7 @@ void HetuwMod::drawCombatIndicator()
 		g = 0.4f;
 		b = 0.4f;
 	}
-	else if (holdingMurderWeapon)
-	{
-		status = "VULNERABLE";
-		r = 1.0f;
-		g = 1.0f;
-		b = 0.0f;
-	}
-
+	
 	char sBuf[128];
 	if (inCombatState && combatCountdown > 0.0)
 	{
