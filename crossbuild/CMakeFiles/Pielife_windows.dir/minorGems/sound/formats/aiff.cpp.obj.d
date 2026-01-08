@@ -1,6 +1,6 @@
 CMakeFiles/Pielife_windows.dir/minorGems/sound/formats/aiff.cpp.obj: \
- /home/crow/onelife/Pielife/minorGems/sound/formats/aiff.cpp \
- /home/crow/onelife/Pielife/minorGems/sound/formats/aiff.h \
+ /home/crow/onelife/Pielife+/minorGems/sound/formats/aiff.cpp \
+ /home/crow/onelife/Pielife+/minorGems/sound/formats/aiff.h \
  /usr/lib/gcc/i686-w64-mingw32/13-win32/include/stdint.h \
  /usr/share/mingw-w64/include/stdint.h \
  /usr/share/mingw-w64/include/crtdefs.h \
@@ -27,10 +27,10 @@ CMakeFiles/Pielife_windows.dir/minorGems/sound/formats/aiff.cpp.obj: \
  /usr/lib/gcc/i686-w64-mingw32/13-win32/include/mm_malloc.h \
  /usr/share/mingw-w64/include/errno.h \
  /usr/lib/gcc/i686-w64-mingw32/13-win32/include/c++/bits/std_abs.h \
- /home/crow/onelife/Pielife/./minorGems/util/StringBufferOutputStream.h \
- /home/crow/onelife/Pielife/./minorGems/common.h \
- /home/crow/onelife/Pielife/./minorGems/util/development/memory/debugMemory.h \
- /home/crow/onelife/Pielife/./minorGems/util/SimpleVector.h \
+ /home/crow/onelife/Pielife+/./minorGems/util/StringBufferOutputStream.h \
+ /home/crow/onelife/Pielife+/./minorGems/common.h \
+ /home/crow/onelife/Pielife+/./minorGems/util/development/memory/debugMemory.h \
+ /home/crow/onelife/Pielife+/./minorGems/util/SimpleVector.h \
  /usr/share/mingw-w64/include/string.h \
  /usr/share/mingw-w64/include/sec_api/string_s.h \
  /usr/share/mingw-w64/include/stdio.h \
@@ -38,6 +38,6 @@ CMakeFiles/Pielife_windows.dir/minorGems/sound/formats/aiff.cpp.obj: \
  /usr/share/mingw-w64/include/_mingw_off_t.h \
  /usr/share/mingw-w64/include/swprintf.inl \
  /usr/share/mingw-w64/include/sec_api/stdio_s.h \
- /home/crow/onelife/Pielife/./minorGems/io/OutputStream.h \
- /home/crow/onelife/Pielife/./minorGems/io/Stream.h \
- /home/crow/onelife/Pielife/./minorGems/io/TypeIO.h
+ /home/crow/onelife/Pielife+/./minorGems/io/OutputStream.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/Stream.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/TypeIO.h

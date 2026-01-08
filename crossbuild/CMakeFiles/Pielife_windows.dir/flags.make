@@ -11,7 +11,7 @@ CXX_FLAGS = -std=gnu++14 -Wall -Wwrite-strings -Wchar-subscripts -Wparentheses -
 
 RC_DEFINES = -DSTATICLIB -DWIN32 -DWIN_32
 
-RC_INCLUDES = -I /home/crow/onelife/Pielife/. -I /home/crow/onelife/Pielife/SDL-1.2.15/include
+RC_INCLUDES = -I /home/crow/onelife/Pielife+/. -I /home/crow/onelife/Pielife+/SDL-1.2.15/include
 
 RC_FLAGS = 
 

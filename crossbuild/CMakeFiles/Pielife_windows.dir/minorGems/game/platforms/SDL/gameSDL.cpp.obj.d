@@ -1,5 +1,5 @@
 CMakeFiles/Pielife_windows.dir/minorGems/game/platforms/SDL/gameSDL.cpp.obj: \
- /home/crow/onelife/Pielife/minorGems/game/platforms/SDL/gameSDL.cpp \
+ /home/crow/onelife/Pielife+/minorGems/game/platforms/SDL/gameSDL.cpp \
  /usr/share/mingw-w64/include/stdio.h \
  /usr/share/mingw-w64/include/corecrt_stdio_config.h \
  /usr/share/mingw-w64/include/corecrt.h \
@@ -41,11 +41,11 @@ CMakeFiles/Pielife_windows.dir/minorGems/game/platforms/SDL/gameSDL.cpp.obj: \
  /usr/lib/gcc/i686-w64-mingw32/13-win32/include/c++/bits/cpp_type_traits.h \
  /usr/lib/gcc/i686-w64-mingw32/13-win32/include/c++/ext/type_traits.h \
  /usr/share/mingw-w64/include/math.h \
- /home/crow/onelife/Pielife/SDL-1.2.15/include/SDL/SDL_main.h \
- /home/crow/onelife/Pielife/SDL-1.2.15/include/SDL/SDL_stdinc.h \
- /home/crow/onelife/Pielife/SDL-1.2.15/include/SDL/SDL_config.h \
- /home/crow/onelife/Pielife/SDL-1.2.15/include/SDL/SDL_platform.h \
- /home/crow/onelife/Pielife/SDL-1.2.15/include/SDL/SDL_config_win32.h \
+ /home/crow/onelife/Pielife+/SDL-1.2.15/include/SDL/SDL_main.h \
+ /home/crow/onelife/Pielife+/SDL-1.2.15/include/SDL/SDL_stdinc.h \
+ /home/crow/onelife/Pielife+/SDL-1.2.15/include/SDL/SDL_config.h \
+ /home/crow/onelife/Pielife+/SDL-1.2.15/include/SDL/SDL_platform.h \
+ /home/crow/onelife/Pielife+/SDL-1.2.15/include/SDL/SDL_config_win32.h \
  /usr/lib/gcc/i686-w64-mingw32/13-win32/include/stddef.h \
  /usr/share/mingw-w64/include/stddef.h \
  /usr/lib/gcc/i686-w64-mingw32/13-win32/include/stdarg.h \
@@ -54,69 +54,69 @@ CMakeFiles/Pielife_windows.dir/minorGems/game/platforms/SDL/gameSDL.cpp.obj: \
  /usr/lib/gcc/i686-w64-mingw32/13-win32/include/stdint.h \
  /usr/share/mingw-w64/include/stdint.h \
  /usr/share/mingw-w64/include/ctype.h \
- /home/crow/onelife/Pielife/SDL-1.2.15/include/SDL/begin_code.h \
- /home/crow/onelife/Pielife/SDL-1.2.15/include/SDL/close_code.h \
- /home/crow/onelife/Pielife/SDL-1.2.15/include/SDL/SDL.h \
- /home/crow/onelife/Pielife/SDL-1.2.15/include/SDL/SDL_main.h \
- /home/crow/onelife/Pielife/SDL-1.2.15/include/SDL/SDL_audio.h \
- /home/crow/onelife/Pielife/SDL-1.2.15/include/SDL/SDL_error.h \
- /home/crow/onelife/Pielife/SDL-1.2.15/include/SDL/SDL_endian.h \
- /home/crow/onelife/Pielife/SDL-1.2.15/include/SDL/SDL_mutex.h \
- /home/crow/onelife/Pielife/SDL-1.2.15/include/SDL/SDL_thread.h \
- /home/crow/onelife/Pielife/SDL-1.2.15/include/SDL/SDL_rwops.h \
- /home/crow/onelife/Pielife/SDL-1.2.15/include/SDL/SDL_cdrom.h \
- /home/crow/onelife/Pielife/SDL-1.2.15/include/SDL/SDL_cpuinfo.h \
- /home/crow/onelife/Pielife/SDL-1.2.15/include/SDL/SDL_events.h \
- /home/crow/onelife/Pielife/SDL-1.2.15/include/SDL/SDL_active.h \
- /home/crow/onelife/Pielife/SDL-1.2.15/include/SDL/SDL_keyboard.h \
- /home/crow/onelife/Pielife/SDL-1.2.15/include/SDL/SDL_keysym.h \
- /home/crow/onelife/Pielife/SDL-1.2.15/include/SDL/SDL_mouse.h \
- /home/crow/onelife/Pielife/SDL-1.2.15/include/SDL/SDL_video.h \
- /home/crow/onelife/Pielife/SDL-1.2.15/include/SDL/SDL_joystick.h \
- /home/crow/onelife/Pielife/SDL-1.2.15/include/SDL/SDL_quit.h \
- /home/crow/onelife/Pielife/SDL-1.2.15/include/SDL/SDL_loadso.h \
- /home/crow/onelife/Pielife/SDL-1.2.15/include/SDL/SDL_timer.h \
- /home/crow/onelife/Pielife/SDL-1.2.15/include/SDL/SDL_version.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/openGL/ScreenGL.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/openGL/MouseHandlerGL.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/openGL/KeyboardHandlerGL.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/openGL/SceneHandlerGL.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/openGL/RedrawListenerGL.h \
- /home/crow/onelife/Pielife/./minorGems/math/geometry/Vector3D.h \
- /home/crow/onelife/Pielife/./minorGems/math/geometry/Angle3D.h \
- /home/crow/onelife/Pielife/./minorGems/io/Serializable.h \
- /home/crow/onelife/Pielife/./minorGems/common.h \
- /home/crow/onelife/Pielife/./minorGems/util/development/memory/debugMemory.h \
- /home/crow/onelife/Pielife/./minorGems/io/InputStream.h \
- /home/crow/onelife/Pielife/./minorGems/io/Stream.h \
- /home/crow/onelife/Pielife/./minorGems/io/TypeIO.h \
- /home/crow/onelife/Pielife/./minorGems/io/OutputStream.h \
- /home/crow/onelife/Pielife/./minorGems/math/geometry/Angle3D.h \
- /home/crow/onelife/Pielife/./minorGems/util/SimpleVector.h \
- /home/crow/onelife/Pielife/./minorGems/system/Time.h \
+ /home/crow/onelife/Pielife+/SDL-1.2.15/include/SDL/begin_code.h \
+ /home/crow/onelife/Pielife+/SDL-1.2.15/include/SDL/close_code.h \
+ /home/crow/onelife/Pielife+/SDL-1.2.15/include/SDL/SDL.h \
+ /home/crow/onelife/Pielife+/SDL-1.2.15/include/SDL/SDL_main.h \
+ /home/crow/onelife/Pielife+/SDL-1.2.15/include/SDL/SDL_audio.h \
+ /home/crow/onelife/Pielife+/SDL-1.2.15/include/SDL/SDL_error.h \
+ /home/crow/onelife/Pielife+/SDL-1.2.15/include/SDL/SDL_endian.h \
+ /home/crow/onelife/Pielife+/SDL-1.2.15/include/SDL/SDL_mutex.h \
+ /home/crow/onelife/Pielife+/SDL-1.2.15/include/SDL/SDL_thread.h \
+ /home/crow/onelife/Pielife+/SDL-1.2.15/include/SDL/SDL_rwops.h \
+ /home/crow/onelife/Pielife+/SDL-1.2.15/include/SDL/SDL_cdrom.h \
+ /home/crow/onelife/Pielife+/SDL-1.2.15/include/SDL/SDL_cpuinfo.h \
+ /home/crow/onelife/Pielife+/SDL-1.2.15/include/SDL/SDL_events.h \
+ /home/crow/onelife/Pielife+/SDL-1.2.15/include/SDL/SDL_active.h \
+ /home/crow/onelife/Pielife+/SDL-1.2.15/include/SDL/SDL_keyboard.h \
+ /home/crow/onelife/Pielife+/SDL-1.2.15/include/SDL/SDL_keysym.h \
+ /home/crow/onelife/Pielife+/SDL-1.2.15/include/SDL/SDL_mouse.h \
+ /home/crow/onelife/Pielife+/SDL-1.2.15/include/SDL/SDL_video.h \
+ /home/crow/onelife/Pielife+/SDL-1.2.15/include/SDL/SDL_joystick.h \
+ /home/crow/onelife/Pielife+/SDL-1.2.15/include/SDL/SDL_quit.h \
+ /home/crow/onelife/Pielife+/SDL-1.2.15/include/SDL/SDL_loadso.h \
+ /home/crow/onelife/Pielife+/SDL-1.2.15/include/SDL/SDL_timer.h \
+ /home/crow/onelife/Pielife+/SDL-1.2.15/include/SDL/SDL_version.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/openGL/ScreenGL.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/openGL/MouseHandlerGL.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/openGL/KeyboardHandlerGL.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/openGL/SceneHandlerGL.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/openGL/RedrawListenerGL.h \
+ /home/crow/onelife/Pielife+/./minorGems/math/geometry/Vector3D.h \
+ /home/crow/onelife/Pielife+/./minorGems/math/geometry/Angle3D.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/Serializable.h \
+ /home/crow/onelife/Pielife+/./minorGems/common.h \
+ /home/crow/onelife/Pielife+/./minorGems/util/development/memory/debugMemory.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/InputStream.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/Stream.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/TypeIO.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/OutputStream.h \
+ /home/crow/onelife/Pielife+/./minorGems/math/geometry/Angle3D.h \
+ /home/crow/onelife/Pielife+/./minorGems/util/SimpleVector.h \
+ /home/crow/onelife/Pielife+/./minorGems/system/Time.h \
  /usr/share/mingw-w64/include/time.h \
  /usr/share/mingw-w64/include/sys/timeb.h \
  /usr/share/mingw-w64/include/sec_api/sys/timeb_s.h \
  /usr/share/mingw-w64/include/_timeval.h \
  /usr/share/mingw-w64/include/pthread_time.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/openGL/SceneHandlerGL.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/Color.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/openGL/SceneHandlerGL.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/Color.h \
  /usr/lib/gcc/i686-w64-mingw32/13-win32/include/float.h \
  /usr/share/mingw-w64/include/float.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/openGL/gui/GUIComponentGL.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/openGL/RedrawListenerGL.h \
- /home/crow/onelife/Pielife/./minorGems/ui/GUIComponent.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/openGL/KeyboardHandlerGL.h \
- /home/crow/onelife/Pielife/./minorGems/network/web/WebRequest.h \
- /home/crow/onelife/Pielife/./minorGems/network/Socket.h \
- /home/crow/onelife/Pielife/./minorGems/network/HostAddress.h \
- /home/crow/onelife/Pielife/./minorGems/util/stringUtils.h \
- /home/crow/onelife/Pielife/./minorGems/network/LookupThread.h \
- /home/crow/onelife/Pielife/./minorGems/system/FinishedSignalThread.h \
- /home/crow/onelife/Pielife/./minorGems/system/Thread.h \
- /home/crow/onelife/Pielife/./minorGems/system/MutexLock.h \
- /home/crow/onelife/Pielife/./minorGems/network/web/WebRequestCompletionThread.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/openGL/glInclude.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/openGL/gui/GUIComponentGL.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/openGL/RedrawListenerGL.h \
+ /home/crow/onelife/Pielife+/./minorGems/ui/GUIComponent.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/openGL/KeyboardHandlerGL.h \
+ /home/crow/onelife/Pielife+/./minorGems/network/web/WebRequest.h \
+ /home/crow/onelife/Pielife+/./minorGems/network/Socket.h \
+ /home/crow/onelife/Pielife+/./minorGems/network/HostAddress.h \
+ /home/crow/onelife/Pielife+/./minorGems/util/stringUtils.h \
+ /home/crow/onelife/Pielife+/./minorGems/network/LookupThread.h \
+ /home/crow/onelife/Pielife+/./minorGems/system/FinishedSignalThread.h \
+ /home/crow/onelife/Pielife+/./minorGems/system/Thread.h \
+ /home/crow/onelife/Pielife+/./minorGems/system/MutexLock.h \
+ /home/crow/onelife/Pielife+/./minorGems/network/web/WebRequestCompletionThread.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/openGL/glInclude.h \
  /usr/share/mingw-w64/include/GL/gl.h \
  /usr/share/mingw-w64/include/windows.h \
  /usr/share/mingw-w64/include/sdkddkver.h \
@@ -258,66 +258,66 @@ CMakeFiles/Pielife_windows.dir/minorGems/game/platforms/SDL/gameSDL.cpp.obj: \
  /usr/share/mingw-w64/include/imm.h /usr/share/mingw-w64/include/GL/glu.h \
  /usr/share/mingw-w64/include/GL/glext.h \
  /usr/share/mingw-w64/include/KHR/khrplatform.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/openGL/MouseHandlerGL.h \
- /home/crow/onelife/Pielife/./minorGems/ui/event/ActionListener.h \
- /home/crow/onelife/Pielife/./minorGems/io/file/File.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/openGL/MouseHandlerGL.h \
+ /home/crow/onelife/Pielife+/./minorGems/ui/event/ActionListener.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/file/File.h \
  /usr/share/mingw-w64/include/sys/stat.h \
  /usr/share/mingw-w64/include/_mingw_stat64.h \
  /usr/share/mingw-w64/include/dirent.h \
- /home/crow/onelife/Pielife/./minorGems/io/file/Path.h \
- /home/crow/onelife/Pielife/./minorGems/io/file/Directory.h \
- /home/crow/onelife/Pielife/./minorGems/io/file/FileInputStream.h \
- /home/crow/onelife/Pielife/./minorGems/io/file/File.h \
- /home/crow/onelife/Pielife/./minorGems/io/InputStream.h \
- /home/crow/onelife/Pielife/./minorGems/io/file/FileOutputStream.h \
- /home/crow/onelife/Pielife/./minorGems/io/OutputStream.h \
- /home/crow/onelife/Pielife/./minorGems/network/SocketClient.h \
- /home/crow/onelife/Pielife/./minorGems/network/Socket.h \
- /home/crow/onelife/Pielife/./minorGems/network/HostAddress.h \
- /home/crow/onelife/Pielife/./minorGems/network/upnp/portMapping.h \
- /home/crow/onelife/Pielife/./minorGems/util/SettingsManager.h \
- /home/crow/onelife/Pielife/./minorGems/util/TranslationManager.h \
- /home/crow/onelife/Pielife/./minorGems/util/log/AppLog.h \
- /home/crow/onelife/Pielife/./minorGems/util/log/Log.h \
- /home/crow/onelife/Pielife/./minorGems/util/log/PrintLog.h \
- /home/crow/onelife/Pielife/./minorGems/util/log/FileLog.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/converters/TGAImageConverter.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/converters/LittleEndianImageConverter.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/ImageConverter.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/Image.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/ChannelFilter.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/Color.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/RawRGBAImage.h \
- /home/crow/onelife/Pielife/./minorGems/util/ByteBufferInputStream.h \
- /home/crow/onelife/Pielife/./minorGems/sound/formats/aiff.h \
- /home/crow/onelife/Pielife/./minorGems/sound/audioNoClip.h \
- /home/crow/onelife/Pielife/./minorGems/game/game.h \
- /home/crow/onelife/Pielife/./minorGems/game/doublePair.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/Image.h \
- /home/crow/onelife/Pielife/./minorGems/game/gameGraphics.h \
- /home/crow/onelife/Pielife/./minorGems/game/drawUtils.h \
- /home/crow/onelife/Pielife/./minorGems/game/doublePair.h \
- /home/crow/onelife/Pielife/./minorGems/game/diffBundle/client/diffBundleClient.h \
- /home/crow/onelife/Pielife/./minorGems/util/random/CustomRandomSource.h \
- /home/crow/onelife/Pielife/./minorGems/util/random/RandomSource32.h \
- /home/crow/onelife/Pielife/./minorGems/util/random/RandomSource.h \
- /home/crow/onelife/Pielife/minorGems/game/platforms/SDL/demoCodePanel.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/openGL/gui/GUIPanelGL.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/openGL/gui/GUIComponentGL.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/openGL/gui/GUIContainerGL.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/openGL/gui/GUITranslatorGL.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/openGL/gui/TextGL.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/openGL/SingleTextureGL.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/openGL/glInclude.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/RGBAImage.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/openGL/gui/TextFieldGL.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/openGL/gui/TextGL.h \
- /home/crow/onelife/Pielife/./minorGems/ui/event/ActionListenerList.h \
- /home/crow/onelife/Pielife/./minorGems/ui/event/ActionListener.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/openGL/gui/LabelGL.h \
- /home/crow/onelife/Pielife/minorGems/game/platforms/SDL/DemoCodeChecker.h \
- /home/crow/onelife/Pielife/./minorGems/system/StopSignalThread.h \
- /home/crow/onelife/Pielife/./minorGems/system/BinarySemaphore.h \
- /home/crow/onelife/Pielife/./minorGems/system/MutexLock.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/file/Path.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/file/Directory.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/file/FileInputStream.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/file/File.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/InputStream.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/file/FileOutputStream.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/OutputStream.h \
+ /home/crow/onelife/Pielife+/./minorGems/network/SocketClient.h \
+ /home/crow/onelife/Pielife+/./minorGems/network/Socket.h \
+ /home/crow/onelife/Pielife+/./minorGems/network/HostAddress.h \
+ /home/crow/onelife/Pielife+/./minorGems/network/upnp/portMapping.h \
+ /home/crow/onelife/Pielife+/./minorGems/util/SettingsManager.h \
+ /home/crow/onelife/Pielife+/./minorGems/util/TranslationManager.h \
+ /home/crow/onelife/Pielife+/./minorGems/util/log/AppLog.h \
+ /home/crow/onelife/Pielife+/./minorGems/util/log/Log.h \
+ /home/crow/onelife/Pielife+/./minorGems/util/log/PrintLog.h \
+ /home/crow/onelife/Pielife+/./minorGems/util/log/FileLog.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/converters/TGAImageConverter.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/converters/LittleEndianImageConverter.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/ImageConverter.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/Image.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/ChannelFilter.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/Color.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/RawRGBAImage.h \
+ /home/crow/onelife/Pielife+/./minorGems/util/ByteBufferInputStream.h \
+ /home/crow/onelife/Pielife+/./minorGems/sound/formats/aiff.h \
+ /home/crow/onelife/Pielife+/./minorGems/sound/audioNoClip.h \
+ /home/crow/onelife/Pielife+/./minorGems/game/game.h \
+ /home/crow/onelife/Pielife+/./minorGems/game/doublePair.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/Image.h \
+ /home/crow/onelife/Pielife+/./minorGems/game/gameGraphics.h \
+ /home/crow/onelife/Pielife+/./minorGems/game/drawUtils.h \
+ /home/crow/onelife/Pielife+/./minorGems/game/doublePair.h \
+ /home/crow/onelife/Pielife+/./minorGems/game/diffBundle/client/diffBundleClient.h \
+ /home/crow/onelife/Pielife+/./minorGems/util/random/CustomRandomSource.h \
+ /home/crow/onelife/Pielife+/./minorGems/util/random/RandomSource32.h \
+ /home/crow/onelife/Pielife+/./minorGems/util/random/RandomSource.h \
+ /home/crow/onelife/Pielife+/minorGems/game/platforms/SDL/demoCodePanel.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/openGL/gui/GUIPanelGL.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/openGL/gui/GUIComponentGL.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/openGL/gui/GUIContainerGL.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/openGL/gui/GUITranslatorGL.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/openGL/gui/TextGL.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/openGL/SingleTextureGL.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/openGL/glInclude.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/RGBAImage.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/openGL/gui/TextFieldGL.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/openGL/gui/TextGL.h \
+ /home/crow/onelife/Pielife+/./minorGems/ui/event/ActionListenerList.h \
+ /home/crow/onelife/Pielife+/./minorGems/ui/event/ActionListener.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/openGL/gui/LabelGL.h \
+ /home/crow/onelife/Pielife+/minorGems/game/platforms/SDL/DemoCodeChecker.h \
+ /home/crow/onelife/Pielife+/./minorGems/system/StopSignalThread.h \
+ /home/crow/onelife/Pielife+/./minorGems/system/BinarySemaphore.h \
+ /home/crow/onelife/Pielife+/./minorGems/system/MutexLock.h \
  /usr/share/mingw-w64/include/tchar.h \
  /usr/share/mingw-w64/include/sec_api/tchar_s.h

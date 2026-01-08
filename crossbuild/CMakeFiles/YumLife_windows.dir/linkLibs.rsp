@@ -1,1 +1,1 @@
-  -L"/home/crow/onelife/Pielife/SDL-1.2.15/lib"  -lopengl32 -lglu32 -lmingw32 -lSDLmain -lSDL -lwsock32 -lwinmm -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 
+  -L"/home/crow/onelife/Pielife+/SDL-1.2.15/lib"  -lopengl32 -lglu32 -lmingw32 -lSDLmain -lSDL -lwsock32 -lwinmm -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 

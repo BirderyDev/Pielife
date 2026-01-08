@@ -1,11 +1,11 @@
 CMakeFiles/Pielife_windows.dir/minorGems/game/platforms/SDL/DemoCodeChecker.cpp.obj: \
- /home/crow/onelife/Pielife/minorGems/game/platforms/SDL/DemoCodeChecker.cpp \
- /home/crow/onelife/Pielife/minorGems/game/platforms/SDL/DemoCodeChecker.h \
- /home/crow/onelife/Pielife/./minorGems/network/web/WebRequest.h \
- /home/crow/onelife/Pielife/./minorGems/network/Socket.h \
- /home/crow/onelife/Pielife/./minorGems/common.h \
- /home/crow/onelife/Pielife/./minorGems/util/development/memory/debugMemory.h \
- /home/crow/onelife/Pielife/./minorGems/network/HostAddress.h \
+ /home/crow/onelife/Pielife+/minorGems/game/platforms/SDL/DemoCodeChecker.cpp \
+ /home/crow/onelife/Pielife+/minorGems/game/platforms/SDL/DemoCodeChecker.h \
+ /home/crow/onelife/Pielife+/./minorGems/network/web/WebRequest.h \
+ /home/crow/onelife/Pielife+/./minorGems/network/Socket.h \
+ /home/crow/onelife/Pielife+/./minorGems/common.h \
+ /home/crow/onelife/Pielife+/./minorGems/util/development/memory/debugMemory.h \
+ /home/crow/onelife/Pielife+/./minorGems/network/HostAddress.h \
  /usr/share/mingw-w64/include/stdio.h \
  /usr/share/mingw-w64/include/corecrt_stdio_config.h \
  /usr/share/mingw-w64/include/corecrt.h \
@@ -20,18 +20,18 @@ CMakeFiles/Pielife_windows.dir/minorGems/game/platforms/SDL/DemoCodeChecker.cpp.
  /usr/share/mingw-w64/include/string.h \
  /usr/share/mingw-w64/include/crtdefs.h \
  /usr/share/mingw-w64/include/sec_api/string_s.h \
- /home/crow/onelife/Pielife/./minorGems/io/Serializable.h \
- /home/crow/onelife/Pielife/./minorGems/io/InputStream.h \
- /home/crow/onelife/Pielife/./minorGems/io/Stream.h \
- /home/crow/onelife/Pielife/./minorGems/io/TypeIO.h \
- /home/crow/onelife/Pielife/./minorGems/io/OutputStream.h \
- /home/crow/onelife/Pielife/./minorGems/util/stringUtils.h \
- /home/crow/onelife/Pielife/./minorGems/util/SimpleVector.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/Serializable.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/InputStream.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/Stream.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/TypeIO.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/OutputStream.h \
+ /home/crow/onelife/Pielife+/./minorGems/util/stringUtils.h \
+ /home/crow/onelife/Pielife+/./minorGems/util/SimpleVector.h \
  /usr/share/mingw-w64/include/ctype.h \
  /usr/lib/gcc/i686-w64-mingw32/13-win32/include/stdarg.h \
  /usr/share/mingw-w64/include/stdarg.h \
  /usr/share/mingw-w64/include/_mingw_stdarg.h \
- /home/crow/onelife/Pielife/./minorGems/system/Time.h \
+ /home/crow/onelife/Pielife+/./minorGems/system/Time.h \
  /usr/share/mingw-w64/include/time.h \
  /usr/share/mingw-w64/include/sys/timeb.h \
  /usr/share/mingw-w64/include/sec_api/sys/timeb_s.h \
@@ -57,14 +57,14 @@ CMakeFiles/Pielife_windows.dir/minorGems/game/platforms/SDL/DemoCodeChecker.cpp.
  /usr/share/mingw-w64/include/malloc.h \
  /usr/lib/gcc/i686-w64-mingw32/13-win32/include/mm_malloc.h \
  /usr/share/mingw-w64/include/errno.h \
- /home/crow/onelife/Pielife/./minorGems/network/LookupThread.h \
- /home/crow/onelife/Pielife/./minorGems/system/FinishedSignalThread.h \
- /home/crow/onelife/Pielife/./minorGems/system/Thread.h \
- /home/crow/onelife/Pielife/./minorGems/system/MutexLock.h \
- /home/crow/onelife/Pielife/./minorGems/network/web/WebRequestCompletionThread.h \
- /home/crow/onelife/Pielife/./minorGems/util/TranslationManager.h \
- /home/crow/onelife/Pielife/./minorGems/crypto/hashes/sha1.h \
- /home/crow/onelife/Pielife/./minorGems/system/endian.h \
- /home/crow/onelife/Pielife/./minorGems/util/log/AppLog.h \
- /home/crow/onelife/Pielife/./minorGems/util/log/Log.h \
- /home/crow/onelife/Pielife/./minorGems/util/log/PrintLog.h
+ /home/crow/onelife/Pielife+/./minorGems/network/LookupThread.h \
+ /home/crow/onelife/Pielife+/./minorGems/system/FinishedSignalThread.h \
+ /home/crow/onelife/Pielife+/./minorGems/system/Thread.h \
+ /home/crow/onelife/Pielife+/./minorGems/system/MutexLock.h \
+ /home/crow/onelife/Pielife+/./minorGems/network/web/WebRequestCompletionThread.h \
+ /home/crow/onelife/Pielife+/./minorGems/util/TranslationManager.h \
+ /home/crow/onelife/Pielife+/./minorGems/crypto/hashes/sha1.h \
+ /home/crow/onelife/Pielife+/./minorGems/system/endian.h \
+ /home/crow/onelife/Pielife+/./minorGems/util/log/AppLog.h \
+ /home/crow/onelife/Pielife+/./minorGems/util/log/Log.h \
+ /home/crow/onelife/Pielife+/./minorGems/util/log/PrintLog.h

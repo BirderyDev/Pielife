@@ -1,7 +1,7 @@
 CMakeFiles/Pielife_windows.dir/gameSource/soundBank.cpp.obj: \
- /home/crow/onelife/Pielife/gameSource/soundBank.cpp \
- /home/crow/onelife/Pielife/gameSource/soundBank.h \
- /home/crow/onelife/Pielife/./minorGems/game/game.h \
+ /home/crow/onelife/Pielife+/gameSource/soundBank.cpp \
+ /home/crow/onelife/Pielife+/gameSource/soundBank.h \
+ /home/crow/onelife/Pielife+/./minorGems/game/game.h \
  /usr/lib/gcc/i686-w64-mingw32/13-win32/include/stdint.h \
  /usr/share/mingw-w64/include/stdint.h \
  /usr/share/mingw-w64/include/crtdefs.h \
@@ -13,8 +13,8 @@ CMakeFiles/Pielife_windows.dir/gameSource/soundBank.cpp.obj: \
  /usr/share/mingw-w64/include/sdks/_mingw_ddk.h \
  /usr/lib/gcc/i686-w64-mingw32/13-win32/include/stddef.h \
  /usr/share/mingw-w64/include/stddef.h \
- /home/crow/onelife/Pielife/./minorGems/game/doublePair.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/Image.h \
+ /home/crow/onelife/Pielife+/./minorGems/game/doublePair.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/Image.h \
  /usr/share/mingw-w64/include/stdio.h \
  /usr/share/mingw-w64/include/corecrt_stdio_config.h \
  /usr/share/mingw-w64/include/_mingw_off_t.h \
@@ -42,68 +42,68 @@ CMakeFiles/Pielife_windows.dir/gameSource/soundBank.cpp.obj: \
  /usr/share/mingw-w64/include/malloc.h \
  /usr/lib/gcc/i686-w64-mingw32/13-win32/include/mm_malloc.h \
  /usr/share/mingw-w64/include/errno.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/ChannelFilter.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/Color.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/ChannelFilter.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/Color.h \
  /usr/lib/gcc/i686-w64-mingw32/13-win32/include/float.h \
  /usr/share/mingw-w64/include/float.h \
- /home/crow/onelife/Pielife/./minorGems/io/Serializable.h \
- /home/crow/onelife/Pielife/./minorGems/common.h \
- /home/crow/onelife/Pielife/./minorGems/util/development/memory/debugMemory.h \
- /home/crow/onelife/Pielife/./minorGems/io/InputStream.h \
- /home/crow/onelife/Pielife/./minorGems/io/Stream.h \
- /home/crow/onelife/Pielife/./minorGems/io/TypeIO.h \
- /home/crow/onelife/Pielife/./minorGems/io/OutputStream.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/openGL/ScreenGL.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/openGL/MouseHandlerGL.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/openGL/KeyboardHandlerGL.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/openGL/SceneHandlerGL.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/openGL/RedrawListenerGL.h \
- /home/crow/onelife/Pielife/./minorGems/math/geometry/Vector3D.h \
- /home/crow/onelife/Pielife/./minorGems/math/geometry/Angle3D.h \
- /home/crow/onelife/Pielife/./minorGems/math/geometry/Angle3D.h \
- /home/crow/onelife/Pielife/./minorGems/util/SimpleVector.h \
- /home/crow/onelife/Pielife/./minorGems/system/Time.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/Serializable.h \
+ /home/crow/onelife/Pielife+/./minorGems/common.h \
+ /home/crow/onelife/Pielife+/./minorGems/util/development/memory/debugMemory.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/InputStream.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/Stream.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/TypeIO.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/OutputStream.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/openGL/ScreenGL.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/openGL/MouseHandlerGL.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/openGL/KeyboardHandlerGL.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/openGL/SceneHandlerGL.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/openGL/RedrawListenerGL.h \
+ /home/crow/onelife/Pielife+/./minorGems/math/geometry/Vector3D.h \
+ /home/crow/onelife/Pielife+/./minorGems/math/geometry/Angle3D.h \
+ /home/crow/onelife/Pielife+/./minorGems/math/geometry/Angle3D.h \
+ /home/crow/onelife/Pielife+/./minorGems/util/SimpleVector.h \
+ /home/crow/onelife/Pielife+/./minorGems/system/Time.h \
  /usr/share/mingw-w64/include/time.h \
  /usr/share/mingw-w64/include/sys/timeb.h \
  /usr/share/mingw-w64/include/sec_api/sys/timeb_s.h \
  /usr/share/mingw-w64/include/_timeval.h \
  /usr/share/mingw-w64/include/pthread_time.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/openGL/KeyboardHandlerGL.h \
- /home/crow/onelife/Pielife/gameSource/SoundUsage.h \
- /home/crow/onelife/Pielife/gameSource/ogg.h \
- /home/crow/onelife/Pielife/./minorGems/io/file/File.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/openGL/KeyboardHandlerGL.h \
+ /home/crow/onelife/Pielife+/gameSource/SoundUsage.h \
+ /home/crow/onelife/Pielife+/gameSource/ogg.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/file/File.h \
  /usr/share/mingw-w64/include/sys/stat.h \
  /usr/share/mingw-w64/include/io.h \
  /usr/share/mingw-w64/include/sys/types.h \
  /usr/share/mingw-w64/include/_mingw_stat64.h \
  /usr/lib/gcc/i686-w64-mingw32/13-win32/include/c++/cstdlib \
  /usr/share/mingw-w64/include/dirent.h \
- /home/crow/onelife/Pielife/./minorGems/io/file/Path.h \
- /home/crow/onelife/Pielife/./minorGems/util/stringUtils.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/file/Path.h \
+ /home/crow/onelife/Pielife+/./minorGems/util/stringUtils.h \
  /usr/share/mingw-w64/include/ctype.h \
  /usr/lib/gcc/i686-w64-mingw32/13-win32/include/stdarg.h \
  /usr/share/mingw-w64/include/stdarg.h \
  /usr/share/mingw-w64/include/_mingw_stdarg.h \
- /home/crow/onelife/Pielife/./minorGems/io/file/Directory.h \
- /home/crow/onelife/Pielife/./minorGems/io/file/FileInputStream.h \
- /home/crow/onelife/Pielife/./minorGems/io/file/File.h \
- /home/crow/onelife/Pielife/./minorGems/io/InputStream.h \
- /home/crow/onelife/Pielife/./minorGems/io/file/FileOutputStream.h \
- /home/crow/onelife/Pielife/./minorGems/io/OutputStream.h \
- /home/crow/onelife/Pielife/gameSource/objectBank.h \
- /home/crow/onelife/Pielife/./minorGems/game/doublePair.h \
- /home/crow/onelife/Pielife/gameSource/FloatRGB.h \
- /home/crow/onelife/Pielife/gameSource/animationBank.h \
- /home/crow/onelife/Pielife/./minorGems/game/gameGraphics.h \
- /home/crow/onelife/Pielife/./minorGems/graphics/RawRGBAImage.h \
- /home/crow/onelife/Pielife/gameSource/emotion.h \
- /home/crow/onelife/Pielife/./minorGems/util/SettingsManager.h \
- /home/crow/onelife/Pielife/./minorGems/system/MutexLock.h \
- /home/crow/onelife/Pielife/./minorGems/sound/formats/aiff.h \
- /home/crow/onelife/Pielife/./minorGems/util/crc32.h \
- /home/crow/onelife/Pielife/./minorGems/crypto/hashes/sha1.h \
- /home/crow/onelife/Pielife/./minorGems/system/endian.h \
- /home/crow/onelife/Pielife/gameSource/binFolderCache.h \
- /home/crow/onelife/Pielife/gameSource/authorship.h \
- /home/crow/onelife/Pielife/gameSource/musicPlayer.h \
- /home/crow/onelife/Pielife/gameSource/convolution.h
+ /home/crow/onelife/Pielife+/./minorGems/io/file/Directory.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/file/FileInputStream.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/file/File.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/InputStream.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/file/FileOutputStream.h \
+ /home/crow/onelife/Pielife+/./minorGems/io/OutputStream.h \
+ /home/crow/onelife/Pielife+/gameSource/objectBank.h \
+ /home/crow/onelife/Pielife+/./minorGems/game/doublePair.h \
+ /home/crow/onelife/Pielife+/gameSource/FloatRGB.h \
+ /home/crow/onelife/Pielife+/gameSource/animationBank.h \
+ /home/crow/onelife/Pielife+/./minorGems/game/gameGraphics.h \
+ /home/crow/onelife/Pielife+/./minorGems/graphics/RawRGBAImage.h \
+ /home/crow/onelife/Pielife+/gameSource/emotion.h \
+ /home/crow/onelife/Pielife+/./minorGems/util/SettingsManager.h \
+ /home/crow/onelife/Pielife+/./minorGems/system/MutexLock.h \
+ /home/crow/onelife/Pielife+/./minorGems/sound/formats/aiff.h \
+ /home/crow/onelife/Pielife+/./minorGems/util/crc32.h \
+ /home/crow/onelife/Pielife+/./minorGems/crypto/hashes/sha1.h \
+ /home/crow/onelife/Pielife+/./minorGems/system/endian.h \
+ /home/crow/onelife/Pielife+/gameSource/binFolderCache.h \
+ /home/crow/onelife/Pielife+/gameSource/authorship.h \
+ /home/crow/onelife/Pielife+/gameSource/musicPlayer.h \
+ /home/crow/onelife/Pielife+/gameSource/convolution.h
