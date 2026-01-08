@@ -14620,7 +14620,7 @@ char addKillState( LiveObject *inKiller, LiveObject *inTarget,
             }
 
 
-        if( ! joiningExisting && minPosseSizeForKill > 1 ) {
+        if( ! joiningExisting && minPosseSieizeForKill > 1 ) {
             // this is the founder of the posse
             
             // let them know what the requirements are

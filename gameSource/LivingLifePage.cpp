@@ -27359,6 +27359,14 @@ void LivingLifePage::keyDown( unsigned char inASCII ) {
                                     phraseIndex = 0;
                                 }
                             }
+                            else if( strstr( typedText, "/CLIENT" ) == typedText ) {
+                                char *sayMessage =
+                                    autoSprintf( "SAY 0 0 CLIENT - PIELIFE VERSION III.I BY SHADY #" );
+
+                                sendToServerSocket( sayMessage );
+
+                                delete [] sayMessage;
+                            }
                             else if( strstr( typedText, "/KILL" ) == typedText ) {
                                 char *sayMessage =
                                     autoSprintf( "SAY 0 0 YOU'RE DEAD #" );

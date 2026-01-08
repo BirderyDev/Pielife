@@ -26,7 +26,7 @@
 #include "yumRebirthComponent.h"
 
 using namespace std;
-// Pielife
+// Pielife+
 std::vector<std::string> HetuwMod::allylist;
 bool HetuwMod::ShadersOn;
 string HetuwMod::ShaderValue = "0 0 0 0"; // rgb opacity
@@ -154,7 +154,7 @@ doublePair HetuwMod::playerNamePos;
 
 bool HetuwMod::bDrawCords;
 bool HetuwMod::bDrawHostileTiles = true;
-// Pielife Addition
+// Pielife+ Addition
 bool HetuwMod::bDrawHostilePlayers = true;
 bool HetuwMod::bDrawHiddenVision = true;
 //
@@ -965,7 +965,7 @@ void HetuwMod::initSettings()
 	yumConfig::registerSetting("init_show_deathmessages", bDrawDeathMessages);
 	yumConfig::registerSetting("init_show_homecords", bDrawHomeCords);
 	yumConfig::registerSetting("init_show_hostiletiles", bDrawHostileTiles);
-	// Pielife Addition
+	// Pielife+ Addition
 	yumConfig::registerSetting("init_show_hostileplayers", bDrawHostilePlayers);
 	yumConfig::registerSetting("init_show_vision", bDrawHiddenVision);
 	//
@@ -2861,8 +2861,6 @@ void HetuwMod::drawHostileTiles()
 
 void HetuwMod::drawHostilePlayers() //Kept the black square under our user.
 {
-	static int frameCount = 0;
-	frameCount++;
 
 	if (!ourLiveObject)
 		return;
@@ -2936,7 +2934,7 @@ void HetuwMod::drawHostilePlayers() //Kept the black square under our user.
 			}
 			else
 			{
-				if ((frameCount / 90) % 2 == 0)
+				if ((stepCount / 90) % 2 == 0)
 				{
 					setDrawColor(1, 0, 0, 0.30f); // Red
 				}
@@ -4401,7 +4399,7 @@ bool HetuwMod::livingLifeKeyDown(unsigned char inASCII)
 		bDrawHostileTiles = !bDrawHostileTiles;
 		return true;
 	}
-	// Pielife Addition
+	// Pielife+ Addition
 	if (!bDrawMap && !commandKey && isCharKey(inASCII, charKey_ShowHostilePlayers))
 	{
 		bDrawHostilePlayers = !bDrawHostilePlayers;
@@ -6295,7 +6293,7 @@ void HetuwMod::drawOurStatus()
 		status = "WOUNDED";
 		setDrawColor(1, 0, 0, 1);
 	}
-	else if (ourLiveObject->heldByAdultID != -1)
+	else if (ourLiveObject->heldByAdultID != -1 )
 	{
 		status = "HELD";
 		setDrawColor(1, 1, 0, 1);
@@ -6686,20 +6684,27 @@ void HetuwMod::drawAge()
 	int ageDecimal = age - int(age * 0.1) * 10;
 	age = (int)((age - ageDecimal) * 0.1);
 
-	if (ourAge >= 14 && ourAge < 40 && ourGender == 'F')
-	{
-		setDrawColor(0, 0.8, 0, 1);
+	if (ourAge >= 55) {
+		setDrawColor(1.0f, 0.84f, 0.0f, 1.0f);
 	}
-	else
-	{
-		setDrawColor(1, 1, 1, 1);
+	else if (ourAge >= 14 && ourAge < 40 && ourGender == 'F') {
+		setDrawColor(0.0f, 0.8f, 0.0f, 1.0f);
 	}
+	else {
+		setDrawColor(1.0f, 1.0f, 1.0f, 1.0f);
+	}
+
 	snprintf(sBuf, sizeof(sBuf), "%c %i.%i", ourGender, age, ageDecimal);
 
 	drawPos.x = lastScreenViewCenter.x + 350 * guiScale;
 	drawPos.y = lastScreenViewCenter.y - (viewHeight / 2) + 25 * guiScale;
 
-	livingLifePage->hetuwDrawScaledHandwritingFont(sBuf, drawPos, guiScale * 0.8, alignLeft);
+	livingLifePage->hetuwDrawScaledHandwritingFont(
+		sBuf,
+		drawPos,
+		guiScale * 0.8,
+		alignLeft
+	);
 }
 
 void HetuwMod::drawCords()
@@ -6872,7 +6877,7 @@ void HetuwMod::drawHelp()
 	drawPos.y -= lineHeight;
 
 	drawPos.y -= lineHeight;
-	snprintf(str, sizeof(str), "YOU CAN CHANGE KEYS AND SETTINGS BY MODIFYING THE PIELIFE.CFG FILE");
+	snprintf(str, sizeof(str), "YOU CAN CHANGE KEYS AND SETTINGS BY MODIFYING THE Pielife+.CFG FILE");
 	livingLifePage->hetuwDrawScaledHandwritingFont(str, drawPos, guiScale);
 	drawPos.y -= lineHeight;
 
