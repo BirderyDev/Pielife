@@ -2471,8 +2471,6 @@ void HetuwMod::livingLifeDraw()
 	drawHunger();
 	drawOurStatus();
 	drawCurseToken();
-	if (bDrawHostilePlayers)
-		drawHostilePlayers();
 	if (bDrawHiddenVision)
 		drawHiddenVision();
 	if (bDrawCords)
@@ -2808,6 +2806,9 @@ void HetuwMod::drawHiddenVision()
 
 void HetuwMod::drawHostileTiles()
 {
+
+    if (bHidePlayers) return;
+
 	if (!bDrawHostileTiles)
 		return;
 	int heldObjectID = ourLiveObject->holdingID;
@@ -2858,106 +2859,90 @@ void HetuwMod::drawHostileTiles()
 	}
 }
 
-
-void HetuwMod::drawHostilePlayers() //Kept the black square under our user.
+void HetuwMod::drawHostilePlayers(LiveObject* o)
 {
+    if (!ourLiveObject) return;
+    if (bHidePlayers) return;
+    if (!bDrawHostilePlayers) return;
 
-	if (!ourLiveObject)
-		return;
-	if (bHidePlayers)
-		return;
-	if (!bDrawHostilePlayers)
-		return;
+    if (!o || o->hide || o->outOfRange || !o->allSpritesLoaded) return;
 
-	for (int i = 0; i < HetuwMod::gameObjects->size(); i++)
-	{
-		LiveObject *player = HetuwMod::gameObjects->getElement(i);
-		if (!player || player->hide || player->outOfRange || !player->allSpritesLoaded)
-			continue;
+    int tileX = lround(o->currentPos.x);
+    int tileY = lround(o->currentPos.y);
 
-		int radius = 0;
-		int tileX = lround(player->currentPos.x);
-		int tileY = lround(player->currentPos.y);
+    ObjectRecord* heldObject = getObject(o->holdingID);
+    int radius = (heldObject && heldObject->deadlyDistance > 0) ? heldObject->deadlyDistance : 0;
 
-		ObjectRecord *anyobject = getObject(player->holdingID);
-		if (anyobject->deadlyDistance > 0){
-			radius = anyobject->deadlyDistance;
-		}
-		else{
-			if(player->id != ourLiveObject->id){
-				if (player->name != nullptr &&
-					std::find(HetuwMod::allylist.begin(), HetuwMod::allylist.end(),
-							std::string(player->name)) != HetuwMod::allylist.end()) {
-					setDrawColor(0, 0, 1, 0.25f);  // Ally
-				} else {
-					setDrawColor(1, 1, 0, 0.20f);  // Neutral
-				}
+    if (radius > 0)
+    {
+        if (o->id == ourLiveObject->id)
+        {
+            setDrawColor(0, 0, 0, 0.25f);
 
-				if (player->heldByAdultID <= 0) {
-					drawTileRect(tileX, tileY);
-				}
-				continue;
-			}
-		}
+            for (int x = tileX - radius; x <= tileX + radius; x++)
+            {
+                for (int y = tileY - radius; y <= tileY + radius; y++)
+                {
+                    int dx = x - tileX;
+                    int dy = y - tileY;
+                    if (dx * dx + dy * dy <= radius * radius)
+                    {
+                        drawTileRect(x, y);
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (!o->chasingUs)
+            {
+                setDrawColor(1, 0, 0, 0.15f);
+            }
+            else
+            {
+                static int stepCount = 0;
+                stepCount++;
+                if ((stepCount / 90) % 2 == 0)
+                    setDrawColor(1, 0, 0, 0.30f);
+                else
+                    setDrawColor(1, 0.5, 0, 0.30f);
+            }
 
-		if (player->id == ourLiveObject->id)
-		{ // if player is us
-			setDrawColor(0, 0, 0, 0.25f);
-			for (int x = tileX - radius; x <= tileX + radius; x++){
-				for (int y = tileY - radius; y <= tileY + radius; y++)
-				{
-					int dx = x - tileX;
-					int dy = y - tileY;
-					if (dx * dx + dy * dy <= radius * radius)
-					{
-						drawTileRect(x, y);
-					}
-				}
-			}
-		}
-		else
-		{
-			if (!player->chasingUs){
-				setDrawColor(1, 0, 0, 0.15f);
-				for (int x = tileX - radius; x <= tileX + radius; x++)
-				{
-					for (int y = tileY - radius; y <= tileY + radius; y++)
-					{
-						int dx = x - tileX;
-						int dy = y - tileY;
-						if (dx * dx + dy * dy <= radius * radius)
-						{
-							drawTileRect(x, y);
-						}
-					}
-				}
-			}
-			else
-			{
-				if ((stepCount / 90) % 2 == 0)
-				{
-					setDrawColor(1, 0, 0, 0.30f); // Red
-				}
-				else
-				{
-					setDrawColor(1, 0.5, 0, 0.30f); // White
-				}
-				for (int x = tileX - radius; x <= tileX + radius; x++)
-				{
-					for (int y = tileY - radius; y <= tileY + radius; y++)
-					{
-						int dx = x - tileX;
-						int dy = y - tileY;
-						if (dx * dx + dy * dy <= radius * radius)
-						{
-							drawTileRect(x, y);
-						}
-					}
-				}
-			}
-		}
+            for (int x = tileX - radius; x <= tileX + radius; x++)
+            {
+                for (int y = tileY - radius; y <= tileY + radius; y++)
+                {
+                    int dx = x - tileX;
+                    int dy = y - tileY;
+                    if (dx * dx + dy * dy <= radius * radius)
+                    {
+                        drawTileRect(x, y);
+                    }
+                }
+            }
+        }
+    }
+    else
+    {
+        if (o->id != ourLiveObject->id)
+        {
+            if (o->name != nullptr &&
+                std::find(HetuwMod::allylist.begin(), HetuwMod::allylist.end(),
+                          std::string(o->name)) != HetuwMod::allylist.end())
+            {
+                setDrawColor(0, 0, 1, 0.25f);
+            }
+            else
+            {
+                setDrawColor(1, 1, 0, 0.20f);
+            }
 
-	} // break happens here
+            if (o->heldByAdultID <= 0)
+            {
+                drawTileRect(tileX, tileY);
+            }
+        }
+    }
 }
 
 bool HetuwMod::charArrContainsCharArr(const char *arr1, const char *arr2)
@@ -6298,14 +6283,14 @@ void HetuwMod::drawOurStatus()
 		status = "HELD";
 		setDrawColor(1, 1, 0, 1);
 	}
-	else if (ourLiveObject->holdingID == 0 &&
+	else if (ourLiveObject->holdingID < 0 &&
 			 ourLiveObject->age >= 14 && ourLiveObject->age < 40 &&
 			 ourGender == 'F')
 	{
 		status = "NURSING";
 		setDrawColor(0, 1, 1, 1);
 	}
-	else if (ourGender == 'M' && ourLiveObject->holdingID == 0)
+	else if (ourGender == 'M' && ourLiveObject->holdingID < 0)
 	{
 		status = "HOLDING";
 		setDrawColor(0, 1, 1, 1);

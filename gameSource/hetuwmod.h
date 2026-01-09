@@ -672,7 +672,7 @@ public:
 	static bool bDrawHostilePlayers;
 	static bool bDrawHiddenVision;
 		
-	static void drawHostilePlayers();
+	static void drawHostilePlayers(LiveObject* o);
 	static std::vector<std::string> allylist;
 
 
