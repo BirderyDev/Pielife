@@ -31,6 +31,7 @@ std::vector<std::string> HetuwMod::allylist;
 bool HetuwMod::ShadersOn;
 string HetuwMod::ShaderValue = "0 0 0 0"; // rgb opacity
 int HetuwMod::FakeUID = 0;
+bool HetuwMod::alternatePID = false;
 //
 constexpr int HetuwMod::OBJID_SharpStone;
 constexpr int HetuwMod::OBJID_Fire;
@@ -1041,7 +1042,7 @@ void HetuwMod::initSettings()
 
 	yumConfig::registerSetting("auto_male_names", autoMaleNames, {preComment : "\n// names to automatically give when holding your bb; separate with commas\n// for example: auto_male_names = MATTHEW, MARK, LUKE, JOHN\n"});
 	yumConfig::registerSetting("auto_female_names", autoFemaleNames);
-	yumConfig::registerSetting("Fake_ID", FakeUID);
+	yumConfig::registerSetting("Alternate_PID", alternatePID);
 	static std::map<std::string, int> autoNameModeMap = {
 		{"sequential", NAME_MODE_SEQUENTIAL},
 		{"shuffle", NAME_MODE_SHUFFLE},
@@ -1893,6 +1894,8 @@ void HetuwMod::resetObjectDrawScale()
 		objectDrawScale[i] = 1.0;
 }
 
+
+
 void HetuwMod::objectDrawScaleStep()
 {
 	if (!b_drawSearchPulsate && !b_drawYumPulsate)
@@ -2465,6 +2468,14 @@ void HetuwMod::livingLifeDraw()
 	if (bDrawGrid)
 		drawGrid();
 	drawAge();
+
+	if(alternatePID){
+		if(FakeUID ==0 ){
+			FakeUID = 12;
+		}
+		HetuwMod::alternateID(20);
+	}
+
 	drawCombatIndicator();
 	drawTemp();
 	drawSpeed();
@@ -2804,6 +2815,57 @@ void HetuwMod::drawHiddenVision()
 	}
 }
 
+void HetuwMod::alternateID(double seconds)
+{
+    if (ourLiveObject == NULL) return;
+
+    static double lastChangeTime = 0.0;
+    static int currentFakeUID = 0;
+
+    double now = game_getCurrentTime();
+
+    if (lastChangeTime == 0.0 || currentFakeUID == 0)
+    {
+        lastChangeTime = now;
+        currentFakeUID = randSource.getRandomBoundedInt(1, 100);
+        Phex::sendServerLife(currentFakeUID);
+    }
+
+    double timeElapsed = now - lastChangeTime;
+    double timeRemaining = seconds - timeElapsed;
+
+    if (timeElapsed >= seconds)
+    {
+        lastChangeTime = now;
+
+        int newID;
+        do {
+            newID = randSource.getRandomBoundedInt(1, 100);
+        } while (newID == currentFakeUID);
+
+        currentFakeUID = newID;
+        timeRemaining = seconds;
+
+        Phex::sendServerLife(currentFakeUID);
+    }
+
+    char sBuf[64];
+    int secondsLeft = (int)ceil(timeRemaining);
+    snprintf(sBuf, sizeof(sBuf), "PID %d  •  %ds", currentFakeUID, secondsLeft);
+
+    doublePair drawPos;
+    drawPos.x = lastScreenViewCenter.x - 400 * guiScale;
+    drawPos.y = lastScreenViewCenter.y - (viewHeight / 2) + 25 * guiScale;
+
+    livingLifePage->hetuwDrawScaledHandwritingFont(
+        sBuf,
+        drawPos,
+        guiScale * 0.8,
+        alignLeft
+    );
+
+    FakeUID = currentFakeUID;
+}
 void HetuwMod::drawHostileTiles()
 {
 
@@ -2900,8 +2962,6 @@ void HetuwMod::drawHostilePlayers(LiveObject* o)
             }
             else
             {
-                static int stepCount = 0;
-                stepCount++;
                 if ((stepCount / 90) % 2 == 0)
                     setDrawColor(1, 0, 0, 0.30f);
                 else
@@ -6691,6 +6751,8 @@ void HetuwMod::drawAge()
 		alignLeft
 	);
 }
+
+
 
 void HetuwMod::drawCords()
 {

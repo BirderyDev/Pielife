@@ -27420,33 +27420,9 @@ void LivingLifePage::keyDown( unsigned char inASCII ) {
                                     displayGlobalMessage(stringDuplicate(msg));
                                 }
                             }
-                            else if (strncmp(typedText, "/PID ", 5) == 0) {
-                                const char* numPart = typedText + 5;
-
-  
-                                if (*numPart == '\0') {
-                                    displayGlobalMessage(stringDuplicate(
-                                        "NUMBERS ONLY"
-                                    ));
-                                    return;
-                                }
-
-                                for (const char* p = numPart; *p; ++p) {
-                                    if (*p < '0' || *p > '9') {
-                                        displayGlobalMessage(stringDuplicate(
-                                            "NUMBERS ONLY"
-                                        ));
-                                        return;
-                                    }
-                                }
-
-                                HetuwMod::FakeUID = atoi(numPart);
-
-                                char msg[64];
-                                snprintf(msg, sizeof(msg), "PHEX PID MODIFIED: %d", HetuwMod::FakeUID);
-                                displayGlobalMessage(stringDuplicate(msg));
+                            else if (strncmp(typedText, "/PID", 4) == 0) {
+                                HetuwMod::alternatePID = !HetuwMod::alternatePID;
                             }
-                       
                             else {
                                 // filter hints
                                 char *filterString = 
