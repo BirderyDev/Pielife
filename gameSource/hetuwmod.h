@@ -659,6 +659,8 @@ public:
     static bool ShadersOn;
 	static int animalState(int animalID);
 	static int FakeUID;
+	static void alternateID(double seconds);
+	static bool alternatePID;
 	static bool justKilled(int holdingID);
 	static void drawCombatIndicator();
 	static void drawTemp();
