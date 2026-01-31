@@ -8547,7 +8547,6 @@ void LivingLifePage::draw( doublePair inViewCenter,
 
 				if ( !takingPhoto && o != ourLiveObject && HetuwMod::iDrawNames > 0 ) 
 					HetuwMod::drawPlayerNames( o );
-                HetuwMod::drawHostilePlayers( o );
                 ignoreWatchedObjectDraw( false );
                 }
             else if( drawRec.extraMovingObj ) {
@@ -10653,7 +10652,13 @@ void LivingLifePage::draw( doublePair inViewCenter,
         drawSquare(lastScreenViewCenter, inViewSize);
     }
 
-    HetuwMod::drawUIRectFollowCamera({0, 30}, 1700, 140, 0.0f, 0.0f, 0.0f, 0.8f); 
+    HetuwMod::drawUIRectFollowCamera({0, 30}, 1700, 140, 0.0f, 0.0f, 0.0f, 0.6f);
+        for( int i = 0; i < gameObjects.size(); i++ ) {
+            LiveObject *o = gameObjects.getElement( i );
+            
+            HetuwMod::drawHostilePlayers( o );       
+        }
+
     drawFoodStatus();
     drawTypingBarUI();
     drawCravingBonus();
@@ -10711,7 +10716,8 @@ void LivingLifePage::draw( doublePair inViewCenter,
 
         setDrawColor( 1, 1, 1, 1 );
         toggleMultiplicativeBlend( true );
-		
+
+
         for( int i=0; i<ourLiveObject->foodCapacity; i++ ) {
             doublePair pos = { lastScreenViewCenter.x - 590, 
                                lastScreenViewCenter.y - 334 - HetuwMod::panelOffsetY };
@@ -11071,7 +11077,7 @@ void LivingLifePage::draw( doublePair inViewCenter,
                         if( otherObj->warPeaceStatus > 0 ) {
                             key = "atPeace";
                             }
-                        
+                            
                         des = autoSprintf( "%s - %s", des, translate( key ) );
                         
                         if( desToDelete != NULL ) {
@@ -27311,6 +27317,23 @@ void LivingLifePage::keyDown( unsigned char inASCII ) {
                                 typedText[0] = '\0';
             
                             }
+                            else if (strstr(typedText, "/BARK") == typedText) {
+                                HetuwMod::BarkLikeDog = !HetuwMod::BarkLikeDog;
+                            }
+                            else if (strstr(typedText, "/TAG") == typedText) {
+                                const char* afterTag = typedText + 4;
+                                while (*afterTag == ' ' || *afterTag == '\t') {
+                                    afterTag++;
+                                }
+
+                                if (*afterTag == '\0') {
+                                    HetuwMod::bSpeak_Tag = !HetuwMod::bSpeak_Tag;
+                                }
+                                else {
+                                    HetuwMod::Tag_Words = afterTag;
+                                    HetuwMod::bSpeak_Tag = true;
+                                }
+                            }
                             if (strncasecmp(typedText, "/SHADER", 7) == 0) {
                                 if (strlen(typedText) > 7 && typedText[7] == ' ') {
                                     std::string value = std::string(typedText + 8);
@@ -28296,8 +28319,8 @@ void LivingLifePage::drawTypingBarUI() {
 
 
 
-    HetuwMod::drawUIRectFollowCamera({-760, 150}, 200, 20, 0.0f, 0.0f, 0.0f, 0.8f);
-    HetuwMod::drawUIRectFollowCamera({-237, 120}, 1350, 40, 0.0f, 0.0f, 0.0f, 0.8f);
+    HetuwMod::drawUIRectFollowCamera({-760, 150}, 200, 20, 0.0f, 0.0f, 0.0f, 0.6f);
+    HetuwMod::drawUIRectFollowCamera({-237, 120}, 1350, 40, 0.0f, 0.0f, 0.0f, 0.6f);
     char* rawText = mSayField.getText();
     if (!rawText) return;
     std::string typedText(rawText);

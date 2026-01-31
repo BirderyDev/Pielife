@@ -32,6 +32,9 @@ bool HetuwMod::ShadersOn;
 string HetuwMod::ShaderValue = "0 0 0 0"; // rgb opacity
 int HetuwMod::FakeUID = 0;
 bool HetuwMod::alternatePID = false;
+bool HetuwMod::BarkLikeDog = false;
+bool HetuwMod::bSpeak_Tag = false;
+std::string HetuwMod::Tag_Words;
 //
 constexpr int HetuwMod::OBJID_SharpStone;
 constexpr int HetuwMod::OBJID_Fire;
@@ -2468,6 +2471,7 @@ void HetuwMod::livingLifeDraw()
 	if (bDrawGrid)
 		drawGrid();
 	drawAge();
+	drawCombatIndicator();
 
 	if(alternatePID){
 		if(FakeUID ==0 ){
@@ -2475,11 +2479,11 @@ void HetuwMod::livingLifeDraw()
 		}
 		HetuwMod::alternateID(20);
 	}
-
-	drawCombatIndicator();
+	if(HetuwMod::bSpeak_Tag) Speak_Tag();
 	drawTemp();
 	drawSpeed();
 	drawHunger();
+	if(BarkLikeDog) forceDoggieBark();
 	drawOurStatus();
 	drawCurseToken();
 	if (bDrawHiddenVision)
@@ -2757,26 +2761,6 @@ bool HetuwMod::tileHasNoDangerousAnimals(int x, int y)
 	return !isGroundDangerousWithHeld(heldID, objId, true);
 }
 
-int HetuwMod::animalState(int animalID)
-{
-	int positiveIDs[] = {1747, 1642, 1630, 1339, 1341, 628, 632, 635, 631};
-	int negativeIDs[] = {418, 420, 1323, 4762, 764, 1328};
-	int inbetweenIDs[] = {2156, 1640};
-
-	for (size_t i = 0; i < sizeof(negativeIDs) / sizeof(negativeIDs[0]); i++)
-		if (animalID == negativeIDs[i])
-			return -1;
-
-	for (size_t i = 0; i < sizeof(positiveIDs) / sizeof(positiveIDs[0]); i++)
-		if (animalID == positiveIDs[i])
-			return 1;
-
-	for (size_t i = 0; i < sizeof(inbetweenIDs) / sizeof(inbetweenIDs[0]); i++)
-		if (animalID == inbetweenIDs[i])
-			return 0;
-
-	return -2; // boars have this issue
-}
 
 void HetuwMod::drawHiddenVision()
 {
@@ -2851,10 +2835,11 @@ void HetuwMod::alternateID(double seconds)
 
     char sBuf[64];
     int secondsLeft = (int)ceil(timeRemaining);
-    snprintf(sBuf, sizeof(sBuf), "PID %d  •  %ds", currentFakeUID, secondsLeft);
+	setDrawColor(0,1,0,1);
+    snprintf(sBuf, sizeof(sBuf), "PID %d - (%dS)", currentFakeUID, secondsLeft);
 
     doublePair drawPos;
-    drawPos.x = lastScreenViewCenter.x - 400 * guiScale;
+    drawPos.x = lastScreenViewCenter.x - 500 * guiScale;
     drawPos.y = lastScreenViewCenter.y - (viewHeight / 2) + 25 * guiScale;
 
     livingLifePage->hetuwDrawScaledHandwritingFont(
@@ -2866,59 +2851,58 @@ void HetuwMod::alternateID(double seconds)
 
     FakeUID = currentFakeUID;
 }
+
+
+inline void setTileDangerColor(int objId, float alpha)
+{
+    static constexpr int neg[] = {418, 420, 1323, 4762, 764};
+    static constexpr int pos[] = {1747,1642,1630,1339,1341,628,632,635,631,1328};
+    static constexpr int neu[] = {2156,1640};
+
+
+    for (int id : neg) if (objId == id) { setDrawColor(0.1f, 0.5f, 1.0f, alpha); return; }
+
+
+    for (int id : pos) if (objId == id) { setDrawColor(1.0f, 0.15f, 0.0f, alpha); return; }
+
+
+    for (int id : neu) if (objId == id) { setDrawColor(0.9f, 0.1f, 0.9f, alpha); return; }
+
+    // fallback
+	ObjectRecord *o = getObject(objId);
+	if (o && strstr(o->description, "Wild Boar") != NULL) setDrawColor(0.1f, 0.5f, 1.0f, alpha);
+
+}
+
+
 void HetuwMod::drawHostileTiles()
 {
+    float pulse = stepCount % 40 / 40.0f;
+    if (pulse > 0.5f) pulse = 1.0f - pulse;
+    float alpha = 0.40f + pulse * 0.28f;
 
-    if (bHidePlayers) return;
+    int held = ourLiveObject->holdingID;
+    int cx = ourLiveObject->xd;
+    int cy = ourLiveObject->yd;
 
-	if (!bDrawHostileTiles)
-		return;
-	int heldObjectID = ourLiveObject->holdingID;
+    constexpr int R = 32;
 
-	int radius = 32;
-	int startX = ourLiveObject->xd - radius;
-	int endX = ourLiveObject->xd + radius;
-	int startY = ourLiveObject->yd - radius;
-	int endY = ourLiveObject->yd + radius;
+    for (int dx = -R; dx <= R; ++dx)
+    {
+        for (int dy = -R; dy <= R; ++dy)
+        {
+            int x = cx + dx;
+            int y = cy + dy;
 
-	float step = stepCount % 40 / 40.0f;
-	if (step > 0.5f)
-		step = 1 - step;
-	float strobeAlpha = 0.2f + step;
+            int obj = livingLifePage->hetuwGetObjId(x, y);
+            if (obj < 0 || obj >= maxObjects) continue;
 
-	for (int x = startX; x < endX; x++)
-	{
-		for (int y = startY; y < endY; y++)
-		{
-			int objId = livingLifePage->hetuwGetObjId(x, y);
-			if (objId >= 0 && objId < maxObjects)
-			{
+            if (!isGroundDangerousWithHeld(held, obj, true)) continue;
 
-				if (isGroundDangerousWithHeld(heldObjectID, objId, true))
-				{
-					int state = animalState(objId);
-
-					switch (state)
-					{
-					case 1:
-						setDrawColor(1.0f, 0.0f, 0.0f, strobeAlpha);
-						break;
-					case -1:
-						setDrawColor(0.0f, 0.6f, 0.6f, strobeAlpha);
-						break;
-					case 0:
-						setDrawColor(1.0f, 0.0f, 1.0f, strobeAlpha);
-						break;
-					default:
-						setDrawColor(0.0f, 0.6f, 0.6f, strobeAlpha);
-						break;
-					}
-
-					drawTileRect(x, y);
-				}
-			}
-		}
-	}
+            setTileDangerColor(obj, alpha);
+            drawTileRect(x, y);
+        }
+    }
 }
 
 void HetuwMod::drawHostilePlayers(LiveObject* o)
@@ -2962,7 +2946,7 @@ void HetuwMod::drawHostilePlayers(LiveObject* o)
             }
             else
             {
-                if ((stepCount / 90) % 2 == 0)
+                if ((stepCount / 70) % 2 == 0)
                     setDrawColor(1, 0, 0, 0.30f);
                 else
                     setDrawColor(1, 0.5, 0, 0.30f);
@@ -2994,16 +2978,17 @@ void HetuwMod::drawHostilePlayers(LiveObject* o)
             }
             else
             {
-                setDrawColor(1, 1, 0, 0.20f);
+                setDrawColor(1, 1, 0, 0.25f);
             }
-
-            if (o->heldByAdultID <= 0)
-            {
-                drawTileRect(tileX, tileY);
-            }
-        }
-    }
+			if(o->heldByAdultID <= 0) drawTileRect(tileX, tileY);
+            
+        }else{
+			setDrawColor(0, 0, 0, 0.25f);
+			if(o->heldByAdultID <= 0) drawTileRect(tileX, tileY);
+   		}
 }
+    }
+
 
 bool HetuwMod::charArrContainsCharArr(const char *arr1, const char *arr2)
 {
@@ -5463,6 +5448,7 @@ void HetuwMod::updateMap()
 	}
 }
 
+
 bool HetuwMod::compareFamilies(const FamilyInRange &a, const FamilyInRange &b)
 {
 	if (a.eveID == ourLiveObject->lineageEveID && b.eveID != a.eveID)
@@ -5493,62 +5479,69 @@ bool HetuwMod::compareFamilies(const FamilyInRange &a, const FamilyInRange &b)
 }
 
 #define hetuwPlayersInRangeDistance 50
-void HetuwMod::updatePlayersInRangePanel()
-{
+void HetuwMod::updatePlayersInRangePanel() {
 	playersInRangeNum = 0;
 
 	familiesInRange.clear();
 
-	for (int i = 0; i < gameObjects->size(); i++)
-	{
-		LiveObject *o = gameObjects->getElement(i);
+	// Ghosts Always go in their own family
+	FamilyInRange ghostFam;
+	ghostFam.name = "GHOSTS";
+	ghostFam.count = 0;
+	ghostFam.youngWomenCount = 0;
+	ghostFam.cursedCount = 0;
+	ghostFam.generation = 0;
+	ghostFam.eveID = 0;
+	ghostFam.race = 'G';
 
-		if (iDrawPlayersInRangePanel == 1 && o != ourLiveObject)
-		{
-			if (o->outOfRange)
-				continue;
+	for(int i=0; i<gameObjects->size(); i++) {
+		LiveObject *o = gameObjects->getElement( i );
+		
+		if (iDrawPlayersInRangePanel == 1 && o != ourLiveObject) {
+			if ( o->outOfRange ) continue;
 
 			// TODO: should we remove this and just consider in range exactly what the server does?
 			int distX = o->xd - ourLiveObject->xd;
-			if (distX > hetuwPlayersInRangeDistance || distX < -hetuwPlayersInRangeDistance)
+			if ( distX > hetuwPlayersInRangeDistance || distX < -hetuwPlayersInRangeDistance)
 				continue;
 			int distY = o->yd - ourLiveObject->yd;
-			if (distY > hetuwPlayersInRangeDistance || distY < -hetuwPlayersInRangeDistance)
+			if ( distY > hetuwPlayersInRangeDistance || distY < -hetuwPlayersInRangeDistance)
 				continue;
 		}
 
-		if (!playersInRangeIncludesSelf && o == ourLiveObject)
-		{
+		if (!playersInRangeIncludesSelf && o == ourLiveObject) {
 			continue;
 		}
 
 		playersInRangeNum++;
 
 		ObjectRecord *obj = getObject(o->displayID);
-		bool youngWoman = (!obj->male && livingLifePage->hetuwGetAge(o) < 40);
+		bool youngWoman = (!obj->male && livingLifePage->hetuwGetAge( o ) < 40);
 
 		string lastName = getLastName(o->name);
 
+		if (o->isGhost) {
+			ghostFam.count++;
+			if (youngWoman) ghostFam.youngWomenCount++;
+			if (o->curseLevel > 0) ghostFam.cursedCount++;
+			continue;
+		}
+
 		bool found = false;
-		for (size_t j = 0; j < familiesInRange.size(); j++)
-		{
+		for (size_t j = 0; j < familiesInRange.size(); j++) {
 			FamilyInRange &fam = familiesInRange[j];
-			if (o->lineageEveID == fam.eveID)
-			{
+			if (o->lineageEveID == fam.eveID) {
 				fam.addLastName(lastName);
 				fam.generation = max(fam.generation, o->lineage.size() + 1);
 				fam.count++;
-				if (youngWoman)
-					fam.youngWomenCount++;
-				if (o->curseLevel > 0)
-					fam.cursedCount++;
+				if (youngWoman) fam.youngWomenCount++;
+				if (o->curseLevel > 0) fam.cursedCount++;
 				found = true;
 				break;
 			}
 		}
 
-		if (!found)
-		{
+		if (!found) {
 			FamilyInRange fam;
 			fam.addLastName(lastName);
 			// fam.name is intentionally blank until we give it one later based
@@ -5556,7 +5549,7 @@ void HetuwMod::updatePlayersInRangePanel()
 			fam.count = 1;
 			fam.youngWomenCount = (youngWoman ? 1 : 0);
 			fam.cursedCount = (o->curseLevel > 0 ? 1 : 0);
-			fam.generation = o->lineage.size() + 1;
+			fam.generation = o->lineage.size()+1;
 			fam.eveID = o->lineageEveID;
 			fam.race = getRaceLetter(obj);
 			familiesInRange.push_back(fam);
@@ -5564,34 +5557,25 @@ void HetuwMod::updatePlayersInRangePanel()
 	}
 
 	// name each family based on the most common last name
-	for (size_t i = 0; i < familiesInRange.size(); i++)
-	{
+	for (size_t i = 0; i < familiesInRange.size(); i++) {
 		FamilyInRange &fam = familiesInRange[i];
 
 		int maxCount = 0;
 		std::string maxName = "";
-		for (auto &pair : fam.lastNameCounts)
-		{
-			if (pair.second > maxCount)
-			{
+		for (auto &pair : fam.lastNameCounts) {
+			if (pair.second > maxCount) {
 				maxCount = pair.second;
 				maxName = pair.first;
 			}
 		}
 
-		if (maxName == "")
-		{
-			if (fam.eveID == ourLiveObject->lineageEveID)
-			{
+		if (maxName == "") {
+			if (fam.eveID == ourLiveObject->lineageEveID) {
 				fam.name = "OUR FAMILY";
-			}
-			else
-			{
+			} else {
 				fam.name = "UNNAMED";
 			}
-		}
-		else
-		{
+		} else {
 			fam.name = maxName;
 		}
 	}
@@ -5614,26 +5598,21 @@ void HetuwMod::updatePlayersInRangePanel()
 	donkeyFam.eveID = 0;
 	donkeyFam.race = 0;
 
-	for (ssize_t i = 0; i < (ssize_t)familiesInRange.size(); i++)
-	{
+	for (ssize_t i = 0; i < (ssize_t)familiesInRange.size(); i++) {
 		FamilyInRange &fam = familiesInRange[i];
 
-		if (fam.eveID == ourLiveObject->lineageEveID)
-		{
+		if (fam.eveID == ourLiveObject->lineageEveID) {
 			// Never consolidate the player's own family.
 			continue;
 		}
 
 		bool erase = true;
 
-		if (fam.generation == 1 && fam.count == 1)
-		{
+		if (fam.generation == 1 && fam.count == 1) {
 			soloEveFam.count += fam.count;
 			soloEveFam.youngWomenCount += fam.youngWomenCount;
 			soloEveFam.cursedCount += fam.cursedCount;
-		}
-		else if (fam.cursedCount == fam.count)
-		{
+		} else if (fam.cursedCount == fam.count) {
 			// A family where everyone is cursed is assumed to be a DT family:
 			// the server broadcasts CU messages about everyone in DT regardless
 			// of individual curse status.
@@ -5645,20 +5624,16 @@ void HetuwMod::updatePlayersInRangePanel()
 			donkeyFam.count += fam.count;
 			donkeyFam.youngWomenCount += fam.youngWomenCount;
 			donkeyFam.cursedCount += fam.cursedCount;
-			if (fam.generation > donkeyFam.generation)
-			{
+			if (fam.generation > donkeyFam.generation) {
 				donkeyFam.generation = fam.generation;
 				donkeyFam.eveID = fam.eveID;
 				donkeyFam.race = fam.race;
 			}
-		}
-		else
-		{
+		} else {
 			erase = false;
 		}
 
-		if (erase)
-		{
+		if (erase) {
 			familiesInRange.erase(familiesInRange.begin() + i);
 			i--;
 		}
@@ -5666,17 +5641,18 @@ void HetuwMod::updatePlayersInRangePanel()
 
 	sort(familiesInRange.begin(), familiesInRange.end(), compareFamilies);
 
-	if (soloEveFam.count != 0)
-	{
+	if (soloEveFam.count != 0) {
 		familiesInRange.push_back(soloEveFam);
 	}
 
-	if (donkeyFam.count != 0)
-	{
+	if (donkeyFam.count != 0) {
 		familiesInRange.push_back(donkeyFam);
 	}
-}
 
+	if (ghostFam.count != 0) {
+		familiesInRange.push_back(ghostFam);
+	}
+}
 void HetuwMod::onOurDeath()
 {
 	HetuwMod::allylist.clear(); // An easy way to clear the ally list
@@ -6290,6 +6266,7 @@ bool HetuwMod::justKilled(int holdingID)
 	static const std::unordered_set<int> murderWeapons = {749, 750, 3048};
 	return murderWeapons.count(holdingID) > 0;
 }
+
 void HetuwMod::drawCurseToken()
 {
 	if (ourLiveObject == NULL) return;
@@ -6321,73 +6298,239 @@ void HetuwMod::drawCurseToken()
 		alignLeft);
 }
 
+void HetuwMod::forceDoggieBark() {
+
+    if (ourLiveObject == NULL) return;
+    if (livingLifePage == NULL) return;
+
+    static double lastBarkTime = 0.0;
+    const char* evenPuppyBarks[] = {
+    "YIP YIP! GREVEN IS SHADY'S WITTLE PATHETIC PUPPY NOW",
+    "ARF ARF! PWEASE SHADY-DADDY PET GREVEN HE IS SOOO NEEDY",
+    "WOOOORF! GREVEN WANNA NUZZLE INTO SHADY'S LAP FOREVER",
+    "YAP YAP YAP! GREVEN WUVS SHADY-DADDY MORE THAN TREATS",
+    "BOW WOW! GREVEN IS SHADY'S CUTEST WITTLE LOSER PUP",
+    "GRRR WAFF! GREVEN JEALOUS OF ANYONE NEAR SHADY-DADDY",
+    "HUFF WAU WAU! GREVEN IS COLD, NEED SHADY-DADDY CUDDLES",
+    "AROOOOO! GREVEN HOWLING CUZ SHADY-DADDY IGNORED HIM",
+    "WAFF WAFF WAFF! GREVEN TAIL WAGGING LIKE A BROKEN LOSER FOR SHADY",
+    "YIP! GREVEN HAS TINY PATHETIC PUPPY FEELINGS ONLY FOR SHADY-DADDY",
+    "SNAP GRR! GREVEN FAKE MAD TILL SHADY-DADDY GIVES HEADPATS",
+    "WOOOF WOOF WOOF! GREVEN BARKING LOUD FOR SHADY'S ATTENTION",
+    "RRRUFF! GREVEN PROTECTING SHADY-DADDY WITH HIS WEAK LITTLE GROWLS",
+    "ARF ARF ARF! GREVEN IS SHADY-DADDY'S MOST CLINGY DESPERATE PUP",
+    "GRRR WAOW! GREVEN MAD BUT STILL NEEDS TO BE HELD BY SHADY",
+    "YAP YAP YAP YAP! GREVEN LOVE ATTACK MODE FOR SHADY ONLY",
+    "BARK BARK! GREVEN WUVS SHADY-DADDY I WUV YOU SO MUCH MASTER",
+    "HUUH RAAUF! GREVEN STRETCH THEN SQUISH INTO SHADY'S LAP",
+    "AWOOOO! GREVEN SINGING WITTLE LOVE SONG TO SHADY-DADDY",
+    "WAFF WAFF! GREVEN NEED MORE NUZZLES FROM SHADY LESS IGNORE",
+    "YIP YIP YIP YIP! SHADY-DADDY CUDDLE TSUNAMI INCOMING",
+    "GRR SNAP SNAP! GREVEN BRATTY TILL SHADY GIVES BELLY RUBS",
+    "RRRAAAF RRRRF! GREVEN PROUD TO BE SHADY-DADDY'S SAD LITTLE BOY",
+    "WOOOORF WAFF! GREVEN MISS SHADY-DADDY COME NUZZLE RIGHT NOW",
+    "BARK ROWF ROWF! GREVEN SWEET ROMANCE BARKS JUST FOR SHADY",
+    "HRRR WAOW HUFF! GREVEN PANTING FROM BEING SO PATHETIC FOR SHADY",
+    "AROOOO AROOOOO! GREVEN MAXIMUM CLINGY TIME FOR SHADY-DADDY",
+    "SNARL GRR! GREVEN NEED SHADY-DADDY'S EYES ON HIM AND HIM ONLY",
+    "BOW WOW WOW! GREVEN & SHADY-DADDY CUDDLE PARTY FOREVER",
+    "YAP YAP YAP YAP YAP! GREVEN LOVE OVERLOAD FOR SHADY ONLY",
+    "ARF ARF! SHADY-DADDY'S VOICE MAKES GREVEN MELT INSTANTLY",
+    "WOOORF! GREVEN SCREAMS HAPPY WHEN SHADY-DADDY COMES HOME",
+    "YIP YIP! TINY GREVEN HAS HUGE PATHETIC CRUSH ON SHADY-DADDY",
+    "GRRR WAFFF! GREVEN BELONGS TO SHADY-DADDY ONLY FOREVER",
+    "HUFF HUFF WAU! GREVEN NEED SHADY-DADDY BLANKET HUGS RIGHT NOW",
+    "BARK BARK BARK! GREVEN HEART GOES BOOM FOR SHADY-DADDY",
+    "AWOOO ARF! GREVEN BEDTIME NUZZLE SONG FOR SHADY ONLY",
+    "RRRUFF AUUF! GREVEN LAST KISSES FOR SHADY BEFORE SLEEPY",
+    "YAP YAP YAP YAP YAP YAP! GREVEN HYPER LOVE BEAM → SHADY",
+    "WOOF WOOF WOOF WOOF! GREVEN LOUD LOVE NOISES FOR SHADY-DADDY",
+    "GRR WAFF GRR! GREVEN JEALOUS OF SHADY-DADDY'S PHONE",
+    "SNARL SNAP GRR! GIMME DAT SHADY LAP RIGHT NOWWWW",
+    "BOW WOW WOW WOW! GREVEN ZOOMIES FOR SHADY-DADDY CHASE",
+    "AROOOO! GREVEN FULL MOON CLINGY HOWL FOR SHADY ONLY",
+    "WAFF WAFF WAFF WAFF! GREVEN TAIL HURTS FROM WAGGING FOR SHADY",
+    "YIP YIP YIP! GREVEN EXCITED MODE FOREVER WHEN SHADY'S HERE",
+    "HRRR WAOW WAOW! GREVEN PANTING CUZ SHADY-DADDY TOO PERFECT",
+    "RRRUFF RRRRF RRRRF! GREVEN GOOD BOY CERTIFIED BY SHADY",
+    "BARK ROWF! GREVEN WITTLE LOVE BALLAD FOR SHADY-DADDY",
+    "GRRR WAU WAU! THIS PATHETIC PUPPY IS SHADY'S ONLY",
+    "WOOOORF WAFF WAFF WAFF! GREVEN MISS SHADY SO BAD IT HURTS",
+    "YAP YAP! GREVEN SPEAKING LOVE LANGUAGE TO SHADY-DADDY",
+    "ARF ARF ARF ARF! GREVEN THINKS SHADY IS HIS WHOLE EVERYTHING",
+    "HUUUH RAAUUUF! GREVEN BIG STRETCH FOR MAX SQUISH INTO SHADY",
+    "SNAP GRRR! GREVEN HUNGRY FOR SHADY-DADDY ATTENTION 24/7",
+    "GRR GRR WAFF! GREVEN JEALOUS OF THAT STUPID PILLOW NEAR SHADY",
+    "BARK BARK BARK BARK! GREVEN MAXIMUM I WUV YOU SHADY",
+    "AWOOO ARF ARF ARF! GREVEN SWEET DREAMS SONG FOR SHADY-DADDY",
+    "RRRUFF AUUUF AUUF! GREVEN NIGHT NIGHT NUZZLES FOR SHADY",
+    "YIP! ONE YIP FOR EVERY SHADY-DADDY BOOP PLEASE",
+    "WORF WORF! GREVEN DOUBLE BARK FOR DOUBLE SHADY CUDDLES",
+    "GRRR WAFFF! GREVEN GUARD MODE BUT STILL SHADY'S BABY",
+    "WAU WAU HUFF! GREVEN NEED SHADY TO KEEP HIM WARM FOREVER",
+    "BOW WOW! GREVEN PARADE OF PATHETIC LOVE FOR SHADY-DADDY",
+    "ARF ARF! BEST DADDY IN THE WORLD IS SHADY SAYS GREVEN",
+    "YAP YAP YAP YAP! GREVEN HYPER CUTE OVERDRIVE FOR SHADY",
+    "GRR SNAP SNAP! GREVEN FAKE GROWL FOR SHADY'S PATS",
+    "WOOOORF! GREVEN WELCOME HOME NUZZLE ATTACK FOR SHADY",
+    "HUFF WAOW! GREVEN TOO SPOILED BY SHADY-DADDY",
+    "RRRAAAF! GREVEN LOYALTY BARKS FOR SHADY FOREVER AND EVER",
+    "AROOOO AROO AROO! GREVEN CLINGY HOWL INTENSIFIES FOR SHADY",
+    "WAFF WAFF! MORE KISSES FROM SHADY RIGHT NOW PWEASE",
+    "YIP YIP YIP YIP YIP! GREVEN LOVE EXPLOSION FOR SHADY-DADDY",
+    "GRRRR WAU! GREVEN POSSESSIVE WITTLE GROWL FOR SHADY ONLY",
+    "BARK BARK! I WUV YOU FOREVER SAYS GREVEN TO SHADY",
+    "SNARL GRR SNAP! GREVEN NEED SHADY HEADPATS NOWWW",
+    "WOOF WOOF! GREVEN HAPPY SCREAMS WHEN SHADY IS HOME",
+    "HUUH WAFFF! GREVEN ROLL OVER FOR SHADY BELLY TIME",
+    "YAP YAP YAP! GREVEN CAN'T STOP LOVING SHADY-DADDY",
+    "AROOOOO! GREVEN HOWL OF PURE DEVOTION TO SHADY",
+    "GRR WAFF WAFF! GREVEN NEED SHADY BLANKET FORT TONIGHT",
+    "BOW WOW WOW! GREVEN CUDDLE MONSTER MODE FOR SHADY",
+    "RRRUFF RRRUFF! GREVEN PROUD LITTLE SHAME PUP FOR SHADY",
+    "WAFF WAFF WAFF! GREVEN TAIL WAG OVERCLOCKED FOR SHADY",
+    "YIP YIP! TINY GREVEN HAS BIG DESPERATE FEELINGS FOR SHADY",
+    "ARF ARF ARF! GREVEN MELTS WHEN SHADY EVEN LOOKS AT HIM",
+    "GRRR WAOW! GREVEN MAD CUZ SHADY-DADDY LOOKED AWAY",
+    "WOOOORF WOOF! GREVEN HAPPY ZOOMIES WHEN SHADY CALLS",
+    "SNAP GRR! GREVEN BRATTY FOR EXTRA SHADY ATTENTION",
+    "BARK ROWF ROWF ROWF! GREVEN LOVE SERENADE FOR SHADY",
+    "HUFF HUFF! GREVEN PANTING FROM SHADY CUTENESS OVERLOAD",
+    "YAP YAP YAP YAP YAP YAP YAP! GREVEN MAX LOVE FOR SHADY",
+    "AWOOO ARF! GREVEN NIGHTY NIGHT SONG FOR SHADY-DADDY",
+    "RRRAAAF RRRRF! GREVEN CERTIFIED SHADY'S GOOD BOY",
+    "WAU WAU WAU! GREVEN NEED MORE SHADY CUDDLE JUICE",
+    "GRR GRR GRR! GREVEN GUARDING SHADY'S LAP LIKE BABY",
+    "BOW WOW! GREVEN BEST WITTLE PUP FOR SHADY FOREVER",
+    "YIP! ONE SHADY BOOP = ONE MILLION GREVEN KISSES",
+    "WORF WORF WORF! GREVEN TRIPLE CUDDLE BARK FOR SHADY",
+    "ARF ARF! SHADY-DADDY IS GREVEN'S WHOLE WORLD",
+    "HUUUH RAAUF RAAUF! GREVEN BIG STRETCH FOR SHADY SQUISH",
+    "WAFF WAFF WAFF WAFF WAFF! GREVEN WAG OVERDRIVE FOR SHADY",
+    "GRRR WAFFF WAFFF! GREVEN ONLY SHADY-DADDY'S PATHETIC PUPPY",
+    "YAP YAP YIP YIP! GREVEN HYPER LOVE ATTACK FOR SHADY GO",
+    "BARK BARK BARK! GREVEN FOREVER SHADY'S WHINY BABY"
+};
+    static const int barkCount = 
+        sizeof(evenPuppyBarks) / sizeof(evenPuppyBarks[0]);
+
+    double now = game_getCurrentTime();
+
+    // first call init
+    if (lastBarkTime == 0.0) {
+        lastBarkTime = now;
+        return;
+    }
+
+    if ((now - lastBarkTime) >= 2) {
+
+        lastBarkTime = now;
+
+        int barkIndex = rand() % barkCount;
+
+        livingLifePage->hetuwSay(evenPuppyBarks[barkIndex]);
+    }
+}
+
+void HetuwMod::Speak_Tag() {
+    if (ourLiveObject == NULL) return;
+    if (livingLifePage == NULL) return;
+    if (HetuwMod::Tag_Words.empty()) return;  
+    static double lastSpeakTime = 0.0;
+    double now = game_getCurrentTime();
+
+    if (lastSpeakTime == 0.0) {
+        lastSpeakTime = now;
+        return;
+    }
+
+    if ((now - lastSpeakTime) >= 14.0) {
+        lastSpeakTime = now;
+
+        livingLifePage->hetuwSay(HetuwMod::Tag_Words.c_str());
+    }
+}
+
 void HetuwMod::drawOurStatus()
 {
-	if (ourLiveObject == NULL) return;
+    if (ourLiveObject == NULL) return;
 
-	char sBuf[64];
-	std::string status = "NO NAME";
-	setDrawColor(1, 1, 1, 1);
-	if (ourLiveObject->sick)
-	{
-		status = "YELLOW FEVER";
-		setDrawColor(1, 0.5f, 0, 1);
-	}
-	else if (ourLiveObject->dying)
-	{
-		status = "WOUNDED";
-		setDrawColor(1, 0, 0, 1);
-	}
-	else if (ourLiveObject->heldByAdultID != -1 )
-	{
-		status = "HELD";
-		setDrawColor(1, 1, 0, 1);
-	}
-	else if (ourLiveObject->holdingID < 0 &&
-			 ourLiveObject->age >= 14 && ourLiveObject->age < 40 &&
-			 ourGender == 'F')
-	{
-		status = "NURSING";
-		setDrawColor(0, 1, 1, 1);
-	}
-	else if (ourGender == 'M' && ourLiveObject->holdingID < 0)
-	{
-		status = "HOLDING";
-		setDrawColor(0, 1, 1, 1);
-	}
-	else if (ourLiveObject->holdingID > 0)
-	{
-		ObjectRecord *obj = getObject(ourLiveObject->holdingID);
-		if (obj != NULL)
-		{
-			char *stringUpper = stringToUpperCase(obj->description);
-			char descrBuf[256];
+    char sBuf[255];
+    std::string status = "NO NAME";
+    setDrawColor(1, 1, 1, 1);
 
-			HetuwMod::objGetDescrWithoutHashtag(stringUpper, descrBuf, sizeof(descrBuf));
+    if (ourLiveObject->sick)
+    {
+        status = "YELLOW FEVER";
+        setDrawColor(1, 0.5f, 0, 1);
+    }
+    else if (ourLiveObject->dying)
+    {
+        status = "WOUNDED";
+        setDrawColor(1, 0, 0, 1);
+    }
+    else if (ourLiveObject->heldByAdultID != -1)
+    {
+        status = "HELD";
+        setDrawColor(1, 1, 0, 1);
+    }
+    else if (ourLiveObject->holdingID < 0)
+    {
+        bool isNursing = false;
 
-			char finalBuf[256];
-			snprintf(finalBuf, sizeof(finalBuf), "%s", descrBuf);
+        for (int i = 0; i < gameObjects->size(); i++) {
+            LiveObject *o = gameObjects->getElement(i);
+			if (o->id == 0) break;
+            if (o && ourLiveObject->holdingID == -o->id) {
+                if (ourLiveObject->age >= 14 && ourLiveObject->age < 40 && ourGender == 'F') {
+                    isNursing = true;
+                }
+                break;
+            }
+        }
 
-			status = finalBuf;
+        if (isNursing)
+        {
+            status = "NURSING";
+            setDrawColor(0, 1, 1, 1);
+        }
+        else
+        {
+            status = "HOLDING";
+            setDrawColor(0, 1, 1, 1);
+        }
+    }
+    else if (ourLiveObject->holdingID > 0)
+    {
+        ObjectRecord *obj = getObject(ourLiveObject->holdingID);
+        if (obj != NULL)
+        {
+            char *stringUpper = stringToUpperCase(obj->description);
+            char descrBuf[256] = {0};
 
-			setDrawColor(1, 0, 1, 1);
-			delete[] stringUpper;
-		}
-	}
-	else if (ourLiveObject->name != NULL && ourLiveObject->name[0] != '\0')
-	{
-		status = ourLiveObject->name;
-		setDrawColor(1, 1, 1, 1);
-	}
+            HetuwMod::objGetDescrWithoutHashtag(stringUpper, descrBuf, sizeof(descrBuf));
 
-	snprintf(sBuf, sizeof(sBuf), "+ %s +", status.c_str());
+            snprintf(sBuf, sizeof(sBuf), "%s", descrBuf);
+            status = sBuf;
 
-	doublePair tipPos;
-	tipPos.x = lastScreenViewCenter.x;
-	tipPos.y = lastScreenViewCenter.y - (viewHeight / 2) + 50 * guiScale;
+            setDrawColor(1, 0, 1, 1);
+            delete[] stringUpper;
+        }
+    }
+    else if (ourLiveObject->name != NULL && ourLiveObject->name[0] != '\0')
+    {
+        status = ourLiveObject->name;
+        setDrawColor(1, 1, 1, 1);
+    }
 
-	livingLifePage->hetuwDrawScaledHandwritingFont(
-		sBuf, tipPos, guiScale * 0.8f, alignCenter);
+    snprintf(sBuf, sizeof(sBuf), "+ %s +", status.c_str());
+
+    doublePair tipPos;
+    tipPos.x = lastScreenViewCenter.x;
+    tipPos.y = lastScreenViewCenter.y - (viewHeight / 2) + 50 * guiScale;
+
+    livingLifePage->hetuwDrawScaledHandwritingFont(
+        sBuf, tipPos, guiScale * 0.8f, alignCenter);
 }
 
 void HetuwMod::drawHunger()
@@ -6489,48 +6632,46 @@ void HetuwMod::drawHunger()
 
 void HetuwMod::drawSpeed()
 {
-	if (ourLiveObject == NULL) return;
+    if (ourLiveObject == NULL) return;
 
-	doublePair drawPos;
-	char sBuf[64];
-	float speed = 0.0f;
+    doublePair drawPos;
+    char sBuf[64];
+    float speed = 0.0f;
 
-	if (ourLiveObject->heldByAdultID != -1)
-	{
-		LiveObject *parent = NULL;
-		if (gameObjects)
-		{
-			for (int i = 0; i < gameObjects->size(); i++)
-			{
-				LiveObject *o = gameObjects->getElement(i);
-				if (o && o->id == ourLiveObject->heldByAdultID)
-				{
-					parent = o;
-					break;
-				}
-			}
-		}
-		if (parent)
-			speed = parent->currentSpeed;
-	}
-	else
-	{
-		speed = ourLiveObject->currentSpeed;
-	}
+    if (ourLiveObject->heldByAdultID != -1)
+    {
+        int numObjs = gameObjects->size();  // cache size first
+        LiveObject *parent = NULL;
+        for (int i = 0; i < numObjs; i++)
+        {
+            LiveObject *o = gameObjects->getElement(i);
+            if (o && o->id == ourLiveObject->heldByAdultID)
+            {
+                parent = o;
+                break;
+            }
+        }
+        if (parent)
+            speed = parent->currentSpeed;
+    }
+    else
+    {
+        speed = ourLiveObject->currentSpeed;
+    }
 
-	int mpsRaw = ((int)(speed * 10000)) % 10000;
-	int mpsWhole = mpsRaw / 100;
-	int mpsDecimal = mpsRaw % 100;
+    int mpsRaw = ((int)(speed * 10000)) % 10000;
+    int mpsWhole = mpsRaw / 100;
+    int mpsDecimal = mpsRaw % 100;
 
-	setDrawColor(0.7, 0, 1, 1);
+    setDrawColor(1, 1, 1, 1);
 
-	snprintf(sBuf, sizeof(sBuf), "TPS: %d.%02d", mpsWhole, mpsDecimal);
+    snprintf(sBuf, sizeof(sBuf), "TPS: %d.%02d", mpsWhole, mpsDecimal);
 
-	drawPos.x = lastScreenViewCenter.x - 300 * guiScale;
-	drawPos.y = lastScreenViewCenter.y - (viewHeight / 2) + 50 * guiScale;
+    drawPos.x = lastScreenViewCenter.x - 300 * guiScale;
+    drawPos.y = lastScreenViewCenter.y - (viewHeight / 2) + 50 * guiScale;
 
-	livingLifePage->hetuwDrawScaledHandwritingFont(
-		sBuf, drawPos, guiScale * 0.8, alignLeft);
+    livingLifePage->hetuwDrawScaledHandwritingFont(
+        sBuf, drawPos, guiScale * 0.8, alignLeft);
 }
 
 void HetuwMod::drawTemp()
@@ -6587,7 +6728,7 @@ void HetuwMod::drawCombatIndicator()
 		lastScreenViewCenter.y - (viewHeight / 2) + 25 * guiScale};
 
 	std::string status = "UNTARGETED";
-	float r = 0.8f, g = 0.0f, b = 1.0f;
+	float r = 1.0f, g = 1.0f, b = 1.0f;
 
 	int ourEmot = ourLiveObject->currentEmot ? ourLiveObject->currentEmot->mouthEmot : -1;
 	bool weAreAttacking = (ourEmot == 3066);
@@ -6924,7 +7065,7 @@ void HetuwMod::drawHelp()
 	drawPos.y -= lineHeight;
 
 	drawPos.y -= lineHeight;
-	snprintf(str, sizeof(str), "YOU CAN CHANGE KEYS AND SETTINGS BY MODIFYING THE Pielife+.CFG FILE");
+	snprintf(str, sizeof(str), "YOU CAN CHANGE KEYS AND SETTINGS BY MODIFYING THE PIELIFE+.CFG FILE");
 	livingLifePage->hetuwDrawScaledHandwritingFont(str, drawPos, guiScale);
 	drawPos.y -= lineHeight;
 

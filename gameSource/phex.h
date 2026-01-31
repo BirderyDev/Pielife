@@ -284,6 +284,7 @@ public:
 	static std::vector<Button*> buttons;
 	static Button butPhex;
 	static Button butTurnOff;
+	static Button butTesting;
 	static Button butMinimize;
 	static Button butMaximize;
 
