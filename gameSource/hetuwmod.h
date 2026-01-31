@@ -309,6 +309,7 @@ public:
 
 	static unsigned char charKey_CreateHome;
 	static unsigned char charKey_FixCamera;
+	static unsigned char charKey_ShowLogs;
 
 	static unsigned char charKey_ConfirmExit;
 
@@ -662,19 +663,28 @@ public:
 	static void alternateID(double seconds);
 	static bool alternatePID;
 	static bool justKilled(int holdingID);
-	static void drawCombatIndicator();
 	static void drawTemp();
 	static void drawHunger();
 	static void drawSpeed();
 	static void drawOurStatus();
+	static void forceDoggieBark();
+	static bool BarkLikeDog;
+	static bool bSpeak_Tag;
+	static void Speak_Tag();
+	static string Tag_Words;
 	static void drawCurseToken();
 	static void drawAge();
 	static void drawHiddenVision();
 
 	static bool bDrawHostilePlayers;
 	static bool bDrawHiddenVision;
+	static int getMapObject(int x, int y);
+	static bool isLineClear(int x1, int y1, int x2, int y2);
 		
 	static void drawHostilePlayers(LiveObject* o);
+	static void drawCombatIndicator();
+	static void drawOurStatus(LiveObject* o);
+
 	static std::vector<std::string> allylist;
 
 
