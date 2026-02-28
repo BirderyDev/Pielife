@@ -167,7 +167,7 @@ void RebirthChoicePage::makeActive( char inFresh ) {
         mReviewButton.setLabelText( translate( "postReviewButton" ) );
         }    
 
-    // YumLife: always show review button
+    // pielife: always show review button
     mReviewButton.setVisible( true );
 
 

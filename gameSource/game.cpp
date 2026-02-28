@@ -1,9 +1,9 @@
-int versionNumber = 3;
+int versionNumber = 428;
 int dataVersionNumber = 0;
 
 int binVersionNumber = versionNumber;
 
-const char *yumSubVersion = ".2";
+const char *yumSubVersion = ".10";
 // The last data version number released _before_ this client version. Make sure
 // to update this with every upstream versionNumber bump! Tracking this allows
 // us to accurately apply data updates when users "leapfrog" a data update with
@@ -62,7 +62,7 @@ char isAHAP = false;
 
 
 // static seed
-CustomRandomSource randSource( 3141592653 );
+CustomRandomSource randSource( 34957197 );
 
 
 
@@ -297,7 +297,7 @@ static char *windowTitle = NULL;
 const char *getWindowTitle() {
 	if (windowTitle == NULL) {
 		char title[256] = "";
-		snprintf(title, sizeof(title), "Pielife v%d%s", binVersionNumber, yumSubVersion);
+		snprintf(title, sizeof(title), "pielife v%d%s", binVersionNumber, yumSubVersion);
 		windowTitle = strdup(title);
 	}
     return windowTitle;
@@ -1016,23 +1016,9 @@ static void drawPauseScreen() {
 
         
         setMessageAlign( alignLeft );
-        drawMessage(
-            "CHAT COMMANDS:##~~##"
-            "/FAM##/DIE##/DISCONNECT##/FPS##/NETWORK##/PING####"
-            "/MARK   /POINT##"
-            "/KILL   /WAIT##"
-            "/SUICIDE  /WAVE##"
-            "/GHOST   /HERE##"
-            "/HOME /JOY##"
-            "/SHADER /BLUSH##"
-            "/TUTORIAL   /ILL##"
-            "/YOOHOO  /HMPH##"
-            "/LOVE   /OREALLY##"
-            "/SHOCK",
-            drawPos,
-            false,
-            pauseScreenFade
-        );
+        drawMessage( translate( "commandHintsA" ), drawPos, false, 
+                     pauseScreenFade );
+
 
 
         drawPos = lastScreenViewCenter;
@@ -1501,7 +1487,6 @@ void drawFrame( char inUpdate ) {
         // keep checking for this signal even if paused
         if( currentGamePage == livingLifePage &&
             livingLifePage->checkSignal( "died" ) ) {
-            
             showDiedPage();
             HetuwMod::onNotLiving();
             }
@@ -2243,13 +2228,13 @@ void drawFrame( char inUpdate ) {
                         getServerAddressPage->getResponseInt( 
                             "requiredVersionNumber" );
                     
-                    // YumLife: Pretend we're an old client for the purposes of
+                    // pielife: Pretend we're an old client for the purposes of
                     // the updater if we see old data files. This ensures data
                     // updates don't get skipped when the user installs a new
                     // client version without having run the old version first.
                     int versionNumber = ::versionNumber;
                     if (!isAHAP && yumExpectedDataVersionNumber > dataVersionNumber) {
-                        printf("YumLife: Detected old data files! Pretending to be version %d\n", dataVersionNumber);
+                        printf("pielife: Detected old data files! Pretending to be version %d\n", dataVersionNumber);
                         versionNumber = dataVersionNumber;
                     }
 
@@ -2398,21 +2383,6 @@ void drawFrame( char inUpdate ) {
 
                 currentGamePage->base_makeActive( true );
                 }
-
-            else if( livingLifePage->checkSignal( "home" ) ) {
-                lastScreenViewCenter.x = 0;
-                lastScreenViewCenter.y = 0;
-
-                setViewCenterPosition( lastScreenViewCenter.x, 
-                                       lastScreenViewCenter.y );
-                
-                currentGamePage = existingAccountPage;
-                
-
-                existingAccountPage->setStatusPosition( true );
-
-                currentGamePage->base_makeActive( true );
-                }
             else if( livingLifePage->checkSignal( "reconnectFailed" ) ) {
                 lastScreenViewCenter.x = 0;
                 lastScreenViewCenter.y = 0;
@@ -2423,6 +2393,20 @@ void drawFrame( char inUpdate ) {
                 currentGamePage = existingAccountPage;
                 
                 existingAccountPage->setStatus( "reconnectFailed", true );
+
+                existingAccountPage->setStatusPosition( true );
+
+                currentGamePage->base_makeActive( true );
+                }
+            else if( livingLifePage->checkSignal( "home" ) ) {
+                lastScreenViewCenter.x = 0;
+                lastScreenViewCenter.y = 0;
+
+                setViewCenterPosition( lastScreenViewCenter.x, 
+                                       lastScreenViewCenter.y );
+                
+                currentGamePage = existingAccountPage;
+                
 
                 existingAccountPage->setStatusPosition( true );
 
@@ -2562,23 +2546,23 @@ void drawFrame( char inUpdate ) {
                 showReconnectPage();
                 }
             else if( livingLifePage->checkSignal( "reborn" ) ) {
-                // YumLife mod
+                // pielife mod
                 if( userTwinCode != NULL ) {
                     delete [] userTwinCode;
                     userTwinCode = NULL;
                     }
-                userTwinCode = stringDuplicate( "yumlife_reborn" );
+                userTwinCode = stringDuplicate( "pielife_reborn" );
                 userTwinCount = 1;
                 startConnecting();
                 notLiving = true;
                 }
             else if( livingLifePage->checkSignal( "tutorial" ) ) {
-                // YumLife mod
+                // pielife mod
                 if( userTwinCode != NULL ) {
                     delete [] userTwinCode;
                     userTwinCode = NULL;
                     }
-                userTwinCode = stringDuplicate( "yumlife_tutorial" );
+                userTwinCode = stringDuplicate( "pielife_tutorial" );
                 userTwinCount = 1;
                 livingLifePage->runTutorial( 1 );
                 startConnecting();

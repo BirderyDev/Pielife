@@ -618,8 +618,7 @@ class LivingLifePage : public GamePage, public ActionListener {
 
         
         LiveObject *getLiveObject( int inID );
-        //Pielife dataspace
-
+        
         
     protected:
 
@@ -1200,17 +1199,14 @@ class LivingLifePage : public GamePage, public ActionListener {
 
 
         void displayPhoto( const char *inPhotoID, char inNegative );
-        
-        void hetuwDrawScaledPencilFont(
-            const char* str,
-            doublePair drawPos,
-            double customScale,
-            TextAlignment align );      
-        void drawFoodStatus();
+        // ssc-client
+        void hetuwDrawScaledPencilFont( const char* str, doublePair drawPos, double customScale, TextAlignment align ); 
+        void drawFoodYumStatus();
         void drawTypingBarUI();
         void drawCravingStatus();
-        void drawCravingBonus();
+        void drawCravingBonus(); 
     };
+
 
 
 #endif

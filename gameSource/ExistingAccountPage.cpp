@@ -360,7 +360,7 @@ void ExistingAccountPage::makeActive( char inFresh ) {
         mReviewButton.setLabelText( translate( "postReviewButton" ) );
         }
 
-    // YumLife: always show review button
+    // pielife: always show review button
     mReviewButton.setVisible( true );
 
     if( SettingsManager::getIntSetting( "useSteamUpdate", 0 ) ) {
@@ -850,7 +850,7 @@ void ExistingAccountPage::draw( doublePair inViewCenter,
             mOholCurseButton.setVisible( true );
         }
 
-        // YumLife: show window title with version info
+        // pielife: show window title with version info
         pos = mServicesButton.getPosition();
         pos.y += 35;
         pos.x = 0;

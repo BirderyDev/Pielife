@@ -3,10 +3,10 @@
 
 #define hetuwWaitingText "press %c in game for help"
 #define hetuwSettingsFileName "pielife.cfg"
-#define hetuwLogFileName "pielog.txt"
+#define hetuwLogFileName "yumlog.txt"
 #define hetuwLogSeperator " | " // needs to be 3 char long
 #define hetuwFakeCoord 1977
-#define hetuwGetNewestVersionFromGithub "get newest version from github https://github.com/selb/YumLife/releases"
+#define hetuwGetNewestVersionFromGithub "get newest version from github https://github.com/selb/pielife/releases"
 #define hetuwPhotoSize 400
 
 #define hetuwLinkMainServer "bigserver2.onehouronelife.com"
@@ -290,8 +290,6 @@ public:
 	static unsigned char charKey_ShowDeathMessages;
 	static unsigned char charKey_ShowHomeCords;
 	static unsigned char charKey_ShowHostileTiles;
-	static unsigned char charKey_ShowHostilePlayers;
-	static unsigned char charKey_DrawHiddenVision;
 	static unsigned char charKey_xRay;
 	static unsigned char charKey_Search;
 	static unsigned char charKey_TeachLanguage;
@@ -309,7 +307,6 @@ public:
 
 	static unsigned char charKey_CreateHome;
 	static unsigned char charKey_FixCamera;
-	static unsigned char charKey_ShowLogs;
 
 	static unsigned char charKey_ConfirmExit;
 
@@ -528,8 +525,8 @@ public:
 
 	static std::vector<std::string> splitStrXTimes(const std::string &str, char splitChar, int count);
 
-	static bool isGroundDangerousWithHeld(int heldID, int groundID, bool ignoreTransition);
-	static bool isObjectDangerous(int objID);
+	static bool strContainsDangerousAnimal(const char* str);
+	static bool *isDangerousAnimal;
 
 	static void setTakingPhoto( bool inTakingPhoto );
 	static bool takingPhoto;
@@ -641,53 +638,27 @@ public:
 	static bool minitechTooltipsEnabled;
 
 	static bool phexOnLeft();
-	//Pielife
-    static doublePair drawUIRectFollowCamera(
-    doublePair offsetFromBottomCenter,
-    float uiWidth, float uiHeight,
-    float r = 0.0f, float g = 0.0f, float b = 0.0f, float a = 1.0
-	
-);
-	static doublePair drawUICircleFollowCamera(
-	doublePair offsetFromBottomCenter,
-	float radius,
-	Color inCenterColor,
-	Color inOuterColor
-);
-
-	
-    static string ShaderValue;
-    static bool ShadersOn;
-	static int animalState(int animalID);
-	static int FakeUID;
+	// ssc-client
+	static doublePair drawUIRectFollowCamera( doublePair offsetFromBottomCenter, float uiWidth, float uiHeight, float r = 0.0f, float g = 0.0f, float b = 0.0f, float a = 1.0 );
+	// draw ssc
+	static void drawHunger();
+	static void drawTemp();
+	static void drawCombatIndicator();
+	static void drawOurStatus();
+	static void drawCurseToken();
+	static void drawSpeed();
+	// other
 	static void alternateID(double seconds);
 	static bool alternatePID;
-	static bool justKilled(int holdingID);
-	static void drawTemp();
-	static void drawHunger();
-	static void drawSpeed();
-	static void drawOurStatus();
-	static void forceDoggieBark();
-	static bool BarkLikeDog;
-	static bool bSpeak_Tag;
-	static void Speak_Tag();
-	static string Tag_Words;
-	static void drawCurseToken();
-	static void drawAge();
-	static void drawHiddenVision();
-
+	static int FakeUID;
+	// bool
 	static bool bDrawHostilePlayers;
 	static bool bDrawHiddenVision;
-	static int getMapObject(int x, int y);
-	static bool isLineClear(int x1, int y1, int x2, int y2);
-		
-	static void drawHostilePlayers(LiveObject* o);
-	static void drawCombatIndicator();
-	static void drawOurStatus(LiveObject* o);
-
 	static std::vector<std::string> allylist;
-
-
+	static void drawHostilePlayers(LiveObject* o);
+	static unsigned char charKey_ShowHostilePlayers;
+	static unsigned char charKey_DrawHiddenVision;
+	static void drawHiddenVision();
 private:
 
 	static void zoomCalc();
@@ -706,7 +677,7 @@ private:
 	static bool bDrawMap;
 	static void drawMap();
 
-
+	static void drawAge();
 
 	static float lastPosX;
 	static float lastPosY;

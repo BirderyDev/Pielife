@@ -21,7 +21,7 @@ void LoadingPage::draw( doublePair inViewCenter,
 
     doublePair labelPos = { 0, 0 };
 
-    drawMessage( "PIELIFE+", labelPos, false );
+    drawMessage( "LOADING", labelPos, false );
 
     labelPos.y = -100;
     

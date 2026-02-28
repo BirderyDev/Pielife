@@ -115,6 +115,7 @@ double LivingLifePage::hetuwMeasureScaledMainFont(const char* str, double custom
 	mainFont->hetuwSetScaleFactor(scale);
 	return r;
 }
+
 void LivingLifePage::hetuwDrawScaledPencilFont(
     const char* str,
     doublePair drawPos,
@@ -125,7 +126,6 @@ void LivingLifePage::hetuwDrawScaledPencilFont(
     pencilFont->drawString(str, drawPos, align);
     pencilFont->hetuwSetScaleFactor(scale);
 }
-
 
 
 void LivingLifePage::hetuwDrawWithHandwritingFont(const char* str, doublePair drawPos, TextAlignment align) {
@@ -4026,7 +4026,7 @@ void LivingLifePage::drawChalkBackgroundString( doublePair inPos,
             doublePair blotPos = add( firstBlot, mult( blotSpacing, b ) );
         
             double rot = blotRandSource.getRandomDouble();
-            drawSprite( mChalkBlotSprite, blotPos, scale, rot );
+            drawSprite( mChalkBlotSprite, blotPos, scale, rot );    //Dont worry about these
             drawSprite( mChalkBlotSprite, blotPos, scale, rot );
             
             // double hit vertically
@@ -5797,7 +5797,7 @@ ObjectAnimPack LivingLifePage::drawLiveObject(
             }
         else {
             returnPack =
-                drawObjectAnimPacked( 
+                drawObjectAnimPacked(
                             inObj->holdingID, curHeldType, 
                             heldTimeVal,
                             heldAnimFade,
@@ -5853,9 +5853,7 @@ void LivingLifePage::drawHungerMaxFillLine( doublePair inAteWordsPos,
     barPos.x += 30 * inMaxFill;
 
     if( ! inSkipBar ) {    
-        // drawSprite( inBarSprites[ inMaxFill %
-        //                           NUM_HUNGER_DASHES ], 
-        //             barPos );
+        // drawSprite( inBarSprites[ inMaxFill %NUM_HUNGER_DASHES ], barPos );
         }
     
 
@@ -5874,14 +5872,12 @@ void LivingLifePage::drawHungerMaxFillLine( doublePair inAteWordsPos,
 
     while( dashPos.x > barPos.x + 9 ) {
         
-        // doublePair drawPos = dashPos;
+        //doublePair drawPos = dashPos;
         
         //drawPos.x += dashRandSource.getRandomBoundedInt( -2, 2 );
         //drawPos.y += dashRandSource.getRandomBoundedInt( -1, 1 );
         
-        // drawSprite( inDashSprites[ numDashes %
-        //                            NUM_HUNGER_DASHES ], 
-        //             drawPos );
+        // drawSprite( inDashSprites[ numDashes % NUM_HUNGER_DASHES ], drawPos );
         dashPos.x -= 15;
         //numDashes += dashRandSource.getRandomBoundedInt( 1, 10 );
         numDashes += 1;
@@ -5894,9 +5890,7 @@ void LivingLifePage::drawHungerMaxFillLine( doublePair inAteWordsPos,
             
     // draw one more to connect to bar
     dashPos.x = barPos.x + 6;
-    // drawSprite( inDashSprites[ numDashes %
-    //                            NUM_HUNGER_DASHES ], 
-    //             dashPos );
+    // drawSprite( inDashSprites[ numDashes % NUM_HUNGER_DASHES ], dashPos );
     }
 
 
@@ -5926,9 +5920,7 @@ static void drawLine( SpriteHandle inSegmentSprite,
     FloatColor spriteColors[4] = 
         { inColor, inColor, inColor, inColor };
     
-                                
-    drawSprite( inSegmentSprite,
-                spriteVerts, spriteColors );
+    drawSprite( inSegmentSprite, spriteVerts, spriteColors );
     }
 
 
@@ -6470,7 +6462,7 @@ void LivingLifePage::drawHomeSlip( doublePair inSlipPos, int inIndex ) {
     doublePair slipPos = inSlipPos;
     
     setDrawColor( 1, 1, 1, 1 );
-    drawSprite( mHomeSlipSprites[inIndex], slipPos );
+    // drawSprite( mHomeSlipSprites[inIndex], slipPos ); // Home slip 1
 
         
     doublePair arrowPos = slipPos;
@@ -6537,7 +6529,7 @@ void LivingLifePage::drawHomeSlip( doublePair inSlipPos, int inIndex ) {
                     
                 float v = 1.0 - a.fade;
                 setDrawColor( v, v, v, 1 );
-                drawSprite( mHomeArrowErasedSprites[i], arrowPos );
+                // drawSprite( mHomeArrowErasedSprites[i], arrowPos ); # Home slip 2
                 }
             }
             
@@ -6550,7 +6542,7 @@ void LivingLifePage::drawHomeSlip( doublePair inSlipPos, int inIndex ) {
                 
             setDrawColor( 1, 1, 1, 1 );
                 
-            drawSprite( mHomeArrowSprites[arrowIndex], arrowPos );
+            // drawSprite( mHomeArrowSprites[arrowIndex], arrowPos ); Home slip 3
             }
                             
         toggleMultiplicativeBlend( false );
@@ -6576,15 +6568,15 @@ void LivingLifePage::drawHomeSlip( doublePair inSlipPos, int inIndex ) {
             doublePair bellPos = distPos;
             bellPos.y += 20;    
             
-            const char *arrowWord = translate( "bell" );
+            //const char *arrowWord = translate( "bell" ); for now
             if( isAncientHomePosHell ) {
-                arrowWord = translate( "hell" );
+               // arrowWord = translate( "hell" ); for now
                 }
             else if( isAncientHomePosRocket ) {
-                arrowWord = translate( "rocket" );
+               // arrowWord = translate( "rocket" ); for now
                 }
 
-            handwritingFont->drawString( arrowWord, bellPos, alignCenter );
+                // handwritingFont->drawString( arrowWord, bellPos, alignCenter ); // Home Slip Write 1
             }
         
         if( temporary ) {
@@ -6600,24 +6592,15 @@ void LivingLifePage::drawHomeSlip( doublePair inSlipPos, int inIndex ) {
                 personHintEverDrawn[inIndex] = true;
                 personHintEverDrawnKey[inIndex] = tempPersonKey;
                 
-                pencilFont->drawString( translate( tempPersonKey ), 
-                                        mapHintPos, alignCenter );
+                // pencilFont->drawString( translate( tempPersonKey ), mapHintPos, alignCenter ); // Homslip Write 0
 
-                if( mapHintEverDrawn[inIndex] ) {
-                    pencilErasedFont->drawString( translate( "map" ), 
-                                              mapHintPos, alignCenter );
-                    }
+                // if( mapHintEverDrawn[inIndex] ) { pencilErasedFont->drawString( translate( "map" ), mapHintPos, alignCenter ); }  // Home Slip Write 2
                 }
             else {
                 mapHintEverDrawn[inIndex] = true;
-                pencilFont->drawString( translate( "map" ), 
-                                        mapHintPos, alignCenter );
+                // pencilFont->drawString( translate( "map" ), mapHintPos, alignCenter );  // Home Slip Write 3
                 
-                if( personHintEverDrawn[inIndex] ) {
-                    pencilErasedFont->drawString( 
-                        translate( personHintEverDrawnKey[inIndex] ), 
-                        mapHintPos, alignCenter );
-                    }
+                // if( personHintEverDrawn[inIndex] ) { pencilErasedFont->drawString( translate( personHintEverDrawnKey[inIndex] ), mapHintPos, alignCenter ); }  // Home Slip Write 4
                 }
             }
         else {
@@ -6628,8 +6611,7 @@ void LivingLifePage::drawHomeSlip( doublePair inSlipPos, int inIndex ) {
                 else {
                     distPos.y -= 20;
                     }
-                pencilErasedFont->drawString( translate( "map" ), 
-                                              mapHintPos, alignCenter );
+                // pencilErasedFont->drawString( translate( "map" ), mapHintPos, alignCenter );  // Home Slip Write 5
                 }
             if( personHintEverDrawn[inIndex] ) {
                 if( inIndex == 0 ) {
@@ -6638,9 +6620,7 @@ void LivingLifePage::drawHomeSlip( doublePair inSlipPos, int inIndex ) {
                 else {
                     distPos.y -= 20;
                     }
-                pencilErasedFont->drawString( 
-                    translate( personHintEverDrawnKey[inIndex] ), 
-                    mapHintPos, alignCenter );
+                // pencilErasedFont->drawString( translate( personHintEverDrawnKey[inIndex] ), mapHintPos, alignCenter );  // Home Slip Write 6
                 }
             }
             
@@ -6682,7 +6662,7 @@ void LivingLifePage::drawHomeSlip( doublePair inSlipPos, int inIndex ) {
 
                 
                 
-            pencilFont->drawString( distString, distPos, alignCenter );
+            // pencilFont->drawString( distString, distPos, alignCenter );  // Home Slip Write 7
 
             char alreadyOld = false;
 
@@ -6750,12 +6730,11 @@ void LivingLifePage::drawHomeSlip( doublePair inSlipPos, int inIndex ) {
             for( int i=0; i<limit; i++ ) {
                 float fade = 
                     mPreviousHomeDistFades[inIndex].getElementDirect( i );
-                char *string = 
-                    mPreviousHomeDistStrings[inIndex].getElementDirect( i );
+                // char *string = 
+                    // mPreviousHomeDistStrings[inIndex].getElementDirect( i );
                     
                 setDrawColor( 0, 0, 0, fade * pencilErasedFontExtraFade );
-                pencilErasedFont->drawString( 
-                    string, distPos, alignCenter );
+                // pencilErasedFont->drawString( string, distPos, alignCenter );  // Home Slip Write 8
                 }
             }    
         }
@@ -7171,7 +7150,7 @@ void LivingLifePage::draw( doublePair inViewCenter,
                         doublePair sheetPos = mult( add( pos, lastCornerPos ),
                                                     0.5 );
                         
-                        drawSprite( s->wholeSheet, sheetPos );
+                        drawSprite( s->wholeSheet, sheetPos ); //draws textures
                         
                         // mark all cells under sheet as drawn
                         for( int sY = y; sY > y - s->numTilesHigh; sY-- ) {
@@ -7238,7 +7217,7 @@ void LivingLifePage::draw( doublePair inViewCenter,
                         
                         // skip if biome square completely covered by floors
                         if( !( floorAt && floorR && floorB && floorBR ) ) {
-                            drawSprite( s->squareTiles[setY][setX], pos );
+                            drawSprite( s->squareTiles[setY][setX], pos ); // draws textures
                             }
                         }
                     else {
@@ -7271,7 +7250,7 @@ void LivingLifePage::draw( doublePair inViewCenter,
                         if( !( floorAt && floorR && floorB && floorBR &&
                                floorL && floorA && floorAL && floorAR &&
                                floorBL ) ) {
-                            drawSprite( s->tiles[setY][setX], pos );
+                            drawSprite( s->tiles[setY][setX], pos ); // draws textures
                             }
                         }
                     if( inBounds ) {
@@ -7318,7 +7297,7 @@ void LivingLifePage::draw( doublePair inViewCenter,
                                                   culvertFractalScale ) * 
                                     culvertFractalAmp;
 
-                                drawSprite( getSprite( stoneSpriteID ), 
+                                drawSprite( getSprite( stoneSpriteID ), // draws textures
                                             stoneJigglePos  );
                                 }
                             }
@@ -7490,7 +7469,7 @@ void LivingLifePage::draw( doublePair inViewCenter,
             if( passIDs[1] != passIDs[2] ) {
                 setDrawColor( 1, 1, 1, 1 );
                 pos.y += 10;
-                drawSprite( mFloorSplitSprite, pos );
+                drawSprite( mFloorSplitSprite, pos ); // draws textures
                 }
             }
         }
@@ -7545,7 +7524,7 @@ void LivingLifePage::draw( doublePair inViewCenter,
                         posTile.y -= groundHTile / 2;
                         }
                     
-                    drawSprite( mGroundOverlaySprite[t], posTile );
+                    drawSprite( mGroundOverlaySprite[t], posTile ); // draws textures
                     }
                 }            
             }
@@ -7591,7 +7570,7 @@ void LivingLifePage::draw( doublePair inViewCenter,
                         posTile.y -= groundHTile / 2;
                         }
                     
-                    drawSprite( mGroundOverlaySprite[t], posTile );
+                    drawSprite( mGroundOverlaySprite[t], posTile ); // draws textures
                     }
                 }
             }
@@ -7727,13 +7706,13 @@ void LivingLifePage::draw( doublePair inViewCenter,
 
         if( drawFill ) {    
             setDrawColor( fill, fill, fill, maxFade * mCurMouseOverCellFade );
-            drawSprite( mCellFillSprite, cellPos );
+            drawSprite( mCellFillSprite, cellPos ); // draws textures
             }
         
         
         setDrawColor( border, border, border,
                       0.75  * maxFade * mCurMouseOverCellFade );
-        drawSprite( mCellBorderSprite, cellPos );        
+        drawSprite( mCellBorderSprite, cellPos ); // draws textures
         }
 
     
@@ -7786,11 +7765,11 @@ void LivingLifePage::draw( doublePair inViewCenter,
         
         if( drawFill ) {    
             setDrawColor( fill, fill, fill, maxFade * fade );
-            drawSprite( mCellFillSprite, cellPos );
+            drawSprite( mCellFillSprite, cellPos ); // draws textures
             }
         
         setDrawColor( border, border, border, 0.75 * maxFade * fade );
-        drawSprite( mCellBorderSprite, cellPos );
+        drawSprite( mCellBorderSprite, cellPos ); // draws textures
         }
 
 
@@ -7830,7 +7809,7 @@ void LivingLifePage::draw( doublePair inViewCenter,
         cellPos.x += 2;
         
         setDrawColor( border, border, border, 0.75 * maxFade * fade );
-        drawSprite( mCellBorderSprite, cellPos );
+        drawSprite( mCellBorderSprite, cellPos ); // draws textures
         }
     
     
@@ -7961,7 +7940,7 @@ void LivingLifePage::draw( doublePair inViewCenter,
                         if( numStepsSinceDrawn == 0 ) {
                             
                             drawSprite( mPathMarkSprite, drawPos, 1.0, 
-                                    -angle( curDir ) / ( 2 * M_PI ) + .25  );
+                                    -angle( curDir ) / ( 2 * M_PI ) + .25  ); // draws textures
                             }
                         
                         numStepsSinceDrawn ++;
@@ -8547,6 +8526,7 @@ void LivingLifePage::draw( doublePair inViewCenter,
 
 				if ( !takingPhoto && o != ourLiveObject && HetuwMod::iDrawNames > 0 ) 
 					HetuwMod::drawPlayerNames( o );
+
                 ignoreWatchedObjectDraw( false );
                 }
             else if( drawRec.extraMovingObj ) {
@@ -8837,7 +8817,7 @@ void LivingLifePage::draw( doublePair inViewCenter,
                     
                 setDrawColor( 1, 1, 1, mCurrentHintTargetPointerFade[i] );
 
-                drawSprite( mHintArrowSprite, targetPos );
+                // drawSprite( mHintArrowSprite, targetPos ); // Hint Arrow 1
             
                 pointerDrawn[i] = true;
                 }
@@ -8889,7 +8869,7 @@ void LivingLifePage::draw( doublePair inViewCenter,
             
             setDrawColor( 1, 1, 1, h->fade );
 
-            drawSprite( mHintArrowSprite, targetPos );
+            // drawSprite( mHintArrowSprite, targetPos ); // Hint Arrow 2
             }
         }
         
@@ -9279,7 +9259,7 @@ void LivingLifePage::draw( doublePair inViewCenter,
                             
                             labelPos.y += lrint( (yWiggle - 0.5) * 32 );
                             
-                            SpriteHandle arrowSprite = mTeaserArrowMedSprite;
+                            // SpriteHandle arrowSprite = mTeaserArrowMedSprite; For now
 
                             if( worldY != 0 ||
                                 ( worldX > 0 && worldX < 7 ) ) {
@@ -9290,12 +9270,11 @@ void LivingLifePage::draw( doublePair inViewCenter,
                                     
                                     if( ( worldX - 11 ) % 6 == 2 ) {
                                         labelPos.y -= 106;
-                                        arrowSprite = 
-                                            mTeaserArrowVeryShortSprite;
+                                        // arrowSprite = mTeaserArrowVeryShortSprite;
                                         }
                                     else if( ( worldX - 11 ) % 6 == 4 ) {
                                         labelPos.y += 86;
-                                        arrowSprite = mTeaserArrowLongSprite;
+                                        // arrowSprite = mTeaserArrowLongSprite;
                                         
                                         // prevent top row from
                                         // going off top of screen
@@ -9313,11 +9292,11 @@ void LivingLifePage::draw( doublePair inViewCenter,
                                     
                                     if( ( worldX - 11 ) % 6 == 3 ) {
                                         labelPos.y -= 106;
-                                        arrowSprite = mTeaserArrowLongSprite;
+                                        // arrowSprite = mTeaserArrowLongSprite;
                                         }
                                     else if( ( worldX - 11 ) % 6 == 5 ) {
                                         labelPos.y += 86;
-                                        arrowSprite = mTeaserArrowShortSprite;
+                                        // arrowSprite = mTeaserArrowShortSprite;
                                         }
                                     }        
                                 }
@@ -9343,7 +9322,7 @@ void LivingLifePage::draw( doublePair inViewCenter,
                                 labelPos.y = lastScreenViewCenter.y - 224;
                                 labelAbove = false;
                                 arrowTipY -= 48;
-                                arrowSprite = mTeaserArrowVeryShortSprite;
+                                // arrowSprite = mTeaserArrowVeryShortSprite;
                                 }
                             // phonograph
                             if( worldX == 4 && worldY == 0 ) {
@@ -9406,24 +9385,23 @@ void LivingLifePage::draw( doublePair inViewCenter,
                                 
                                 w = w / cos( a );
 
-                                doublePair spriteVerts[4] = 
-                                    { { labelPos.x - w, 
-                                        labelPos.y + arrowStart },
-                                      { labelPos.x + w, 
-                                        labelPos.y + arrowStart },
-                                      { (double)arrowTipX + w, 
-                                        (double)arrowTipY },
-                                      { (double)arrowTipX - w, 
-                                        (double)arrowTipY } };
+                                // doublePair spriteVerts[4] = 
+                                //     { { labelPos.x - w, 
+                                //         labelPos.y + arrowStart },
+                                //       { labelPos.x + w, 
+                                //         labelPos.y + arrowStart },
+                                //       { (double)arrowTipX + w, 
+                                //         (double)arrowTipY },
+                                //       { (double)arrowTipX - w, 
+                                //         (double)arrowTipY } };
 
-                                FloatColor spriteColors[4] = 
-                                    { { 1, 1, 1, (float)fade },
-                                      { 1, 1, 1, (float)fade },
-                                      { 1, 1, 1, (float)fade * .25f },
-                                      { 1, 1, 1, (float)fade * .25f } };
+                                // FloatColor spriteColors[4] = 
+                                //     { { 1, 1, 1, (float)fade }, for now
+                                //       { 1, 1, 1, (float)fade },
+                                //       { 1, 1, 1, (float)fade * .25f },
+                                //       { 1, 1, 1, (float)fade * .25f } };
                                 
-                                drawSprite( arrowSprite,
-                                            spriteVerts, spriteColors );
+                                // drawSprite( arrowSprite, spriteVerts, spriteColors ); Hint Arrow 3
                                 }
                             else {
                                 char *des = stringDuplicate( baseDes );
@@ -10080,7 +10058,7 @@ void LivingLifePage::draw( doublePair inViewCenter,
             mHintMessage[i] != NULL ) {
             
             doublePair hintPos  = 
-                add( mHintPosOffset[i], lastScreenViewCenter);
+                add( mHintPosOffset[i], lastScreenViewCenter );
             
             hintPos = add( hintPos, mHintExtraOffset[i] );
 
@@ -10115,7 +10093,6 @@ void LivingLifePage::draw( doublePair inViewCenter,
                 
                 hintPos.x -= extraA;
                 hintPos.x -= 10;
-
                 }
             
 
@@ -10124,8 +10101,7 @@ void LivingLifePage::draw( doublePair inViewCenter,
             doublePair sheetSpritePos = hintPos;
             sheetSpritePos.x += mHintSheetXTweak[i];
             
-            drawSprite( mHintSheetSprites[i], sheetSpritePos );
-
+            // drawSprite( mHintSheetSprites[i], sheetSpritePos ); // Hint Sheets
 
             setDrawColor( 0, 0, 0, 1.0f );
             double lineSpacing = handwritingFont->getFontHeight() / 2 + 5;
@@ -10142,21 +10118,17 @@ void LivingLifePage::draw( doublePair inViewCenter,
                 if( l == 1 ) {
                     doublePair drawPos = lineStart;
                     drawPos.x -= 5;
-                    
-                    handwritingFont->drawString( "+",
-                                                 drawPos, alignRight );
+                        // handwritingFont->drawString( "+", drawPos, alignRight );
                     }
                 
                 if( l == 2 ) {
                     doublePair drawPos = lineStart;
                     drawPos.x -= 5;
                     
-                    handwritingFont->drawString( "=",
-                                                 drawPos, alignRight );
+                    // handwritingFont->drawString( "=", drawPos, alignRight );
                     }
                 
-                handwritingFont->drawString( lines[l], 
-                                             lineStart, alignLeft );
+                // handwritingFont->drawString( lines[l], lineStart, alignLeft );
                     
                 delete [] lines[l];
                 
@@ -10177,7 +10149,7 @@ void LivingLifePage::draw( doublePair inViewCenter,
                 
                 lineStart.y += 30;
                 
-                handwritingFont->drawString( pageNum, lineStart, alignLeft );
+                // handwritingFont->drawString( pageNum, lineStart, alignLeft );
                 
                 
                 lineStart.y -= lineSpacing;
@@ -10189,14 +10161,11 @@ void LivingLifePage::draw( doublePair inViewCenter,
                 lineStart.x -= 0.5 * handwritingFont->measureString( pageNum );
                 
                 delete [] pageNum;
-                
-                handwritingFont->drawString( translate( shiftHintKey ), 
-                                             lineStart, alignCenter );
+                // handwritingFont->drawString( translate( shiftHintKey ), lineStart, alignCenter );
                 
                 lineStart.y -= lineSpacing;
                 
-                handwritingFont->drawString( translate( "tabHint" ), 
-                                             lineStart, alignCenter );
+                // handwritingFont->drawString( translate( "tabHint" ), lineStart, alignCenter );
                 }
             }
         }
@@ -10220,9 +10189,7 @@ void LivingLifePage::draw( doublePair inViewCenter,
             
             setDrawColor( 1, 1, 1, 1 );
             // rotate 180
-            drawSprite( mHintSheetSprites[i], tutorialPos, 1.0, 0.5,
-                        mTutorialFlips[i] );
-            
+            drawSprite( mHintSheetSprites[i], tutorialPos, 1.0, 0.5, mTutorialFlips[i] ); // Global Sheet 1
 
             setDrawColor( 0, 0, 0, 1.0f );
             double lineSpacing = handwritingFont->getFontHeight() / 2 + 16;
@@ -10244,10 +10211,7 @@ void LivingLifePage::draw( doublePair inViewCenter,
             
             lineStart.y += 8;
             for( int l=0; l<numLines; l++ ) {
-                
-                handwritingFont->drawString( lines[l], 
-                                             lineStart, alignLeft );
-                    
+                handwritingFont->drawString( lines[l], lineStart, alignLeft );
                 delete [] lines[l];
                 
                 lineStart.y -= lineSpacing;
@@ -10269,11 +10233,11 @@ void LivingLifePage::draw( doublePair inViewCenter,
             doublePair sheetPos  = 
                 add( mPhotoDisplayPosOffset[i], lastScreenViewCenter );
 
-            drawSprite( mPhotoDisplaySprites[i], sheetPos );
+            drawSprite( mPhotoDisplaySprites[i], sheetPos ); // Photo display
             
             toggleMultiplicativeBlend( true );
             
-            drawSprite( mPhotoToShowSprites[i], sheetPos );
+            drawSprite( mPhotoToShowSprites[i], sheetPos ); // Photo display
 
             toggleMultiplicativeBlend( false );
             }
@@ -10361,49 +10325,49 @@ void LivingLifePage::draw( doublePair inViewCenter,
             
             slipPos.y += lrint( highestCravingYOffset / 1.75 );
 
-            // drawSprite( mHungerSlipSprites[i], slipPos );
+            //drawSprite( mHungerSlipSprites[i], slipPos ); // Hunger Sheet 1
             }
         }
 
 
 
-    // for( int i=0; i<NUM_YUM_SLIPS; i++ ) {
+    for( int i=0; i<NUM_YUM_SLIPS; i++ ) {
 
-    //     if( ! equal( mYumSlipPosOffset[i], mYumSlipHideOffset[i] ) ) {
-    //         doublePair slipPos = 
-    //             add( mYumSlipPosOffset[i], lastScreenViewCenter );
+        if( ! equal( mYumSlipPosOffset[i], mYumSlipHideOffset[i] ) ) {
+            doublePair slipPos = 
+                add( mYumSlipPosOffset[i], lastScreenViewCenter );
         
-    //         slipPos.y += lrint( highestCravingYOffset / 1.75 );
+            slipPos.y += lrint( highestCravingYOffset / 1.75 );
             
-    //         setDrawColor( 1, 1, 1, 1 );
-    //         // drawSprite( mYumSlipSprites[i], slipPos );
+            setDrawColor( 1, 1, 1, 1 );
+            //drawSprite( mYumSlipSprites[i], slipPos ); // Yumsheet 1
             
-    //         doublePair messagePos = slipPos;
-    //         messagePos.y += 11;
+            doublePair messagePos = slipPos;
+            messagePos.y += 11;
 
-    //         if( mYumSlipNumberToShow[i] != 0 ) {
-    //             char *s = autoSprintf( "%dx", mYumSlipNumberToShow[i] );
+            if( mYumSlipNumberToShow[i] != 0 ) {
+                char *s = autoSprintf( "%dx", mYumSlipNumberToShow[i] );
 
-    //             setDrawColor( 0, 0, 0, 1 );
-    //             handwritingFont->drawString( s, messagePos, alignCenter );
-    //             delete [] s;
-    //             }
-    //         if( i == 2 || i == 3 ) {
-    //             setDrawColor( 0, 0, 0, 1 );
+                setDrawColor( 0, 0, 0, 1 );
+                //handwritingFont->drawString( s, messagePos, alignCenter );
+                delete [] s;
+                }
+            if( i == 2 || i == 3 ) {
+                setDrawColor( 0, 0, 0, 1 );
 
-    //             const char *word;
+                // const char *word;
                 
-    //             if( i == 3 ) {
-    //                 word = translate( "meh" );
-    //                 }
-    //             else {
-    //                 word = translate( "yum" );
-    //                 }
+                if( i == 3 ) {
+                    // word = translate( "meh" );
+                    }
+                else {
+                    // word = translate( "yum" );
+                    }
 
-    //             handwritingFont->drawString( word, messagePos, alignCenter );
-    //             }
-    //         }
-    //     }
+                // handwritingFont->drawString( word, messagePos, alignCenter );
+                }
+            }
+        }
 
     
     
@@ -10419,7 +10383,7 @@ void LivingLifePage::draw( doublePair inViewCenter,
             
             setDrawColor( 1, 1, 1, 1.0 );
             // flip, don't rotate
-            // drawSprite( mHintSheetSprites[i], cravingPos, 1.0, 0.0, true );
+            //drawSprite( mHintSheetSprites[i], cravingPos, 1.0, 0.0, true ); // Hint Sheet Cravings 1
                 
             setDrawColor( 0, 0, 0, 1.0f );
             
@@ -10430,8 +10394,7 @@ void LivingLifePage::draw( doublePair inViewCenter,
             
             lineStart.y += 26;
                 
-            // handwritingFont->drawString( mCravingMessage[i],
-            //                              lineStart, alignLeft );
+            // handwritingFont->drawString( mCravingMessage[i], lineStart, alignLeft );
             
             }
         }
@@ -10439,191 +10402,189 @@ void LivingLifePage::draw( doublePair inViewCenter,
 
 
     
-    // // finally, draw chat note sheet, so that it covers craving sheet
-    // // whenever it is up.
+    // finally, draw chat note sheet, so that it covers craving sheet
+    // whenever it is up.
 
-    // int lineSpacing = 20;
+    int lineSpacing = 20;
 
-    // doublePair notePos = add( mNotePaperPosOffset, lastScreenViewCenter );
+    doublePair notePos = add( mNotePaperPosOffset, lastScreenViewCenter );
 
-    // if( ! equal( mNotePaperPosOffset, mNotePaperHideOffset ) ) {
-    //     setDrawColor( 1, 1, 1, 1 );
-    //     // drawSprite( mNotePaperSprite, notePos );
+    if( ! equal( mNotePaperPosOffset, mNotePaperHideOffset ) ) {
+        setDrawColor( 1, 1, 1, 1 );
+        //drawSprite( mNotePaperSprite, notePos ); // Hint Sheet Cravings 2
         
 
-    //     doublePair drawPos = notePos;
+        doublePair drawPos = notePos;
 
-    //     drawPos.x += 160;
-    //     drawPos.y += 79;
-    //     drawPos.y += 22;
+        drawPos.x += 160;
+        drawPos.y += 79;
+        drawPos.y += 22;
         
-    //     drawPos.x += 27;
+        drawPos.x += 27;
 
-    //     setDrawColor( 0, 0, 0, 1 );
+        setDrawColor( 0, 0, 0, 1 );
         
-    //     handwritingFont->drawString( translate( "enterHint" ), 
-    //                                  drawPos,
-    //                                  alignRight );
-    //     }
+        // handwritingFont->drawString( translate( "enterHint" ), drawPos, alignRight );
+        }
         
 
     
 
-    // doublePair paperPos = add( mNotePaperPosOffset, lastScreenViewCenter );
+    doublePair paperPos = add( mNotePaperPosOffset, lastScreenViewCenter );
 
-    // if( mSayField.isFocused() ) {
-    //     char *partialSay = mSayField.getText();
+    if( mSayField.isFocused() ) {
+        char *partialSay = mSayField.getText();
 
-    //     char *strUpper = stringToUpperCase( partialSay );
+        char *strUpper = stringToUpperCase( partialSay );
         
-    //     delete [] partialSay;
+        delete [] partialSay;
 
-    //     SimpleVector<char*> *lines = splitLines( strUpper, 345 );
+        SimpleVector<char*> *lines = splitLines( strUpper, 345 );
         
-    //     mNotePaperPosTargetOffset.y = mNotePaperHideOffset.y + 58;
+        mNotePaperPosTargetOffset.y = mNotePaperHideOffset.y + 58;
         
-    //     if( lines->size() > 1 ) {    
-    //         mNotePaperPosTargetOffset.y += 20 * ( lines->size() - 1 );
-    //         }
+        if( lines->size() > 1 ) {    
+            mNotePaperPosTargetOffset.y += 20 * ( lines->size() - 1 );
+            }
         
-    //     doublePair drawPos = paperPos;
+        doublePair drawPos = paperPos;
 
-    //     drawPos.x -= 160;
-    //     drawPos.y += 79;
+        drawPos.x -= 160;
+        drawPos.y += 79;
 
 
-    //     doublePair drawPosTemp = drawPos;
+        doublePair drawPosTemp = drawPos;
         
 
-    //     for( int i=0; i<mLastKnownNoteLines.size(); i++ ) {
-    //         char *oldString = mLastKnownNoteLines.getElementDirect( i );
-    //         int oldLen = strlen( oldString );
+        for( int i=0; i<mLastKnownNoteLines.size(); i++ ) {
+            char *oldString = mLastKnownNoteLines.getElementDirect( i );
+            int oldLen = strlen( oldString );
             
-    //         SimpleVector<doublePair> charPos;        
+            SimpleVector<doublePair> charPos;        
                     
-    //         pencilFont->getCharPos( &charPos, 
-    //                                 oldString,
-    //                                 drawPosTemp,
-    //                                 alignLeft );
+            pencilFont->getCharPos( &charPos, 
+                                    oldString,
+                                    drawPosTemp,
+                                    alignLeft );
             
-    //         int newLen = 0;
+            int newLen = 0;
             
-    //         if( i < lines->size() ) {
-    //             // compare lines
+            if( i < lines->size() ) {
+                // compare lines
 
-    //             newLen = strlen( lines->getElementDirect( i ) );
+                newLen = strlen( lines->getElementDirect( i ) );
                 
-    //             }
+                }
             
 
-    //         // any extra chars?
+            // any extra chars?
                     
-    //         for( int j=newLen; j<oldLen; j++ ) {
-    //             mErasedNoteChars.push_back( oldString[j] );
+            for( int j=newLen; j<oldLen; j++ ) {
+                mErasedNoteChars.push_back( oldString[j] );
                        
-    //             mErasedNoteCharOffsets.push_back(
-    //                 sub( charPos.getElementDirect( j ),
-    //                      paperPos ) );
+                mErasedNoteCharOffsets.push_back(
+                    sub( charPos.getElementDirect( j ),
+                         paperPos ) );
                 
-    //             mErasedNoteCharFades.push_back( 1.0f );
-    //             }
+                mErasedNoteCharFades.push_back( 1.0f );
+                }
             
-    //         drawPosTemp.y -= lineSpacing;
-    //         }
-    //     mLastKnownNoteLines.deallocateStringElements();
+            drawPosTemp.y -= lineSpacing;
+            }
+        mLastKnownNoteLines.deallocateStringElements();
         
-    //     for( int i=0; i<lines->size(); i++ ) {
-    //         mLastKnownNoteLines.push_back( 
-    //             stringDuplicate( lines->getElementDirect(i) ) );
-    //         }
+        for( int i=0; i<lines->size(); i++ ) {
+            mLastKnownNoteLines.push_back( 
+                stringDuplicate( lines->getElementDirect(i) ) );
+            }
         
 
     
-    //     delete [] strUpper;
+        delete [] strUpper;
 
         
         
-    //     setDrawColor( 0, 0, 0, 1 );
+        setDrawColor( 0, 0, 0, 1 );
         
-    //     mCurrentNoteChars.deleteAll();
-    //     mCurrentNoteCharOffsets.deleteAll();
+        mCurrentNoteChars.deleteAll();
+        mCurrentNoteCharOffsets.deleteAll();
         
-    //     for( int i=0; i<lines->size(); i++ ) {
-    //         char *line = lines->getElementDirect( i );
+        for( int i=0; i<lines->size(); i++ ) {
+            char *line = lines->getElementDirect( i );
             
-    //         pencilFont->drawString( line, drawPos,
-    //                                 alignLeft );
+            // pencilFont->drawString( line, drawPos, orignal write
+            //                         alignLeft );
 
-    //         SimpleVector<doublePair> charPos;        
+            SimpleVector<doublePair> charPos;        
                     
-    //         pencilFont->getCharPos( &charPos, 
-    //                                 line,
-    //                                 drawPos,
-    //                                 alignLeft );
+            // pencilFont->getCharPos( &charPos, 
+            //                         line,
+            //                         drawPos,
+            //                         alignLeft );
 
-    //         int lineSize = strlen( line );
+            int lineSize = strlen( line );
             
-    //         for( int j=0; j<lineSize; j++ ) {
-    //             mCurrentNoteChars.push_back( line[j] );
-    //             mCurrentNoteCharOffsets.push_back( 
-    //                 sub( charPos.getElementDirect( j ), paperPos ) );
-    //             }
+            for( int j=0; j<lineSize; j++ ) {
+                mCurrentNoteChars.push_back( line[j] );
+                mCurrentNoteCharOffsets.push_back( 
+                    sub( charPos.getElementDirect( j ), paperPos ) );
+                }
 
-    //         drawPos.y -= lineSpacing;
-    //         }
-    //     lines->deallocateStringElements();
-    //     delete lines;
-    //     }
-    // else {
-    //     mNotePaperPosTargetOffset = mNotePaperHideOffset;
+            drawPos.y -= lineSpacing;
+            }
+        lines->deallocateStringElements();
+        delete lines;
+        }
+    else {
+        mNotePaperPosTargetOffset = mNotePaperHideOffset;
 
-    //     doublePair drawPos = paperPos;
+        doublePair drawPos = paperPos;
 
-    //     drawPos.x -= 160;
-    //     drawPos.y += 79;
+        drawPos.x -= 160;
+        drawPos.y += 79;
 
-    //     for( int i=0; i<mLastKnownNoteLines.size(); i++ ) {
-    //         // whole line gone
+        for( int i=0; i<mLastKnownNoteLines.size(); i++ ) {
+            // whole line gone
             
-    //         char *oldString = mLastKnownNoteLines.getElementDirect( i );
-    //         int oldLen = strlen( oldString );
+            char *oldString = mLastKnownNoteLines.getElementDirect( i );
+            int oldLen = strlen( oldString );
             
-    //         SimpleVector<doublePair> charPos;        
+            SimpleVector<doublePair> charPos;        
                     
-    //         pencilFont->getCharPos( &charPos, 
-    //                                 oldString,
-    //                                 drawPos,
-    //                                 alignLeft );
+            pencilFont->getCharPos( &charPos, 
+                                    oldString,
+                                    drawPos,
+                                    alignLeft );
                     
-    //         for( int j=0; j<oldLen; j++ ) {
-    //             mErasedNoteChars.push_back( oldString[j] );
+            for( int j=0; j<oldLen; j++ ) {
+                mErasedNoteChars.push_back( oldString[j] );
                         
-    //             mErasedNoteCharOffsets.push_back(
-    //                 sub( charPos.getElementDirect( j ),
-    //                      paperPos ) );
+                mErasedNoteCharOffsets.push_back(
+                    sub( charPos.getElementDirect( j ),
+                         paperPos ) );
                 
-    //             mErasedNoteCharFades.push_back( 1.0f );
-    //             }
+                mErasedNoteCharFades.push_back( 1.0f );
+                }
             
-    //         drawPos.y -= lineSpacing;
+            drawPos.y -= lineSpacing;
 
-    //         }
-    //     mLastKnownNoteLines.deallocateStringElements();
-    //     }
+            }
+        mLastKnownNoteLines.deallocateStringElements();
+        }
     
 
 
-    // setDrawColor( 0, 0, 0, 1 );
-    // for( int i=0; i<mErasedNoteChars.size(); i++ ) {
-    //     setDrawFade( mErasedNoteCharFades.getElementDirect( i ) *
-    //                  pencilErasedFontExtraFade );
+    setDrawColor( 0, 0, 0, 1 );
+    for( int i=0; i<mErasedNoteChars.size(); i++ ) {
+        // setDrawFade( mErasedNoteCharFades.getElementDirect( i ) *
+        //              pencilErasedFontExtraFade );
         
-    //     pencilErasedFont->
-    //         drawCharacterSprite( 
-    //             mErasedNoteChars.getElementDirect( i ), 
-    //             add( paperPos, 
-    //                  mErasedNoteCharOffsets.getElementDirect( i ) ) );
-    //     }
+        // pencilErasedFont->
+        //     drawCharacterSprite( 
+        //         mErasedNoteChars.getElementDirect( i ), 
+        //         add( paperPos, 
+        //              mErasedNoteCharOffsets.getElementDirect( i ) ) );
+        }
 
 
 
@@ -10632,34 +10593,18 @@ void LivingLifePage::draw( doublePair inViewCenter,
 
     // info panel at bottom, over top of all the other slips
     setDrawColor( 1, 1, 1, 1 );
-
-    //drawSprite( mGuiPanelSprite, panelPos );
-
-    //Pielife GUI replacement (1)
-    //doublePair panelPos = 
-    if (HetuwMod::ShadersOn) {
-        int r = 255, g = 255, b = 255, opacity = 100;
-
-        if (sscanf(HetuwMod::ShaderValue.c_str(), "%d %d %d %d", &r, &g, &b, &opacity) == 4) {
-        }
-
-        float fr = r / 255.0f;
-        float fg = g / 255.0f;
-        float fb = b / 255.0f;
-        float fa = opacity / 100.0f;
-
-        setDrawColor(fr, fg, fb, fa);
-        drawSquare(lastScreenViewCenter, inViewSize);
+    doublePair panelPos = lastScreenViewCenter;
+    panelPos.y -= 242 + 32 + 16 + 6;
+	panelPos.y -= HetuwMod::panelOffsetY;
+    //drawSprite( mGuiPanelSprite, panelPos ); // Panel 1
+    HetuwMod::drawUIRectFollowCamera({0, 40}, 1700, 160, 0.0f, 0.0f, 0.0f, 0.6f);
+    for( int i = 0; i < gameObjects.size(); i++ ) {
+        LiveObject *o = gameObjects.getElement( i );
+        
+        HetuwMod::drawHostilePlayers( o );       
     }
 
-    HetuwMod::drawUIRectFollowCamera({0, 30}, 1700, 140, 0.0f, 0.0f, 0.0f, 0.6f);
-        for( int i = 0; i < gameObjects.size(); i++ ) {
-            LiveObject *o = gameObjects.getElement( i );
-            
-            HetuwMod::drawHostilePlayers( o );       
-        }
-
-    drawFoodStatus();
+    drawFoodYumStatus();
     drawTypingBarUI();
     drawCravingBonus();
     drawCravingStatus();
@@ -10668,10 +10613,10 @@ void LivingLifePage::draw( doublePair inViewCenter,
         ourLiveObject->dying  &&
         ! ourLiveObject->sick ) {
         toggleMultiplicativeBlend( true );
-        //doublePair bloodPos = panelPos;
-        //bloodPos.y -= 32;
-        //bloodPos.x -= 32;
-        //drawSprite( mGuiBloodSprite, bloodPos );
+        doublePair bloodPos = panelPos;
+        bloodPos.y -= 32;
+        bloodPos.x -= 32;
+        // drawSprite( mGuiBloodSprite, bloodPos ); # Panel 2
         toggleMultiplicativeBlend( false );
         }
     
@@ -10681,22 +10626,22 @@ void LivingLifePage::draw( doublePair inViewCenter,
 
         // draw curse token status
         // Font *curseTokenFont;
-        // if( ourLiveObject->curseTokenCount > 0 ) {
-        //     setDrawColor( 0, 0, 0, 1.0 );
-        //     curseTokenFont = pencilFont;
-        //     }
-        // else {
-        //     setDrawColor( 0, 0, 0, pencilErasedFontExtraFade );
-        //     curseTokenFont = pencilErasedFont;
-        //     }
+        if( ourLiveObject->curseTokenCount > 0 ) { 
+            setDrawColor( 0, 0, 0, 1.0 );
+            // curseTokenFont = pencilFont;
+            }
+        else {
+            setDrawColor( 0, 0, 0, pencilErasedFontExtraFade );
+            // curseTokenFont = pencilErasedFont;
+            }
 
         // show as a sigil to right of temp meter
         doublePair curseTokenPos = { lastScreenViewCenter.x + 621, 
                                      lastScreenViewCenter.y - 316 - HetuwMod::panelOffsetY };
-        // curseTokenFont->drawString( "C", curseTokenPos, alignCenter );
-        // curseTokenFont->drawString( "+", curseTokenPos, alignCenter );
+        //curseTokenFont->drawString( "C", curseTokenPos, alignCenter );
+        //curseTokenFont->drawString( "+", curseTokenPos, alignCenter );
         curseTokenPos.x += 6;
-        // curseTokenFont->drawString( "X", curseTokenPos, alignCenter );
+        //curseTokenFont->drawString( "X", curseTokenPos, alignCenter );
         
         
         // for now, we receive at most one update per life, so
@@ -10709,33 +10654,26 @@ void LivingLifePage::draw( doublePair inViewCenter,
             
             char *pointString = autoSprintf( "%d", 
                                              ourLiveObject->excessCursePoints );
-            // pencilFont->drawString( pointString, pointsPos, alignCenter );
+            //pencilFont->drawString( pointString, pointsPos, alignCenter );
             delete [] pointString;
             }
         
 
         setDrawColor( 1, 1, 1, 1 );
         toggleMultiplicativeBlend( true );
-
-
+		
         for( int i=0; i<ourLiveObject->foodCapacity; i++ ) {
             doublePair pos = { lastScreenViewCenter.x - 590, 
                                lastScreenViewCenter.y - 334 - HetuwMod::panelOffsetY };
         
             pos.x += i * 30;
-            // drawSprite( 
-            //         mHungerBoxSprites[ i % NUM_HUNGER_BOX_SPRITES ], 
-            //         pos );
+            //drawSprite( mHungerBoxSprites[ i % NUM_HUNGER_BOX_SPRITES ], pos ); // Hunger 2
                 
             if( i < ourLiveObject->foodStore ) {                
-                // drawSprite( 
-                //     mHungerBoxFillSprites[ i % NUM_HUNGER_BOX_SPRITES ], 
-                //     pos );
+                // drawSprite( mHungerBoxFillSprites[ i % NUM_HUNGER_BOX_SPRITES ], pos ); // Hunger 3 
                 }
             else if( i < ourLiveObject->maxFoodStore ) {
-                // drawSprite( 
-                //     mHungerBoxFillErasedSprites[ i % NUM_HUNGER_BOX_SPRITES ], 
-                //     pos );
+                // drawSprite( mHungerBoxFillErasedSprites[ i % NUM_HUNGER_BOX_SPRITES ], pos ); // Hunger 4
                 }
             }
         for( int i=ourLiveObject->foodCapacity; 
@@ -10744,14 +10682,10 @@ void LivingLifePage::draw( doublePair inViewCenter,
                                lastScreenViewCenter.y - 334 - HetuwMod::panelOffsetY };
             
             pos.x += i * 30;
-            // drawSprite( 
-            //     mHungerBoxErasedSprites[ i % NUM_HUNGER_BOX_SPRITES ], 
-            //     pos );
+            // drawSprite( mHungerBoxErasedSprites[ i % NUM_HUNGER_BOX_SPRITES ], pos ); // Hunger 5
             
             if( i < ourLiveObject->maxFoodStore ) {
-                // drawSprite( 
-                //     mHungerBoxFillErasedSprites[ i % NUM_HUNGER_BOX_SPRITES ], 
-                //     pos );
+                // drawSprite( mHungerBoxFillErasedSprites[ i % NUM_HUNGER_BOX_SPRITES ], pos ); // Hunger 6
                 }
             }
         
@@ -10801,7 +10735,7 @@ void LivingLifePage::draw( doublePair inViewCenter,
             // no sub pixel positions
             pos2.x = round( pos2.x );
 
-            // drawSprite( mTempArrowErasedSprites[a->i], pos2 );
+             // drawSprite( mTempArrowErasedSprites[a->i], pos2 ); // Temp 1
             }
         toggleAdditiveTextureColoring( false );
         
@@ -10814,7 +10748,7 @@ void LivingLifePage::draw( doublePair inViewCenter,
         // no sub pixel positions
         pos.x = round( pos.x );
         
-        // drawSprite( mTempArrowSprites[mCurrentArrowI], pos );
+        // drawSprite( mTempArrowSprites[mCurrentArrowI], pos ); // Temp 2
         
         toggleMultiplicativeBlend( false );
         
@@ -10822,10 +10756,10 @@ void LivingLifePage::draw( doublePair inViewCenter,
         for( int i=0; i<mOldDesStrings.size(); i++ ) {
             // doublePair pos = { lastScreenViewCenter.x, 
             //                    lastScreenViewCenter.y - 313 - HetuwMod::panelOffsetY };
-            // float fade =
-            //     mOldDesFades.getElementDirect( i );
+            float fade =
+                mOldDesFades.getElementDirect( i );
             
-            // setDrawColor( 0, 0, 0, fade * pencilErasedFontExtraFade );
+            setDrawColor( 0, 0, 0, fade * pencilErasedFontExtraFade );
             // pencilErasedFont->drawString( 
             //     mOldDesStrings.getElementDirect( i ), pos, alignCenter );
             }
@@ -10842,10 +10776,10 @@ void LivingLifePage::draw( doublePair inViewCenter,
             }
         
         for( int i=0; i<mOldYumBonus.size(); i++ ) {
-            // float fade =
-            //     mOldYumBonusFades.getElementDirect( i );
+            float fade =
+                mOldYumBonusFades.getElementDirect( i );
             
-            // setDrawColor( 0, 0, 0, fade * pencilErasedFontExtraFade );
+            setDrawColor( 0, 0, 0, fade * pencilErasedFontExtraFade );
             char *yumString = autoSprintf( "+%d", 
                                            mOldYumBonus.getElementDirect( i ) );
             // pencilErasedFont->drawString( yumString, yumPos, alignLeft );
@@ -10913,10 +10847,7 @@ void LivingLifePage::draw( doublePair inViewCenter,
         if( mCurrentLastAteString != NULL ) {
             setDrawColor( 0, 0, 0, 1 );
         
-            // pencilFont->drawString( 
-            //     mCurrentLastAteString, atePos, alignLeft );
-            
-            
+            // pencilFont->drawString( mCurrentLastAteString, atePos, alignLeft ); // ate string 1
             toggleMultiplicativeBlend( true );
             setDrawColor( 1, 1, 1, 1 );
             
@@ -10930,18 +10861,17 @@ void LivingLifePage::draw( doublePair inViewCenter,
             }
 
 
-        doublePair tipPos = { lastScreenViewCenter.x, 
-                           lastScreenViewCenter.y - 313 - HetuwMod::panelOffsetY};
+        // doublePair tipPos = { lastScreenViewCenter.x, lastScreenViewCenter.y - 313 - HetuwMod::panelOffsetY};
 
         char overTempMeter = false;
         
-        doublePair mousePos = { lastMouseX, lastMouseY };
+        // doublePair mousePos = { lastMouseX, lastMouseY };
         
-        if( mousePos.y < tipPos.y + 13 &&
-            mousePos.x > tipPos.x + 480 &&
-            mousePos.x < tipPos.x + 607 ) {
-            overTempMeter = true;
-            }
+        // if( mousePos.y < tipPos.y + 13 &&
+        //     mousePos.x > tipPos.x + 480 &&
+        //     mousePos.x < tipPos.x + 607 ) {
+        //     overTempMeter = true;
+        //     }
         
         char badBiome = false;
         if( mCurMouseOverBiome != -1 &&
@@ -11077,7 +11007,7 @@ void LivingLifePage::draw( doublePair inViewCenter,
                         if( otherObj->warPeaceStatus > 0 ) {
                             key = "atPeace";
                             }
-                            
+                        
                         des = autoSprintf( "%s - %s", des, translate( key ) );
                         
                         if( desToDelete != NULL ) {
@@ -11485,12 +11415,12 @@ void LivingLifePage::draw( doublePair inViewCenter,
             
             // 2HOL hetuw hides this in preference to the cursor tooltips.
             // This causes some useful information (like leadership, or object
-            // tags if enabled) to be lost, so we keep it enabled for YumLife.
-            setDrawColor( 1, 0, 0, 2 );
+            // tags if enabled) to be lost, so we keep it enabled for pielife.
+            setDrawColor( 1, 1, 0, 2 );
+
             doublePair drawPos;
             drawPos.x = lastScreenViewCenter.x + 0 * HetuwMod::guiScale;
-            drawPos.y = lastScreenViewCenter.y - 370 * HetuwMod::guiScale; // Pielife -  tooltips bar color
-
+            drawPos.y = lastScreenViewCenter.y - 350 * HetuwMod::guiScale; // Pielife -  tooltips bar color
 
             hetuwDrawScaledPencilFont(
                 stringUpper,
@@ -11500,7 +11430,7 @@ void LivingLifePage::draw( doublePair inViewCenter,
             );
 
             // Minitech cursor tooltips
-            if( HetuwMod::minitechTooltipsEnabled && !mXKeyDown && mCurMouseOverID != 0 ) {
+            if( HetuwMod::minitechTooltipsEnabled && !mXKeyDown && mCurMouseOverID != 0 ) { // tooltips area thing
                 FloatColor bgColor = { 0.05, 0.05, 0.05, 1.0 };
                 FloatColor txtColor = { 1, 1, 1, 1 };
                 doublePair pos1 = {lastMouseX + 16 * HetuwMod::guiScale, lastMouseY - 16 * HetuwMod::guiScale};
@@ -11617,14 +11547,13 @@ void LivingLifePage::draw( doublePair inViewCenter,
         timeMeasures[2] += game_getCurrentTime() - drawStartTime;
         }
 
-        
-    /* YumLife: Full-screen inversion is a bit painful for players attempting
+    /* pielife: Full-screen inversion is a bit painful for players attempting
      * long ghost lives. invertDrawBodyless in animationBank.cpp is still set
      * appropriately and will cause ghosts to be inverted.
     if( ourLiveObject->isGhost ) {
         
         // invert the colors on the ghost's view
-    
+
         toggleInvertedBlend( true );
     
         setDrawColor( 1, 1, 1, 1 );
@@ -13422,7 +13351,7 @@ void LivingLifePage::step() {
     
 
     if ( mServerSocketOld != -1 && pageLifeTime > 10 ) {
-        // YumLife: close old socket after reconnecting due to /reborn or /tutorial
+        // pielife: close old socket after reconnecting due to /reborn or /tutorial
         closeSocket( mServerSocketOld );
         mServerSocketOld = -1;
         }
@@ -15427,7 +15356,7 @@ void LivingLifePage::step() {
                     double d = distance( pos, ourLiveObject->currentPos );
                     
                     addAncientHomeLocation( posX, posY );
-                    // YumLife mod
+                    // pielife mod
                     HetuwMod::homePosType hpt = HetuwMod::hpt_bell;
                     if ( monumentID == HetuwMod::OBJID_EndTower2 ||
                          monumentID == HetuwMod::OBJID_EndTower3 ||
@@ -20512,7 +20441,7 @@ void LivingLifePage::step() {
                                 
                                 existing->currentSpeech = 
                                     stringDuplicate( &( firstSpace[1] ) );
-                                HetuwMod::decodeDigits( existing->currentSpeech );  // YumLife mod
+                                HetuwMod::decodeDigits( existing->currentSpeech );  // pielife mod
                                 
 
                                 double curTime = game_getCurrentTime();
@@ -22927,7 +22856,7 @@ void LivingLifePage::step() {
                                 // avoid clicks on self and objects
                                 // when walking on road
                                 mForceGroundClick = true;
-                                isAutoClick = true; // YumLife: make this an auto click to stop interfering with Phex while on road
+                                isAutoClick = true; // pielife: make this an auto click to stop interfering with Phex while on road
                                 pointerDown( nextStep.x * CELL_D, 
                                              nextStep.y * CELL_D );
                                 isAutoClick = false;
@@ -27287,7 +27216,7 @@ void LivingLifePage::keyDown( unsigned char inASCII ) {
                                 }
                             else if( commandTyped( typedText, "/REBORN" ) ||
                                      commandTyped( typedText, "/TUTORIAL" ) ) {
-                                // YumLife mod
+                                // pielife mod
                                 if ( computeCurrentAge( ourLiveObject ) < 2 ) {
                                     char *message = autoSprintf( "DIE 0 0#" );
                                     sendToServerSocket( message );
@@ -27316,34 +27245,6 @@ void LivingLifePage::keyDown( unsigned char inASCII ) {
 
                                 typedText[0] = '\0';
             
-                            }
-                            else if (strstr(typedText, "/BARK") == typedText) {
-                                HetuwMod::BarkLikeDog = !HetuwMod::BarkLikeDog;
-                            }
-                            else if (strstr(typedText, "/TAG") == typedText) {
-                                const char* afterTag = typedText + 4;
-                                while (*afterTag == ' ' || *afterTag == '\t') {
-                                    afterTag++;
-                                }
-
-                                if (*afterTag == '\0') {
-                                    HetuwMod::bSpeak_Tag = !HetuwMod::bSpeak_Tag;
-                                }
-                                else {
-                                    HetuwMod::Tag_Words = afterTag;
-                                    HetuwMod::bSpeak_Tag = true;
-                                }
-                            }
-                            if (strncasecmp(typedText, "/SHADER", 7) == 0) {
-                                if (strlen(typedText) > 7 && typedText[7] == ' ') {
-                                    std::string value = std::string(typedText + 8);
-                                    if (value.length() >= 7) {
-                                        HetuwMod::ShaderValue = value;
-                                        HetuwMod::ShadersOn = true;
-                                    }
-                                } else {
-                                    HetuwMod::ShadersOn = !HetuwMod::ShadersOn;
-                                }
                             }
                             else if( strstr( typedText, "/SUICIDE" ) == typedText ) {
                                 char *killMessage = 
@@ -27381,14 +27282,6 @@ void LivingLifePage::keyDown( unsigned char inASCII ) {
                                 if (phraseIndex >= (int)(sizeof(phrases) / sizeof(phrases[0]))) {
                                     phraseIndex = 0;
                                 }
-                            }
-                            else if( strstr( typedText, "/CLIENT" ) == typedText ) {
-                                char *sayMessage =
-                                    autoSprintf( "SAY 0 0 CLIENT - PIELIFE VERSION III.I BY SHADY #" );
-
-                                sendToServerSocket( sayMessage );
-
-                                delete [] sayMessage;
                             }
                             else if( strstr( typedText, "/KILL" ) == typedText ) {
                                 char *sayMessage =
@@ -28242,9 +28135,8 @@ void LivingLifePage::updateLeadership() {
     
     }
 
-
-
-void LivingLifePage::drawFoodStatus() {
+//
+void LivingLifePage::drawFoodYumStatus() {
     bool yumVisible = false;
     bool mehVisible = false;
 
@@ -28258,7 +28150,7 @@ void LivingLifePage::drawFoodStatus() {
     setDrawColor( 1, 1, 1, 1 );
     const char *stats = "/////";
     if( yumVisible ){
-        setDrawColor( 0, 1, 0, 1 );
+        setDrawColor( 0.5, 0.85, 1, 1 );
         stats = "YUM";
     }
     else if( mehVisible ){
@@ -28285,44 +28177,42 @@ void LivingLifePage::drawCravingStatus() {
     float s = HetuwMod::guiScale;
 
     doublePair drawPos;
-    drawPos.x = lastScreenViewCenter.x + 450 * s;
-    drawPos.y = lastScreenViewCenter.y - (viewHeight / 2) + 75 * s;
+    drawPos.x = lastScreenViewCenter.x + 350 * s;
+    drawPos.y = lastScreenViewCenter.y - (viewHeight / 2) + 100 * s;
 
     setDrawColor( 1, 1, 1, 1 );
     hetuwDrawScaledHandwritingFont( msg, drawPos, s * 0.8, alignLeft );
 }
 
 void LivingLifePage::drawCravingBonus() {
-    
     int bonus = mYumMultiplier;
 
-    float s = HetuwMod::guiScale;
+    char buf[32];
+    if (bonus > 0) {
+        snprintf(buf, sizeof(buf), "%dx", bonus);
+        setDrawColor(0.0f, 0.7f, 1.0f, 1.0f);
+    } else {
+        snprintf(buf, sizeof(buf), "0x");
+        setDrawColor(1.0f, 1.0f, 1.0f, 1.0f);
+    }
 
+    float s = HetuwMod::guiScale;
     doublePair drawPos;
     drawPos.x = lastScreenViewCenter.x + 350 * s;
     drawPos.y = lastScreenViewCenter.y - (viewHeight / 2) + 75 * s;
 
-    setDrawColor( 1, 1, 1, 1 );
-
-    char buf[16];
-    if( bonus > 0 ) {
-        snprintf( buf, sizeof(buf), "%dx", bonus );
-    } else {
-        snprintf( buf, sizeof(buf), "0x" );
-    }
-
-    hetuwDrawScaledHandwritingFont( buf, drawPos, s * 0.8, alignLeft );
+    hetuwDrawScaledHandwritingFont(buf, drawPos, s * 0.8, alignLeft);
 }
 
 void LivingLifePage::drawTypingBarUI() {
     if (!mSayField.isFocused()) return;
 
+    HetuwMod::drawUIRectFollowCamera({-760, 170}, 200, 20, 0.0f, 0.0f, 0.0f, 0.6f); // 20 sec 1
+    HetuwMod::drawUIRectFollowCamera({-237, 140}, 1350, 40, 0.0f, 0.0f, 0.0f, 0.6f);
 
-
-    HetuwMod::drawUIRectFollowCamera({-760, 150}, 200, 20, 0.0f, 0.0f, 0.0f, 0.6f);
-    HetuwMod::drawUIRectFollowCamera({-237, 120}, 1350, 40, 0.0f, 0.0f, 0.0f, 0.6f);
-    char* rawText = mSayField.getText();
+    const char* rawText = mSayField.getText();
     if (!rawText) return;
+
     std::string typedText(rawText);
 
     bool hasSlash = (strchr(rawText, '/') != nullptr);
@@ -28336,9 +28226,9 @@ void LivingLifePage::drawTypingBarUI() {
 
     doublePair textPos;
     textPos.x = lastScreenViewCenter.x - 790 * HetuwMod::guiScale;
-    textPos.y = lastScreenViewCenter.y - (viewHeight / 2) + 120 * HetuwMod::guiScale;
+    textPos.y = lastScreenViewCenter.y - (viewHeight / 2) + 140 * HetuwMod::guiScale;
 
-    setDrawColor(hasSlash ? 0.0f : 1.0f, 1.0f, 1.0f, 1.0f);
+    setDrawColor(hasSlash ? 0.7f : 1.0f, 1.0f, 1.0f, 1.0f);
     hetuwDrawScaledHandwritingFont(
         typedText.c_str(),
         textPos,
@@ -28355,9 +28245,9 @@ void LivingLifePage::drawTypingBarUI() {
 
     doublePair counterTextPos;
     counterTextPos.x = lastScreenViewCenter.x - 795 * HetuwMod::guiScale;
-    counterTextPos.y = lastScreenViewCenter.y - (viewHeight / 2) + 150 * HetuwMod::guiScale;
+    counterTextPos.y = lastScreenViewCenter.y - (viewHeight / 2) + 170 * HetuwMod::guiScale;
 
-    setDrawColor(1, 1, 1, 1);
+    setDrawColor(1.0f, 1.0f, 1.0f, 1.0f);
     hetuwDrawScaledHandwritingFont(
         counterMsg,
         counterTextPos,
@@ -28365,4 +28255,3 @@ void LivingLifePage::drawTypingBarUI() {
         alignLeft
     );
 }
-//Even Sucks
