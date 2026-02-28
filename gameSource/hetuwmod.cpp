@@ -4962,96 +4962,78 @@ void HetuwMod::drawMap() {
 	}
 }
 
-void HetuwMod::drawPlayersInRangePanel()
-{
+void HetuwMod::drawPlayersInRangePanel() {
 	int listSize = 0;
-	for (size_t k = 0; k < familiesInRange.size(); k++)
-	{
-		if (k != 0 && familiesInRange[k].count <= 0)
-			continue;
+	for (size_t k=0; k < familiesInRange.size(); k++) {
+		if (k != 0 && familiesInRange[k].count <= 0) continue;
 		listSize++;
 	}
 
-	setDrawColor(0, 0, 0, 0.8);
+	setDrawColor( 0, 0, 0, 0.8 );
 	doublePair bckgrRecPos = lastScreenViewCenter;
-	int bckgrRecWidthHalf = 140 * guiScale;
-	int bckgrRecHeightHalf = (int)(10 + listSize * 12.5f + 12.5f) * guiScale;
-	bckgrRecPos.x += viewWidth / 2;
-	bckgrRecPos.y += viewHeight / 2;
+	int bckgrRecWidthHalf = 140*guiScale;
+	int bckgrRecHeightHalf = (int)(10 + listSize*12.5f + 12.5f)*guiScale;
+	bckgrRecPos.x += viewWidth/2;
+	bckgrRecPos.y += viewHeight/2;
 	doublePair textPos = bckgrRecPos;
 	bckgrRecPos.x -= bckgrRecWidthHalf;
 	bckgrRecPos.y -= bckgrRecHeightHalf;
-	drawRect(bckgrRecPos, bckgrRecWidthHalf, bckgrRecHeightHalf);
+	drawRect( bckgrRecPos, bckgrRecWidthHalf, bckgrRecHeightHalf );
 
-	drawSearchListTopY = bckgrRecPos.y - bckgrRecHeightHalf - (int)(10 * guiScale);
+	drawSearchListTopY = bckgrRecPos.y - bckgrRecHeightHalf - (int)(10*guiScale);
 
-	setDrawColor(1, 1, 1, 1);
+	setDrawColor( 1, 1, 1, 1 );
 	char text[64];
-	textPos.y -= 20 * guiScale;
-	textPos.x -= 20 * guiScale;
-
-	if (iDrawPlayersInRangePanel == 1)
-	{
-		if (playersInRangeNum < 10)
-			snprintf(text, sizeof(text), "PLAYERS IN RANGE:   %d", playersInRangeNum);
-		else if (playersInRangeNum < 100)
-			snprintf(text, sizeof(text), "PLAYERS IN RANGE:  %d", playersInRangeNum);
-		else
-			snprintf(text, sizeof(text), "PLAYERS IN RANGE: %d", playersInRangeNum);
+	textPos.y -= 20*guiScale;
+	textPos.x -= 20*guiScale;
+	
+	if (iDrawPlayersInRangePanel == 1) {
+		if (playersInRangeNum < 10) snprintf(text, sizeof(text), "PLAYERS IN RANGE:   %d", playersInRangeNum);
+		else if (playersInRangeNum < 100) snprintf(text, sizeof(text), "PLAYERS IN RANGE:  %d", playersInRangeNum);
+		else snprintf(text, sizeof(text), "PLAYERS IN RANGE: %d", playersInRangeNum);
+	} else {
+		if (playersInRangeNum < 10) snprintf(text, sizeof(text), "PLAYERS ON SERVER:   %d", playersInRangeNum);
+		else if (playersInRangeNum < 100) snprintf(text, sizeof(text), "PLAYERS ON SERVER:  %d", playersInRangeNum);
+		else snprintf(text, sizeof(text), "PLAYERS ON SERVER: %d", playersInRangeNum);
 	}
-	else
-	{
-		if (playersInRangeNum < 10)
-			snprintf(text, sizeof(text), "PLAYERS ON SERVER:   %d", playersInRangeNum);
-		else if (playersInRangeNum < 100)
-			snprintf(text, sizeof(text), "PLAYERS ON SERVER:  %d", playersInRangeNum);
-		else
-			snprintf(text, sizeof(text), "PLAYERS ON SERVER: %d", playersInRangeNum);
-	}
-	livingLifePage->hetuwDrawScaledHandwritingFont(text, textPos, guiScale, alignRight);
+	livingLifePage->hetuwDrawScaledHandwritingFont( text, textPos, guiScale, alignRight );
 
 	int mouseX, mouseY;
-	livingLifePage->hetuwGetMouseXY(mouseX, mouseY);
+	livingLifePage->hetuwGetMouseXY( mouseX, mouseY );
 	float recStartX = bckgrRecPos.x - bckgrRecWidthHalf;
 	float recEndX = bckgrRecPos.x + bckgrRecWidthHalf;
 	float recStartY, recEndY;
 
-	float lineHeight = 25 * guiScale;
+	float lineHeight = 25*guiScale;
 
-	doublePair drawPos = {textPos.x, textPos.y};
-	for (size_t k = 0; k < familiesInRange.size(); k++)
-	{
+	doublePair drawPos = { textPos.x, textPos.y };
+	for (size_t k=0; k < familiesInRange.size(); k++) {
 		const FamilyInRange &fam = familiesInRange[k];
-		if (k != 0 && fam.count <= 0)
-			continue;
+		if (k != 0 && fam.count <= 0) continue;
 		textPos.y -= lineHeight;
 		setRaceColor(fam.race, 1.0f);
-		snprintf(text, sizeof(text), "%s  F:%i  %i", fam.name.c_str(), fam.youngWomenCount, fam.count);
-		livingLifePage->hetuwDrawScaledHandwritingFont(text, textPos, guiScale, alignRight);
+		snprintf( text, sizeof(text), "%s  F:%i  %i", fam.name.c_str(), fam.youngWomenCount, fam.count);
+		livingLifePage->hetuwDrawScaledHandwritingFont( text, textPos, guiScale, alignRight );
 	}
-	for (size_t k = 0; k < familiesInRange.size(); k++)
-	{
+	for (size_t k=0; k < familiesInRange.size(); k++) {
 		const FamilyInRange &fam = familiesInRange[k];
-		if (k != 0 && fam.count <= 0)
-			continue;
+		if (k != 0 && fam.count <= 0) continue;
 		drawPos.y -= lineHeight;
 
-		recStartY = drawPos.y - lineHeight / 2;
-		recEndY = drawPos.y + lineHeight / 2;
-		if (mouseX >= recStartX && mouseX <= recEndX)
-		{
-			if (mouseY >= recStartY && mouseY <= recEndY)
-			{
-				doublePair descDrawPos = {(double)mouseX, (double)mouseY};
-				snprintf(text, sizeof(text), "%s GEN:%i", getRaceName(fam.race), fam.generation);
+		recStartY = drawPos.y - lineHeight/2;
+		recEndY = drawPos.y + lineHeight/2;
+		if (mouseX >= recStartX && mouseX <= recEndX) {
+			if (mouseY >= recStartY && mouseY <= recEndY) {
+				doublePair descDrawPos = { (double)mouseX, (double)mouseY };
+				snprintf( text, sizeof(text), "%s GEN:%i", getRaceName(fam.race), fam.generation);
 				float rgba[4];
 				getRaceColor(fam.race, rgba);
 				drawTextWithBckgr(descDrawPos, text, rgba);
 			}
 		}
 	}
-}
 
+}
 void HetuwMod::drawSearchList() {
 	int mouseX, mouseY;
 	livingLifePage->hetuwGetMouseXY( mouseX, mouseY );

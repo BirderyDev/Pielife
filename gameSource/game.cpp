@@ -1,9 +1,9 @@
-int versionNumber = 428;
+int versionNumber = 3;
 int dataVersionNumber = 0;
 
 int binVersionNumber = versionNumber;
 
-const char *yumSubVersion = ".10";
+const char *yumSubVersion = ".5";
 // The last data version number released _before_ this client version. Make sure
 // to update this with every upstream versionNumber bump! Tracking this allows
 // us to accurately apply data updates when users "leapfrog" a data update with
