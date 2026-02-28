@@ -1,0 +1,86 @@
+L4 | Sun Jan 04 22:24:31 2026 (817 ms) | general | exiting: calling SDL_CloseAudio
+
+L4 | Sun Jan 04 22:24:31 2026 (857 ms) | general | exiting: Deleting sceneHandler
+
+L4 | Sun Jan 04 22:24:31 2026 (857 ms) | general | Freeing sound sprites
+
+L4 | Sun Jan 04 22:24:31 2026 (874 ms) | general | exiting: freeing frameDrawer
+
+L4 | Sun Jan 04 22:24:32 2026 (101 ms) | general | exiting: Deleting screen
+
+L4 | Sun Jan 04 22:24:32 2026 (101 ms) | general | exiting: freeing drawString
+
+L4 | Sun Jan 04 22:24:32 2026 (103 ms) | general | exiting: calling SDL_Quit()
+
+L4 | Sun Jan 04 22:24:32 2026 (185 ms) | general | exiting: Done.
+
+L4 | Wed Jan 07 04:01:50 2026 (167 ms) | general | New game starting up
+L4 | Wed Jan 07 04:01:50 2026 (167 ms) | general | Target game image size:  1280x720
+
+L4 | Wed Jan 07 04:01:50 2026 (168 ms) | general | Ideal window dimensions:  1280x720
+
+L4 | Wed Jan 07 04:01:50 2026 (168 ms) | general | Trying to start in window mode.
+L4 | Wed Jan 07 04:01:50 2026 (168 ms) | general | Want to use largest window that fits on screen.
+L4 | Wed Jan 07 04:01:50 2026 (168 ms) | general | Screen dimensions for largest-window mode:  1280x720
+
+L4 | Wed Jan 07 04:01:50 2026 (169 ms) | general | The following frame rates are considered possible:
+L4 | Wed Jan 07 04:01:50 2026 (169 ms) | general | 30 fps
+L4 | Wed Jan 07 04:01:50 2026 (169 ms) | general | 60 fps
+L4 | Wed Jan 07 04:01:50 2026 (169 ms) | general | 100 fps
+L4 | Wed Jan 07 04:01:50 2026 (169 ms) | general | 120 fps
+L4 | Wed Jan 07 04:01:50 2026 (169 ms) | general | 144 fps
+L4 | Wed Jan 07 04:01:50 2026 (169 ms) | general | 165 fps
+L4 | Wed Jan 07 04:01:50 2026 (171 ms) | general | Constructing ScreenGL with requested 1280x720, 60 fps, fullscreen(0)
+L4 | Wed Jan 07 04:01:50 2026 (171 ms) | general | Current screen configuration is 1920x1080 with aspect ratio 1.77
+L4 | Wed Jan 07 04:01:50 2026 (173 ms) | general | All resolutions available
+L4 | Wed Jan 07 04:01:50 2026 (291 ms) | general | ScreenGL gave us 1280x720, 60 fps
+L4 | Wed Jan 07 04:01:50 2026 (291 ms) | general | Setting integer-scaled screen image size of 1280x720
+L4 | Wed Jan 07 04:01:50 2026 (329 ms) | general | Successfully opened audio: 44100Hz (requested 44100Hz), sample buffer size=1024 (requested 1024)
+
+L4 | Wed Jan 07 04:01:50 2026 (425 ms) | general | setViewSize called with 1280.000000
+L4 | Wed Jan 07 04:01:50 2026 (440 ms) | general | setViewSize called with 1280.000000
+L4 | Wed Jan 07 04:24:39 2026 (121 ms) | general | exiting...
+
+L4 | Wed Jan 07 04:24:39 2026 (121 ms) | general | exiting: calling SDL_CloseAudio
+
+L4 | Wed Jan 07 04:24:39 2026 (153 ms) | general | exiting: Deleting sceneHandler
+
+L4 | Wed Jan 07 04:24:39 2026 (153 ms) | general | Freeing sound sprites
+
+L4 | Wed Jan 07 04:24:39 2026 (164 ms) | general | exiting: freeing frameDrawer
+
+L4 | Wed Jan 07 04:24:39 2026 (307 ms) | general | exiting: Deleting screen
+
+L4 | Wed Jan 07 04:24:39 2026 (307 ms) | general | exiting: freeing drawString
+
+L4 | Wed Jan 07 04:24:39 2026 (308 ms) | general | exiting: calling SDL_Quit()
+
+L4 | Wed Jan 07 04:24:39 2026 (389 ms) | general | exiting: Done.
+
+L4 | Sat Jan 31 10:58:10 2026 (132 ms) | general | New game starting up
+L4 | Sat Jan 31 10:58:10 2026 (136 ms) | general | Target game image size:  1280x720
+
+L4 | Sat Jan 31 10:58:10 2026 (139 ms) | general | Ideal window dimensions:  1280x720
+
+L4 | Sat Jan 31 10:58:10 2026 (139 ms) | general | Trying to start in window mode.
+L4 | Sat Jan 31 10:58:10 2026 (140 ms) | general | Want to use largest window that fits on screen.
+L4 | Sat Jan 31 10:58:10 2026 (140 ms) | general | Screen dimensions for largest-window mode:  1280x720
+
+L4 | Sat Jan 31 10:58:10 2026 (142 ms) | general | The following frame rates are considered possible:
+L4 | Sat Jan 31 10:58:10 2026 (142 ms) | general | 30 fps
+L4 | Sat Jan 31 10:58:10 2026 (142 ms) | general | 60 fps
+L4 | Sat Jan 31 10:58:10 2026 (142 ms) | general | 100 fps
+L4 | Sat Jan 31 10:58:10 2026 (142 ms) | general | 120 fps
+L4 | Sat Jan 31 10:58:10 2026 (142 ms) | general | 144 fps
+L4 | Sat Jan 31 10:58:10 2026 (143 ms) | general | 165 fps
+L4 | Sat Jan 31 10:58:10 2026 (151 ms) | general | Constructing ScreenGL with requested 1280x720, 60 fps, fullscreen(0)
+L4 | Sat Jan 31 10:58:10 2026 (156 ms) | general | Current screen configuration is 1920x1080 with aspect ratio 1.77
+L4 | Sat Jan 31 10:58:10 2026 (156 ms) | general | All resolutions available
+L4 | Sat Jan 31 10:58:10 2026 (443 ms) | general | ScreenGL gave us 1280x720, 60 fps
+L4 | Sat Jan 31 10:58:10 2026 (444 ms) | general | Setting integer-scaled screen image size of 1280x720
+L4 | Sat Jan 31 10:58:10 2026 (501 ms) | general | Successfully opened audio: 44100Hz (requested 44100Hz), sample buffer size=1024 (requested 1024)
+
+L4 | Sat Jan 31 10:58:10 2026 (612 ms) | general | setViewSize called with 1280.000000
+L4 | Sat Jan 31 10:58:10 2026 (789 ms) | general | setViewSize called with 1280.000000
+L4 | Sat Jan 31 12:26:34 2026 (279 ms) | general | exiting...
+

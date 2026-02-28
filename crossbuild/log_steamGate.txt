@@ -1,0 +1,32 @@
+L4 | Wed Nov 12 01:22:59 2025 (660 ms) | general | steamGateForceUpdate.txt file exists.
+L4 | Wed Nov 12 01:22:59 2025 (660 ms) | general | steamGateForceUpdate.txt file contains '1' flag.
+L2 | Wed Nov 12 01:23:03 2025 (49 ms) | general | Could not init Steam API.
+L4 | Wed Nov 12 01:27:34 2025 (162 ms) | general | steamGateForceUpdate.txt file exists.
+L4 | Wed Nov 12 01:27:34 2025 (162 ms) | general | steamGateForceUpdate.txt file contains '1' flag.
+L4 | Wed Nov 12 01:27:34 2025 (318 ms) | general | Calling MarkContentCorrupt.
+L4 | Wed Nov 12 01:27:34 2025 (320 ms) | general | Done forcing update, exiting.
+L4 | Wed Nov 12 01:27:55 2025 (789 ms) | general | steamGateForceUpdate.txt file exists.
+L4 | Wed Nov 12 01:27:55 2025 (794 ms) | general | We already have saved login info.  Launching game.
+L4 | Wed Nov 12 01:27:55 2025 (794 ms) | general | Processing mods before launching the game.
+L4 | Wed Nov 12 01:27:55 2025 (951 ms) | general | See 2 subscribed Workshop items.
+L4 | Wed Nov 12 01:27:58 2025 (317 ms) | general | Launching game
+L4 | Wed Nov 12 01:27:58 2025 (317 ms) | general | Waiting for child game process to exit after launching.
+L4 | Wed Nov 12 01:28:27 2025 (311 ms) | general | Child game process ran for 0.483217 minutes before exiting.
+L4 | Wed Nov 12 01:28:27 2025 (311 ms) | general | Exiting.
+L4 | Wed Nov 12 01:28:36 2025 (75 ms) | general | steamGateForceUpdate.txt file exists.
+L4 | Wed Nov 12 01:28:36 2025 (76 ms) | general | We already have saved login info.  Launching game.
+L4 | Wed Nov 12 01:28:36 2025 (76 ms) | general | Processing mods before launching the game.
+L4 | Wed Nov 12 01:28:36 2025 (235 ms) | general | See 2 subscribed Workshop items.
+L4 | Wed Nov 12 01:28:36 2025 (239 ms) | general | Launching game
+L4 | Wed Nov 12 01:28:36 2025 (239 ms) | general | Waiting for child game process to exit after launching.
+L4 | Wed Nov 12 01:29:43 2025 (82 ms) | general | Child game process ran for 1.114050 minutes before exiting.
+L4 | Wed Nov 12 01:29:43 2025 (82 ms) | general | Exiting.
+L4 | Wed Nov 12 01:30:45 2025 (358 ms) | general | steamGateForceUpdate.txt file exists.
+L4 | Wed Nov 12 01:30:45 2025 (358 ms) | general | steamGateForceUpdate.txt file contains '1' flag.
+L2 | Wed Nov 12 01:30:46 2025 (354 ms) | general | Could not init Steam API.
+L4 | Wed Nov 12 01:31:30 2025 (873 ms) | general | steamGateForceUpdate.txt file exists.
+L4 | Wed Nov 12 01:31:30 2025 (873 ms) | general | steamGateForceUpdate.txt file contains '1' flag.
+L2 | Wed Nov 12 01:31:31 2025 (923 ms) | general | Could not init Steam API.
+L4 | Wed Nov 12 19:53:07 2025 (222 ms) | general | steamGateForceUpdate.txt file exists.
+L4 | Wed Nov 12 19:53:07 2025 (222 ms) | general | steamGateForceUpdate.txt file contains '1' flag.
+L2 | Wed Nov 12 19:53:09 2025 (114 ms) | general | Could not init Steam API.
