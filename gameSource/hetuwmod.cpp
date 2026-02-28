@@ -4437,6 +4437,16 @@ void HetuwMod::updatePlayersInRangePanel() {
 
 	familiesInRange.clear();
 
+	// Ghosts Always go in their own family
+	FamilyInRange ghostFam;
+	ghostFam.name = "GHOSTS";
+	ghostFam.count = 0;
+	ghostFam.youngWomenCount = 0;
+	ghostFam.cursedCount = 0;
+	ghostFam.generation = 0;
+	ghostFam.eveID = 0;
+	ghostFam.race = 'G';
+
 	for(int i=0; i<gameObjects->size(); i++) {
 		LiveObject *o = gameObjects->getElement( i );
 		
@@ -4462,6 +4472,13 @@ void HetuwMod::updatePlayersInRangePanel() {
 		bool youngWoman = (!obj->male && livingLifePage->hetuwGetAge( o ) < 40);
 
 		string lastName = getLastName(o->name);
+
+		if (o->isGhost) {
+			ghostFam.count++;
+			if (youngWoman) ghostFam.youngWomenCount++;
+			if (o->curseLevel > 0) ghostFam.cursedCount++;
+			continue;
+		}
 
 		bool found = false;
 		for (size_t j = 0; j < familiesInRange.size(); j++) {
@@ -4584,8 +4601,11 @@ void HetuwMod::updatePlayersInRangePanel() {
 	if (donkeyFam.count != 0) {
 		familiesInRange.push_back(donkeyFam);
 	}
-}
 
+	if (ghostFam.count != 0) {
+		familiesInRange.push_back(ghostFam);
+	}
+}
 void HetuwMod::onOurDeath() {
 	
 	if (!bWriteLogs) return;
@@ -4942,7 +4962,8 @@ void HetuwMod::drawMap() {
 	}
 }
 
-void HetuwMod::drawPlayersInRangePanel(){
+void HetuwMod::drawPlayersInRangePanel()
+{
 	int listSize = 0;
 	for (size_t k = 0; k < familiesInRange.size(); k++)
 	{
